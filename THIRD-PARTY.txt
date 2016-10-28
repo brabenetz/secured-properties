@@ -1,0 +1,6 @@
+
+Lists of 4 third-party dependencies.
+     (Apache Software License, version 2.0) (Lesser General Public License, version 3 or greater) throwing-lambdas (com.github.fge:throwing-lambdas:0.5.0 - https://github.com/fge/throwing-lambdas)
+     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.5 - http://commons.apache.org/proper/commons-io/)
+     (Apache License, Version 2.0) Apache Commons Lang (org.apache.commons:commons-lang3:3.4 - http://commons.apache.org/proper/commons-lang/)
+     (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.12 - http://www.slf4j.org)
