@@ -1,24 +1,24 @@
 language: java
 
 # Coverity and coveralls should only run in "code-quality" branch (not on each submit)
-#env:
-#  global:
-#   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-#   #   via the "travis encrypt" command using the project repo's public key
-#   - secure: "b3OK/OGLVpUxoz/THE8+TAvMIXZoMbpr8hoGPsKk8/nBh8DEn9XgQNfIdY/oFgjD0c1vrgE9uqlcPRoboojQV+BxM05WXARS+frkrq/qpxSgBBdTvIM55ai4nPHV3nfOmvqVB8z5c+8pmOHlWShC8ZVGIR9YnLDxH2lW6L2kOdfvOIOb1X2tNdcqnSA8/rymb+RKTzQnYnyNkI2OrJWRsXPcko0/ZVJxTIC4S59+IUpPKbw+HwjimFkHPuUvXcwI3THZDvWq0xXaNxsfpmch4y9WtWbnSA/ZuhUPBkEKslC1lrpR+tEDtYZc/5hy0ZSPnBqM5WksufXrUsrMhPzGExxQBuiAqMWkL3B78uVVzhLH2K43uGJY0DP3Vy5pujP2sbslJSD2e0ywFpIU39GN8ClaUxPoObeZCU8RhkFt/VW3ftHVZQ5+GVhSL+Uk/njVHi92LahSYd9uBq+KRVaLtto4pTa19C/W3AoRdLFcgLCcBXYW1zrrFWj57o4l6DxC111UlU+phvRFI9P3LOma75p7f8NYRBtytsDFgQrLM2ks0ruWvjSpL4d6U8zIS+AmyUGji1R5MnnJBELpjref3GMcKENsheSyjraTF9ysEu5Y/kd2dpaOYqOHnvqYwT8naW36oI5LQKjhgwYXlbF0Cqy03S6iZARyyPV+6ErVbIE="
-   
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "GRuU9Pw8Xzh7SWLATEjdji5bxpuO2iMVrSc5zjFO6x330NY4o/kwhxxGeWQkbU1qDQHoS5kI7H0CNbOFXTDVoUB2Umxw470IHvEjT4zjP4yquId7VISkgQXMr/IFqyfr1Nx0vG5xUPO8ELJvzsSxiSewXI21wjeT+jl4h1qk61bMEpLSpQ3jRU7psO3A9zrBL3g3tZv7Wi46upwD+5KO3EUrZKnBy0+dSEtSiJ9Tm2AlQO/obE8GYcQ3AHcd7tEMtnHuJjbOLrnllWC9D3XY7Jw6FJgYsWCGapAhZq6BE8UPGrn1xsAOGu90GqLXIT5I4RvLsxUCaplXGTmrV9mNMejtqBdNr4LgdfVvsqdDY6PMYA3uciP5QDQNdyGcJZ1difpLpXPSjqHurHyIUbmkwqM6Lmpcb3PlS1IuHJS+AAZjvSzePNTh16ea1vlmjNFaqFUh8nmQB+fBKYEDVLoYfwY8uHVIbmYR8BlpxnroEwtdx8dhjzWwZaaRkcmFP+P7j2nJxB4AynQ3pQxzx58C7C4q0Sv3RnW2zptnrvn14HhGmmzmni1sFiOYgcCEcTVDuoouew4hbjoN8FA/48UUf3xHudDDk/jHEJjKIAFX4vbUl1oBt3AE0Uj3T8oUX5mkUPpm0RERuxlh2zKXHGQH0Ox3EDWUA6mfbLYhqWEHD4s="
+
 jdk:
   - oraclejdk8
 
-#addons:
-#  coverity_scan:
-#    project:
-#      name: "brabenetz/secured-properties"
-#      description: "Secured Properties Build submitted via Travis CI"
-#    notification_email: brabenetz@gmx.net
-#    build_command_prepend: "mvn clean"
-#    build_command:   "mvn -DskipTests=true compile"
-#    branch_pattern: code-quality
-#    
-#after_success:
-#  - mvn clean cobertura:cobertura coveralls:report
+addons:
+  coverity_scan:
+    project:
+      name: "brabenetz/secured-properties"
+      description: "Secured Properties Build submitted via Travis CI"
+    notification_email: brabenetz@gmx.net
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: code-quality
+    
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
