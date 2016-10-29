@@ -9,8 +9,8 @@
 # Costs extra for more than one project:
 [![Dependency Status](https://www.versioneye.com/user/projects/1234/badge.svg?style=flat)](https://www.versioneye.com/user/projects/1234)
 # Not now:
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib.security/secured-properties/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib.security/secured-properties)
-[![Javadocs](http://www.javadoc.io/badge/net.brabenetz.lib.security/secured-properties.svg)](http://www.javadoc.io/doc/net.brabenetz.lib.security/secured-properties)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties)
+[![Javadocs](http://www.javadoc.io/badge/net.brabenetz.lib/secured-properties.svg)](http://www.javadoc.io/doc/net.brabenetz.lib/secured-properties)
 -->
 
 

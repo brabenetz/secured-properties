@@ -17,12 +17,33 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.core;
+package net.brabenetz.lib.securedproperties.core;
 
-public interface Algorithm {
+import net.brabenetz.lib.securedproperties.core.Algorithm;
 
-    String getKey();
+public class MockAlgorithm implements Algorithm {
+    private final String key;
+    private final int size;
 
-    int getSize();
+    public MockAlgorithm(final String key, final int size) {
+        super();
+        this.key = key;
+        this.size = size;
+    }
+
+    @Override
+    public String getKey() {
+        return this.key;
+    }
+
+    @Override
+    public int getSize() {
+        return this.size;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s_%s", getKey(), getSize());
+    }
 
 }

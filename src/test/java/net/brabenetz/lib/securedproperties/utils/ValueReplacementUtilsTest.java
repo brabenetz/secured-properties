@@ -17,10 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.utils;
+package net.brabenetz.lib.securedproperties.utils;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.brabenetz.lib.securedproperties.utils.ValueReplacementUtils;
 
 public class ValueReplacementUtilsTest {
 

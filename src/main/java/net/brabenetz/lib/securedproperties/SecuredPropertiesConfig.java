@@ -17,14 +17,14 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties;
+package net.brabenetz.lib.securedproperties;
 
 import java.io.File;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import net.brabenetz.lib.security.properties.core.Algorithm;
-import net.brabenetz.lib.security.properties.core.SupportedAlgorithm;
+import net.brabenetz.lib.securedproperties.core.Algorithm;
+import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
 public class SecuredPropertiesConfig {
 

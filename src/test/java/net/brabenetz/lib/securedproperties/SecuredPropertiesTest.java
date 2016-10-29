@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties;
+package net.brabenetz.lib.securedproperties;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,9 +35,11 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.brabenetz.lib.security.properties.core.Encryption;
-import net.brabenetz.lib.security.properties.test.TestUtils;
-import net.brabenetz.lib.security.properties.utils.SecuredPropertiesUtils;
+import net.brabenetz.lib.securedproperties.SecuredProperties;
+import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
+import net.brabenetz.lib.securedproperties.core.Encryption;
+import net.brabenetz.lib.securedproperties.test.TestUtils;
+import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 
 public class SecuredPropertiesTest {
 

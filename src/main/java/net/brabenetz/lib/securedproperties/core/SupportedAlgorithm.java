@@ -17,20 +17,30 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.utils;
+package net.brabenetz.lib.securedproperties.core;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public enum SupportedAlgorithm implements Algorithm {
+    AES_256("AES", 256), // By default, Java only supports AES 128
+    AES_192("AES", 192), // By default, Java only supports AES 128
+    AES_128("AES", 128),
+    DESede_168("DESede", 168),
+    DESede_112("DESede", 112);
 
-public final class ValueReplacementUtils {
+    private final String key;
+    private final int size;
 
-    public static String replaceValue(final String line, final String key, final String newValue) {
-        Pattern pattern = Pattern.compile("^" + Pattern.quote(key) + "(\\s*=\\s*).*$");
-        Matcher matcher = pattern.matcher(line);
-        if (matcher.matches()) {
-            String gr1 = matcher.group(1);
-            return key + gr1 + newValue;
-        }
-        return line;
+    private SupportedAlgorithm(final String key, final int size) {
+        this.key = key;
+        this.size = size;
+    }
+
+    @Override
+    public String getKey() {
+        return this.key;
+    }
+
+    @Override
+    public int getSize() {
+        return this.size;
     }
 }

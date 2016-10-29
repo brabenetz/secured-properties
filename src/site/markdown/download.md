@@ -7,7 +7,7 @@
 ## Manual
 
 You can download source and binary distributions from the
-[Maven Central Repo](https://repo1.maven.org/maven2/net/brabenetz/lib/security/secured-properties/).
+[Maven Central Repo](https://repo1.maven.org/maven2/net/brabenetz/lib/secured-properties/).
 
 ## Automatically with Maven
 
@@ -15,10 +15,10 @@ Add the Secured Properties <<Dependency>> to your pom.xml:
 	
 ```Xml
 <dependency>
-  <groupId>net.brabenetz.lib.security</groupId>
+  <groupId>net.brabenetz.lib</groupId>
   <artifactId>secured-properties</artifactId>
   <version>1.0</version>
 </dependency>
 ```
 
-See also https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib.security/secured-properties
+See also https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties

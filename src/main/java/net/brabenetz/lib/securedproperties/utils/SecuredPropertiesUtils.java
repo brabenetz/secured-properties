@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.utils;
+package net.brabenetz.lib.securedproperties.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

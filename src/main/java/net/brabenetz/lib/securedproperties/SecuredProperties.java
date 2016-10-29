@@ -17,17 +17,17 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties;
+package net.brabenetz.lib.securedproperties;
 
 import java.io.File;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.brabenetz.lib.security.properties.core.Encryption;
-import net.brabenetz.lib.security.properties.core.SecretContainer;
-import net.brabenetz.lib.security.properties.core.SecretContainerStore;
-import net.brabenetz.lib.security.properties.utils.SecuredPropertiesUtils;
+import net.brabenetz.lib.securedproperties.core.Encryption;
+import net.brabenetz.lib.securedproperties.core.SecretContainer;
+import net.brabenetz.lib.securedproperties.core.SecretContainerStore;
+import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 
 public class SecuredProperties {
 
