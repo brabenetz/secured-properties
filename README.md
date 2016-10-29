@@ -64,7 +64,7 @@ This encrypted password can now be read only in combination with the secret file
 
 *new SecuredPropertiesConfig()* is a valid Configuration with following default behaviors:
 
-  * **secretFile** default location: "%system_home%/.secret/securedProperties.key"
+  * **secretFile** default location: "%user_home%/.secret/securedProperties.key"
   * **autoCreateSecretKey** If the secret key doesn't exists, it will be created automatically
   * **allowedAlgorithm** AES-256,  AES-192,  AES-128, DESede-168, DESede-128: The first algorithm supported by the java-VM will be used to create the initial secret key.
   * **autoEncryptNonEncryptedValues** If the value in the property file is not already encrypted. it will be replaced by the encrypted value.

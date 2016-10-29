@@ -33,6 +33,7 @@
     <menu name="Secured Properties Library">
       <item name="Overview" href="index.html" />
       <item name="Download" href="download.html" />
+      <item name="Configuration" href="configuration.html" />
       <item name="Changes" href="changes-report.html" />
       <item name="Archiv" href="http://secured-properties.brabenetz.net/archiv/" />
     </menu>
