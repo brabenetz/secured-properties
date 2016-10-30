@@ -1,3 +1,3 @@
-net.brabenetz.lib.security.properties
-net.brabenetz.lib.security.properties.core
-net.brabenetz.lib.security.properties.utils
+net.brabenetz.lib.securedproperties
+net.brabenetz.lib.securedproperties.core
+net.brabenetz.lib.securedproperties.utils
