@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.brabenetz.lib</groupId>
   <artifactId>secured-properties</artifactId>
-  <version>1.0-beta1</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Secured Properties</name>
 
@@ -36,7 +36,7 @@
     </developer>
   </developers>
 
-  <contributors></contributors>
+  <contributors />
 
   <prerequisites>
     <maven>3.3.0</maven>
@@ -45,7 +45,7 @@
   <scm>
     <connection>scm:git:git@github.com:brabenetz/secured-properties.git</connection>
     <developerConnection>scm:git:git@github.com:brabenetz/secured-properties.git</developerConnection>
-    <tag>secured-properties-1.0-beta1</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/brabenetz/secured-properties</url>
   </scm>
 
@@ -57,7 +57,7 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/brabenetz/secured-properties</url>
-    <notifiers></notifiers>
+    <notifiers />
   </ciManagement>
 
   <distributionManagement>
@@ -634,7 +634,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore></ignore>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
