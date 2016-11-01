@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.brabenetz.lib</groupId>
   <artifactId>secured-properties</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0-beta1</version>
   <packaging>jar</packaging>
   <name>Secured Properties</name>
 
@@ -36,7 +36,7 @@
     </developer>
   </developers>
 
-  <contributors />
+  <contributors></contributors>
 
   <prerequisites>
     <maven>3.3.0</maven>
@@ -45,7 +45,7 @@
   <scm>
     <connection>scm:git:git@github.com:brabenetz/secured-properties.git</connection>
     <developerConnection>scm:git:git@github.com:brabenetz/secured-properties.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>secured-properties-1.0-beta1</tag>
     <url>https://github.com/brabenetz/secured-properties</url>
   </scm>
 
@@ -57,7 +57,7 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/brabenetz/secured-properties</url>
-    <notifiers />
+    <notifiers></notifiers>
   </ciManagement>
 
   <distributionManagement>
@@ -78,17 +78,16 @@
       <url>github:http://brabenetz.github.io/secured-properties/archiv/${project.version}</url>
     </site>
   </distributionManagement>
-  
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    
+
     <plugin-config-checkstyle-header-location>${basedir}/src/config/header.txt</plugin-config-checkstyle-header-location>
     <plugin-config-checkstyle-location>${basedir}/src/config/checkstyle.xml</plugin-config-checkstyle-location>
     <plugin-config-findbug-location>${basedir}/src/config/findbugs-exclude.xml</plugin-config-findbug-location>
     <plugin-config-pmd-location>${basedir}/src/config/pmd5-rulesets.xml</plugin-config-pmd-location>
-    
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
@@ -635,7 +634,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore></ignore>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
