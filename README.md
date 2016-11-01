@@ -5,12 +5,11 @@
 [![Coverity](https://scan.coverity.com/projects/10666/badge.svg)](https://scan.coverity.com/projects/brabenetz-secured-properties)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://secured-properties.brabenetz.net/archiv/latest/)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-brightgreen.svg)](https://github.com/brabenetz/secured-properties/blob/master/LICENSE.txt)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties)
+[![Javadocs](http://www.javadoc.io/badge/net.brabenetz.lib/secured-properties.svg)](http://www.javadoc.io/doc/net.brabenetz.lib/secured-properties)
 <!--
 # Costs extra for more than one project:
 [![Dependency Status](https://www.versioneye.com/user/projects/1234/badge.svg?style=flat)](https://www.versioneye.com/user/projects/1234)
-# Not now:
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties)
-[![Javadocs](http://www.javadoc.io/badge/net.brabenetz.lib/secured-properties.svg)](http://www.javadoc.io/doc/net.brabenetz.lib/secured-properties)
 -->
 
 
