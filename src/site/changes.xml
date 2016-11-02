@@ -26,7 +26,12 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="1.0-b1" date="2016-11" description="The beginning - Beta version 1">
+    <release version="1.0-beta2" date="2016-11-??" description="Beta version 2 - Add Salt implementation">
+      <action dev="brabenetz" type="add">
+        Add Salt implementation
+      </action>
+    </release>
+    <release version="1.0-beta1" date="2016-11-01" description="Beta version 1">
       <action dev="brabenetz" type="add">
        The beginning
       </action>

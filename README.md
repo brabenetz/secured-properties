@@ -77,5 +77,7 @@ See: http://secured-properties.brabenetz.net/archiv/latest/configuration.html
   * Maven Site: http://secured-properties.brabenetz.net/archiv/latest/index.html
   * Dependency-Information: http://secured-properties.brabenetz.net/archiv/latest/download.html
   * Custom Configuration: http://secured-properties.brabenetz.net/archiv/latest/configuration.html
+  * Example with Settings4j: http://secured-properties.brabenetz.net/archiv/latest/exampleSettings4j.html
+  * Example with CommonsConfiguration: http://secured-properties.brabenetz.net/archiv/latest/exampleCommonsConfiguration.html
 
 

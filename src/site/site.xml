@@ -37,6 +37,10 @@
       <item name="Changes" href="changes-report.html" />
       <item name="Archiv" href="http://secured-properties.brabenetz.net/archiv/" />
     </menu>
+    <menu name="Examples">
+      <item name="Settings4j" href="exampleSettings4j.html" />
+      <item name="CommonsConfiguration" href="exampleCommonsConfiguration.html" />
+    </menu>
     <menu ref="reports" />
   </body>
   <skin>
