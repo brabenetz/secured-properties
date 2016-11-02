@@ -10,15 +10,15 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet
-	c69 [label=<<table title="net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConfigurationSnippet.html">
+	c100 [label=<<table title="net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConfigurationSnippet.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ConfigurationSnippet </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ConfigurationSnippet.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet NAVASSOC net.brabenetz.lib.securedproperties.SecuredPropertiesConfig
-	c69:p -> c80:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c100:p -> c106:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// net.brabenetz.lib.securedproperties.SecuredPropertiesConfig
-	c80 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c106 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesConfig </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> net.brabenetz.lib.securedproperties </font></td></tr>

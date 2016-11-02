@@ -1,4 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./ConfigurationSnippet.html" title="net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet" alt="" coords="15,17,150,41"/>
-<area shape="rect" id="node1" href="./ConfigurationSnippet.html" title="&lt;TABLE&gt;" alt="" coords="5,5,161,53"/>
+<area shape="rect" id="node1_0" href="./Settings4jExampleTest.html" title="net.brabenetz.lib.securedproperties.snippets.Settings4jExampleTest" alt="" coords="15,17,161,41"/>
+<area shape="rect" id="node1" href="./Settings4jExampleTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,171,53"/>
+<area shape="rect" id="node2_1" href="./ConfigurationSnippet.html" title="net.brabenetz.lib.securedproperties.snippets.ConfigurationSnippet" alt="" coords="206,17,341,41"/>
+<area shape="rect" id="node2" href="./ConfigurationSnippet.html" title="&lt;TABLE&gt;" alt="" coords="195,5,351,53"/>
+<area shape="rect" id="node3_2" href="./CommonsConfigurationExampleTest.html" title="net.brabenetz.lib.securedproperties.snippets.CommonsConfigurationExampleTest" alt="" coords="387,17,611,41"/>
+<area shape="rect" id="node3" href="./CommonsConfigurationExampleTest.html" title="&lt;TABLE&gt;" alt="" coords="376,5,621,53"/>
 </map>
