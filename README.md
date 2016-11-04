@@ -58,6 +58,24 @@ mySecretPassword = {wVtvW8lQrwCf8MA9sadwww==}
 
 This encrypted password can now be read only in combination with the secret file "G:/mysecret.key" 
 
+## Manual Encryption/Decryption
+
+In some cases you don't want encrypt/decrypt values from Properties Files.
+
+This example shows how values from System Properties are encrypted/encrypted:
+
+```Java
+    String systemPropPassword = System.getProperty(key);
+    if (SecuredProperties.isEncryptedPassword(systemPropPassword)) {
+        return SecuredProperties.decrypt(config, systemPropPassword);
+    } else if (StringUtils.isNotEmpty(systemPropPassword)) {
+        System.out.println(String.format("you could now use the following encrypted password: -D%s=%s", key,
+            SecuredProperties.encrypt(config, systemPropPassword)));
+        return systemPropPassword;
+    } else {
+        return null;
+    }
+```
 
 ## Default Configurations
 

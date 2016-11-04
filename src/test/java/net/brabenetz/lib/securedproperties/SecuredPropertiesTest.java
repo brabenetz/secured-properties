@@ -59,6 +59,7 @@ public class SecuredPropertiesTest {
         String secretValue = SecuredProperties.getSecretValue(
             new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
             getTestPropertyFile(), "mySecretPassword");
+
         // validate result
         assertThat(secretValue, is("test"));
 
@@ -133,7 +134,7 @@ public class SecuredPropertiesTest {
     }
 
     private String checkSystemProperties(final SecuredPropertiesConfig config, final String key) {
-        
+
         String systemPropPassword = System.getProperty(key);
         if (SecuredProperties.isEncryptedPassword(systemPropPassword)) {
             return SecuredProperties.decrypt(config, systemPropPassword);
