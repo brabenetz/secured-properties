@@ -54,7 +54,7 @@ public class SecuredPropertiesUtils {
 
         if (StringUtils.isEmpty(secretFilePath)) {
             secretFilePath = SystemUtils.USER_HOME + "/.secret/securedProperties.key";
-            LOG.debug("No secretFilePath configured. Use default location: " + secretFilePath);
+            LOG.debug("No secretFilePath configured. Use default location: {}", secretFilePath);
         }
 
         return new File(secretFilePath);

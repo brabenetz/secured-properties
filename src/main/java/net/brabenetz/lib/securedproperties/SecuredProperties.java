@@ -29,13 +29,53 @@ import net.brabenetz.lib.securedproperties.core.SecretContainer;
 import net.brabenetz.lib.securedproperties.core.SecretContainerStore;
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 
-public class SecuredProperties {
+/**
+ * Encrypt and decrypt secret values in properties files with a secret key.
+ * <p>
+ * <b>Example:</b> <br>
+ * The Property file "myConfiguration.properties":
+ * 
+ * <pre>
+ * mySecretPassword = test
+ * </pre>
+ * 
+ * The Java code:
+ * 
+ * <pre>
+ * String secretValue = SecuredProperties.getSecretValue(
+ *     new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")), // custom config
+ *     new File("myConfiguration.properties"), // The Property File
+ *     "mySecretPassword"); // the property-key from "myConfiguration.properties"
+ * </pre>
+ * 
+ * will return "test" as secretValue and automatically encrypt the value in the property file. After
+ * the first run the Property file will looks similar to the following:
+ * 
+ * <pre>
+ *  mySecretPassword = {wVtvW8lQrwCf8MA9sadwww==}
+ * </pre>
+ * 
+ * This encrypted password can now be read only in combination with the secret file
+ * "G:/mysecret.key"
+ */
+public final class SecuredProperties {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SecuredProperties.class);
 
-    public static String getSecretValue(final SecuredPropertiesConfig config, final File propertyFile, final String key) {
+    private SecuredProperties() {
+        super();
+    }
 
+    /**
+     * 
+     * @see SecuredProperties
+     * @param config the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile The Properties file to with the encrypted value
+     * @param key The Property-Key of the encrypted value.
+     * @return The decrypted plain-text value.
+     */
+    public static String getSecretValue(final SecuredPropertiesConfig config, final File propertyFile, final String key) {
 
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
 
@@ -63,8 +103,9 @@ public class SecuredProperties {
         if (Encryption.isEncryptedPassword(systemPropPassword)) {
             return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), systemPropPassword);
         } else if (StringUtils.isNotEmpty(systemPropPassword)) {
-            LOG.info("you could now use the following encrypted password: " + key + "="
-                + Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), systemPropPassword));
+            LOG.info("you could now use the following encrypted password: {}={}",
+                key,
+                Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), systemPropPassword));
             return systemPropPassword;
         } else {
             return null;
