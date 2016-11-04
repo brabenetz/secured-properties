@@ -27,8 +27,16 @@
   </properties>
   <body>
     <release version="1.0-beta2" date="2016-11-??" description="Beta version 2 - Add Salt implementation">
-      <action dev="brabenetz" type="add">
+      <action dev="brabenetz" type="add" date="2016-11-??">
         Add Salt implementation
+      </action>
+      <action dev="brabenetz" type="update" date="2016-11-??">
+        Change behavior: check first the secured key path from the properties file (custom key),
+        then the custom secured key file (overwrites the default)
+        and then the default path %USER_HOME%/.secret/securedProperties.key
+      </action>
+      <action dev="brabenetz" type="remove" date="2016-11-05">
+        remove behavior: remove getting password from System Properties (can and should be done outside of secured-properties)
       </action>
     </release>
     <release version="1.0-beta1" date="2016-11-01" description="Beta version 1">

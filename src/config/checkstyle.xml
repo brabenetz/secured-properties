@@ -100,6 +100,9 @@
            <property name="minLineCount" value="2"/>
            <property name="allowUndeclaredRTE" value="true"/>
            <property name="allowMissingPropertyJavadoc" value="true"/>
+           <property name="allowMissingParamTags" value="true"/>
+           <property name="allowMissingThrowsTags" value="true"/>
+           <property name="allowMissingReturnTag" value="true"/>
            <property name="scope" value="protected"/>
         </module>
         <module name="JavadocType"/>
@@ -124,7 +127,9 @@
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_imports.html -->
         
-        <module name="AvoidStarImport"/>
+        <module name="AvoidStarImport">
+            <property name="excludes" value="org.hamcrest.Matchers"/>
+        </module>
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>

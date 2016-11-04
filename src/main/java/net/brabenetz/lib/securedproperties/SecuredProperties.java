@@ -19,15 +19,14 @@
  */
 package net.brabenetz.lib.securedproperties;
 
-import java.io.File;
-import java.util.Properties;
-
-import org.apache.commons.lang3.StringUtils;
-
 import net.brabenetz.lib.securedproperties.core.Encryption;
 import net.brabenetz.lib.securedproperties.core.SecretContainer;
 import net.brabenetz.lib.securedproperties.core.SecretContainerStore;
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * Encrypt and decrypt secret values in properties files with a secret key.
@@ -76,13 +75,8 @@ public final class SecuredProperties {
      * @return The decrypted plain-text value.
      */
     public static String getSecretValue(final SecuredPropertiesConfig config, final File propertyFile, final String key) {
-
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
-
-        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getSecretFile(), config.getSecretFilePropertyKey(), properties);
-
-        final SecretContainer secretContainer = SecretContainerStore.getSecretContainer(
-            secretFile, config.isAutoCreateSecretKey(), config.getAllowedAlgorithm());
+        final SecretContainer secretContainer = getSecretContainer(config, properties);
 
         String value = properties.getProperty(key);
         if (Encryption.isEncryptedPassword(value)) {
@@ -99,17 +93,63 @@ public final class SecuredProperties {
             return value;
         }
 
-        String systemPropPassword = System.getProperty(key);
-        if (Encryption.isEncryptedPassword(systemPropPassword)) {
-            return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), systemPropPassword);
-        } else if (StringUtils.isNotEmpty(systemPropPassword)) {
-            LOG.info("you could now use the following encrypted password: {}={}",
-                key,
-                Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), systemPropPassword));
-            return systemPropPassword;
-        } else {
-            return null;
-        }
+        return null;
 
+    }
+    
+    public static boolean isEncryptedPassword(final String password) {
+        return Encryption.isEncryptedPassword(password);
+    }
+
+    /**
+     * @see #encrypt(SecuredPropertiesConfig, File, String)
+     */
+    public static String encrypt(final SecuredPropertiesConfig config, final String password) {
+        return encrypt(config, null, password);
+    }
+    
+    /**
+     * Encrypt the given password (will create the secret key if not already exist).
+     * 
+     * @param config the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile The optional PropertyFile is only used if {@link SecuredPropertiesConfig#withSecretFilePropertyKey(String)} is set.
+     * @param password The password to encrypt
+     * @return the encrypted value.
+     */
+    public static String encrypt(final SecuredPropertiesConfig config, final File propertyFile, final String password) {
+        final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
+        final SecretContainer secretContainer = getSecretContainer(config, properties);
+        
+        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), password);
+    }
+    
+    /**
+     * @see #decrypt(SecuredPropertiesConfig, File, String)
+     */
+    public static String decrypt(final SecuredPropertiesConfig config, final String encryptedPassword) {
+        return decrypt(config, null, encryptedPassword);
+    }
+
+    
+    /**
+     * Encrypt the given password (will create the secret key if not already exist).
+     * 
+     * @param config the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile The optional PropertyFile is only used if {@link SecuredPropertiesConfig#withSecretFilePropertyKey(String)} is set.
+     * @param encryptedPassword The password to encrypt
+     * @return the encrypted value.
+     */
+    public static String decrypt(final SecuredPropertiesConfig config, final File propertyFile, final String encryptedPassword) {
+        final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
+        final SecretContainer secretContainer = getSecretContainer(config, properties);
+        
+        return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), encryptedPassword);
+        
+    }
+
+    private static SecretContainer getSecretContainer(final SecuredPropertiesConfig config, final Properties properties) {
+        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getSecretFile(), config.getSecretFilePropertyKey(), properties);
+
+        return SecretContainerStore.getSecretContainer(secretFile, config.isAutoCreateSecretKey(), config.getAllowedAlgorithm());
     }
 }

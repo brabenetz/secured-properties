@@ -38,6 +38,9 @@ public class SecuredPropertiesUtils {
 
     public static Properties readProperties(final File propertyFile) {
         final Properties properties = new Properties();
+        if (propertyFile == null) {
+            return properties;
+        }
         byte[] propertyFileContent = Throwing.supplier(() -> FileUtils.readFileToByteArray(propertyFile)).get();
         Throwing.runnable(() -> properties.load(new ByteArrayInputStream(propertyFileContent))).run();
         return properties;
