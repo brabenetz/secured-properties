@@ -1,6 +1,8 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="./SecuredPropertiesTest.html" title="net.brabenetz.lib.securedproperties.SecuredPropertiesTest" alt="" coords="15,17,161,41"/>
 <area shape="rect" id="node1" href="./SecuredPropertiesTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,171,53"/>
-<area shape="rect" id="node2_1" href="./JDependTest.html" title="net.brabenetz.lib.securedproperties.JDependTest" alt="" coords="207,17,300,41"/>
-<area shape="rect" id="node2" href="./JDependTest.html" title="&lt;TABLE&gt;" alt="" coords="196,5,311,53"/>
+<area shape="rect" id="node2_1" href="./SecuredPropertiesConfigTest.html" title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfigTest" alt="" coords="207,17,388,41"/>
+<area shape="rect" id="node2" href="./SecuredPropertiesConfigTest.html" title="&lt;TABLE&gt;" alt="" coords="196,5,399,53"/>
+<area shape="rect" id="node3_2" href="./JDependTest.html" title="net.brabenetz.lib.securedproperties.JDependTest" alt="" coords="433,17,527,41"/>
+<area shape="rect" id="node3" href="./JDependTest.html" title="&lt;TABLE&gt;" alt="" coords="423,5,537,53"/>
 </map>

@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.core.SecretContainer
-	c78 [label=<<table title="net.brabenetz.lib.securedproperties.core.SecretContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./core/SecretContainer.html">
+	c70 [label=<<table title="net.brabenetz.lib.securedproperties.core.SecretContainer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./core/SecretContainer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecretContainer </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> net.brabenetz.lib.securedproperties.core </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./core/SecretContainer.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// net.brabenetz.lib.securedproperties.SecuredProperties
-	c82 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredProperties.html">
+	c74 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredProperties </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecuredProperties.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// net.brabenetz.lib.securedproperties.SecuredProperties DEPEND net.brabenetz.lib.securedproperties.core.SecretContainer
-	c82:p -> c78:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c74:p -> c70:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

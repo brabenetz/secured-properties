@@ -25,9 +25,9 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016 Brabenetz Harald, Austria</copyright>
     <item>
-      <title>File: 9,
+      <title>File: 8,
              Errors: 0,
-             Warnings: 30,
+             Warnings: 0,
              Infos: 0
       </title>
             <link>http://secured-properties.brabenetz.net/checkstyle.html</link>
@@ -52,7 +52,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  8
+                  0
                 </td>
                 <td>
                   0
@@ -66,7 +66,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -94,7 +94,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  0
                 </td>
                 <td>
                   0
@@ -108,7 +108,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -122,7 +122,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
+                  0
                 </td>
                 <td>
                   0
@@ -136,21 +136,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  5
-                </td>
-                <td>
                   0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://secured-properties.brabenetz.net/checkstyle.html#net.brabenetz.lib.securedproperties.utils.ValueReplacementUtils.java">net/brabenetz/lib/securedproperties/utils/ValueReplacementUtils.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
                 </td>
                 <td>
                   0
@@ -164,7 +150,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  7
+                  0
                 </td>
                 <td>
                   0

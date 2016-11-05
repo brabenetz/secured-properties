@@ -10,26 +10,26 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.JDependTest
-	c124 [label=<<table title="net.brabenetz.lib.securedproperties.JDependTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JDependTest.html">
+	c125 [label=<<table title="net.brabenetz.lib.securedproperties.JDependTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JDependTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JDependTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./JDependTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// net.brabenetz.lib.securedproperties.JDependTest DEPEND jdepend.framework.JavaPackage
-	c124:p -> c136:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// net.brabenetz.lib.securedproperties.JDependTest DEPEND jdepend.framework.JavaPackage
-	c124:p -> c136:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// net.brabenetz.lib.securedproperties.JDependTest DEPEND jdepend.framework.JDepend
-	c124:p -> c141:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c125:p -> c137:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// net.brabenetz.lib.securedproperties.JDependTest DEPEND jdepend.framework.JavaPackage
+	c125:p -> c141:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// net.brabenetz.lib.securedproperties.JDependTest DEPEND jdepend.framework.JavaPackage
+	c125:p -> c141:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// jdepend.framework.JavaPackage
-	c136 [label=<<table title="jdepend.framework.JavaPackage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c141 [label=<<table title="jdepend.framework.JavaPackage" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JavaPackage </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> jdepend.framework </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// jdepend.framework.JDepend
-	c141 [label=<<table title="jdepend.framework.JDepend" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c137 [label=<<table title="jdepend.framework.JDepend" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JDepend </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> jdepend.framework </font></td></tr>
