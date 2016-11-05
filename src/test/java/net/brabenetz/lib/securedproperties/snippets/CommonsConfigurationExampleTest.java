@@ -46,7 +46,7 @@ public class CommonsConfigurationExampleTest {
 
         // initialization - get decrypted value
         String myPassword = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(secretKey),
+            new SecuredPropertiesConfig().withDefaultSecretFile(secretKey),
             propertiesFile,
             "mySecretPassword");
         System.setProperty("mySecretPassword", myPassword);

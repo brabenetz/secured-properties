@@ -57,7 +57,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
             getTestPropertyFile(), "mySecretPassword");
 
         // validate result
@@ -76,7 +76,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
             getTestPropertyFile(), "mySecretPassword");
         // validate result
         assertThat(secretValue, is("test"));
@@ -96,7 +96,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
             getTestPropertyFile(), "mySecretPassword");
         // validate result
         assertThat(secretValue, is(nullValue()));
@@ -109,7 +109,7 @@ public class SecuredPropertiesTest {
         System.setProperty("mySecretPassword", "{wNnuFmepE9cAN6GpaULDZw==}");
 
         // run test
-        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(getSecretFileExample());
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample());
 
         String encryptedValue = checkSystemProperties(config, "mySecretPassword");
 
@@ -124,7 +124,7 @@ public class SecuredPropertiesTest {
         System.setProperty("mySecretPassword", "test");
 
         // run test
-        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(getSecretFileExample());
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample());
         String encryptedValue = checkSystemProperties(config, "mySecretPassword");
         
         // validate result
@@ -154,7 +154,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()).disableAutoEncryptNonEncryptedValues(),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()).disableAutoEncryptNonEncryptedValues(),
             getTestPropertyFile(), "mySecretPassword");
         // validate result
         assertThat(secretValue, is("test"));
@@ -173,7 +173,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getTestSecretFile()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getTestSecretFile()),
             getTestPropertyFile(), "mySecretPassword");
         // validate result
         assertThat(secretValue, is("test"));
@@ -194,7 +194,7 @@ public class SecuredPropertiesTest {
 
         // run test
         Exception expectException = TestUtils.expectException(() -> SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getTestSecretFile()).disableAutoCreateSecretKey(),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getTestSecretFile()).disableAutoCreateSecretKey(),
             getTestPropertyFile(), "mySecretPassword"));
         // validate result
         assertThat(expectException.getMessage(), containsString("test.key"));

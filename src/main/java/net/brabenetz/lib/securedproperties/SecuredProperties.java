@@ -148,7 +148,7 @@ public final class SecuredProperties {
     }
 
     private static SecretContainer getSecretContainer(final SecuredPropertiesConfig config, final Properties properties) {
-        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getSecretFile(), config.getSecretFilePropertyKey(), properties);
+        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getDefaultSecretFile(), config.getSecretFilePropertyKey(), properties);
 
         return SecretContainerStore.getSecretContainer(secretFile, config.isAutoCreateSecretKey(), config.getAllowedAlgorithm());
     }

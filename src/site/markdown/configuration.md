@@ -25,30 +25,29 @@ The following customizations are available:
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/ConfigurationSnippet.java} -->
 
-### [1] withSecretFile() and withSecretFilePropertyKey():
+### [1] withSecretFilePropertyKey():
 
-Only one of the two properties can be set.
+If **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
 
-If **secretFile** is set, **secretFilePropertyKey** will be ignored, and the **secretFile** will always be used as secret file.
+### [2] withDefaultSecretFile():
 
-If only **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
+If no secret file path is configured in th eproperty file with key **secretFilePropertyKey**, then the **defaultSecretFile** will be used.
 
-If the properties file doesn't have a value for the given key, <br/>
-then the default "%user_home%/.secret/securedProperties.key" will be used as secret file.
+Without **defaultSecretFile** the default  "%user_home%/.secret/securedProperties.key" will be used as secret file.
         
-### [2] withAllowedAlgorithm()
+### [3] withAllowedAlgorithm()
 
 will replace the default **allowedAlgorithm** with the given algorithm.
  
-### [3] addAllowedAlgorithm()
+### [4] addAllowedAlgorithm()
 
 will add additional **allowedAlgorithm** to the given algorithm.
  
-### [4] disableAutoCreateSecretKey()
+### [5] disableAutoCreateSecretKey()
 
 will deactivate the auto creation of the secretKey file. If the secretKey file doesn't exist an Exception will be thrown.
  
-### [5] disableAutoEncryptNonEncryptedValues()
+### [6] disableAutoEncryptNonEncryptedValues()
 
 will deactivate the auto encryption of passwords in the property file. The property file will never be changed.<br/>
 A warning will be logged if the password is in plain-text.

@@ -19,18 +19,17 @@
  */
 package net.brabenetz.lib.securedproperties.utils;
 
+import com.github.fge.lambdas.Throwing;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
-
-import com.github.fge.lambdas.Throwing;
 
 public class SecuredPropertiesUtils {
 
@@ -46,16 +45,16 @@ public class SecuredPropertiesUtils {
         return properties;
     }
 
-    public static File getSecretFile(final File secretFile, final String secretFilePropertyKey, final Properties properties) {
-        if (secretFile != null) {
-            return secretFile;
-        }
+    public static File getSecretFile(final File defaultSecretFile, final String secretFilePropertyKey, final Properties properties) {
         String secretFilePath = null;
         if (StringUtils.isNotEmpty(secretFilePropertyKey)) {
             secretFilePath = properties.getProperty(secretFilePropertyKey);
         }
 
         if (StringUtils.isEmpty(secretFilePath)) {
+            if (defaultSecretFile != null) {
+                return defaultSecretFile;
+            }
             secretFilePath = SystemUtils.USER_HOME + "/.secret/securedProperties.key";
             LOG.debug("No secretFilePath configured. Use default location: {}", secretFilePath);
         }
