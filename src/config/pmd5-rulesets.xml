@@ -49,7 +49,8 @@
 	<rule ref="rulesets/java/imports.xml" />
 	<rule ref="rulesets/java/j2ee.xml" />
 	<rule ref="rulesets/java/optimizations.xml" >
-		<exclude name="SimplifyStartsWith" />
+        <exclude name="LocalVariableCouldBeFinal" />
+        <exclude name="SimplifyStartsWith" />
 	</rule>
 
 

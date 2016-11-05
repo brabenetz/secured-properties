@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.core;
+package net.brabenetz.lib.securedproperties.core;
 
 import java.io.File;
 import java.util.ArrayList;

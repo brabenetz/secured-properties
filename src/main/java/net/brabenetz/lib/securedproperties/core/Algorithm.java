@@ -17,27 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.core;
+package net.brabenetz.lib.securedproperties.core;
 
-import javax.crypto.SecretKey;
+public interface Algorithm {
 
-public class SecretContainer {
+    String getKey();
 
-    private final Algorithm algorithm;
-    private final SecretKey secretKey;
-
-    public SecretContainer(final Algorithm algorithm, final SecretKey secretKey) {
-        super();
-        this.algorithm = algorithm;
-        this.secretKey = secretKey;
-    }
-
-    public Algorithm getAlgorithm() {
-        return this.algorithm;
-    }
-
-    public SecretKey getSecretKey() {
-        return this.secretKey;
-    }
+    int getSize();
 
 }

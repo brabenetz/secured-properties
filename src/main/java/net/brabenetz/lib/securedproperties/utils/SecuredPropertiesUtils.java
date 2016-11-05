@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.utils;
+package net.brabenetz.lib.securedproperties.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -38,6 +38,9 @@ public class SecuredPropertiesUtils {
 
     public static Properties readProperties(final File propertyFile) {
         final Properties properties = new Properties();
+        if (propertyFile == null) {
+            return properties;
+        }
         byte[] propertyFileContent = Throwing.supplier(() -> FileUtils.readFileToByteArray(propertyFile)).get();
         Throwing.runnable(() -> properties.load(new ByteArrayInputStream(propertyFileContent))).run();
         return properties;
@@ -54,7 +57,7 @@ public class SecuredPropertiesUtils {
 
         if (StringUtils.isEmpty(secretFilePath)) {
             secretFilePath = SystemUtils.USER_HOME + "/.secret/securedProperties.key";
-            LOG.debug("No secretFilePath configured. Use default location: " + secretFilePath);
+            LOG.debug("No secretFilePath configured. Use default location: {}", secretFilePath);
         }
 
         return new File(secretFilePath);

@@ -18,25 +18,31 @@
   #L%
   -->
 <project name="Secured Properties library">
-	<publishDate position="left" format="dd. MMM yyyy HH:mm" />
-	<bannerLeft>
-		<name>Secured Properties</name>
-		<!--
-		<src>images/secured-properties-logo-37px.png</src>
-		-->
-		<href>http://secured-properties.brabenetz.net</href>
-	</bannerLeft>
+  <publishDate position="left" format="dd. MMM yyyy HH:mm" />
+  <bannerLeft>
+    <name>Secured Properties</name>
+    <!-- <src>images/secured-properties-logo-37px.png</src> -->
+    <href>http://secured-properties.brabenetz.net</href>
+  </bannerLeft>
   <bannerRight>
     <name>GitHub</name>
     <src>images/github-logo-37px.png</src>
     <href>https://github.com/brabenetz/secured-properties</href>
   </bannerRight>
-	<body>
-		<menu name="Secured Properties Library">
-			<item name="Overview" href="index.html" />
-		</menu>
-		<menu ref="reports" />
-	</body>
+  <body>
+    <menu name="Secured Properties Library">
+      <item name="Overview" href="index.html" />
+      <item name="Download" href="download.html" />
+      <item name="Configuration" href="configuration.html" />
+      <item name="Changes" href="changes-report.html" />
+      <item name="Archiv" href="http://secured-properties.brabenetz.net/archiv/" />
+    </menu>
+    <menu name="Examples">
+      <item name="Settings4j" href="exampleSettings4j.html" />
+      <item name="CommonsConfiguration" href="exampleCommonsConfiguration.html" />
+    </menu>
+    <menu ref="reports" />
+  </body>
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
@@ -45,7 +51,7 @@
   <custom>
     <fluidoSkin>
       <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
-      <googleSearch/>
+      <googleSearch />
       <gitHub>
         <projectId>brabenetz/secured-properties</projectId>
         <ribbonOrientation>right</ribbonOrientation>

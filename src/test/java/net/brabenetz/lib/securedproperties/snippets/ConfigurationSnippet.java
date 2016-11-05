@@ -17,31 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.core;
+package net.brabenetz.lib.securedproperties.snippets;
 
-public class MockAlgorithm implements Algorithm {
-    private final String key;
-    private final int size;
+import java.io.File;
 
-    public MockAlgorithm(final String key, final int size) {
-        super();
-        this.key = key;
-        this.size = size;
-    }
+import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
+import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
-    @Override
-    public String getKey() {
-        return this.key;
-    }
+public class ConfigurationSnippet {
 
-    @Override
-    public int getSize() {
-        return this.size;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s_%s", getKey(), getSize());
-    }
-
+    // START SNIPPET: configExample
+    SecuredPropertiesConfig config = new SecuredPropertiesConfig()
+        .withSecretFile(new File("./mySecret.key")) // [1a]
+        .withSecretFilePropertyKey("secretKeyPath") // [1b]
+        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [2]
+        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [3]
+        .disableAutoCreateSecretKey() // [4]
+        .disableAutoEncryptNonEncryptedValues(); // [5]
+    // END SNIPPET: configExample
 }

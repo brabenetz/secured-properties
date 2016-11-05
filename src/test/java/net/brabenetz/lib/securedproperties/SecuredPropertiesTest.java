@@ -17,13 +17,14 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties;
+package net.brabenetz.lib.securedproperties;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import net.brabenetz.lib.securedproperties.test.TestUtils;
+import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,13 +32,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-import org.junit.Test;
-
-import net.brabenetz.lib.security.properties.core.Encryption;
-import net.brabenetz.lib.security.properties.test.TestUtils;
-import net.brabenetz.lib.security.properties.utils.SecuredPropertiesUtils;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class SecuredPropertiesTest {
 
@@ -62,6 +59,7 @@ public class SecuredPropertiesTest {
         String secretValue = SecuredProperties.getSecretValue(
             new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
             getTestPropertyFile(), "mySecretPassword");
+
         // validate result
         assertThat(secretValue, is("test"));
 
@@ -87,22 +85,7 @@ public class SecuredPropertiesTest {
         Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
         String newPasswordValue = props.getProperty("mySecretPassword");
         assertThat(newPasswordValue, is(not("test")));
-        assertThat(Encryption.isEncryptedPassword(newPasswordValue), is(true));
-
-    }
-
-    @Test
-    public void testGetSecretValue_fromEncryptedSystemProperty() throws Exception {
-        // prepare SystemProperty
-        writeProperties(getTestPropertyFile(), "title=Some Test");
-        System.setProperty("mySecretPassword", "{wNnuFmepE9cAN6GpaULDZw==}");
-
-        // run test
-        String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
-            getTestPropertyFile(), "mySecretPassword");
-        // validate result
-        assertThat(secretValue, is("test"));
+        assertThat(SecuredProperties.isEncryptedPassword(newPasswordValue), is(true));
 
     }
 
@@ -121,19 +104,47 @@ public class SecuredPropertiesTest {
     }
 
     @Test
-    public void testGetSecretValue_fromUnencryptedSystemProperty_shouldLogInfoMessage() throws Exception {
+    public void testManualExampleEncryptAndDecrypt_fromEncryptedSystemProperty() throws Exception {
         // prepare SystemProperty
-        writeProperties(getTestPropertyFile(), "title=Some Test");
+        System.setProperty("mySecretPassword", "{wNnuFmepE9cAN6GpaULDZw==}");
+
+        // run test
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(getSecretFileExample());
+
+        String encryptedValue = checkSystemProperties(config, "mySecretPassword");
+
+        // validate result
+        assertThat(encryptedValue, is("test"));
+
+    }
+
+    @Test
+    public void testManualExampleEncryptAndDecrypt_fromUnencryptedSystemProperty_shouldLogInfoMessage() throws Exception {
+        // prepare SystemProperty
         System.setProperty("mySecretPassword", "test");
 
         // run test
-        String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(getSecretFileExample()),
-            getTestPropertyFile(), "mySecretPassword");
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(getSecretFileExample());
+        String encryptedValue = checkSystemProperties(config, "mySecretPassword");
+        
         // validate result
-        assertThat(secretValue, is("test"));
+        assertThat(encryptedValue, is("test"));
 
         // TODO brabenetz 28.10.2016 : validate Log Message
+    }
+
+    private String checkSystemProperties(final SecuredPropertiesConfig config, final String key) {
+
+        String systemPropPassword = System.getProperty(key);
+        if (SecuredProperties.isEncryptedPassword(systemPropPassword)) {
+            return SecuredProperties.decrypt(config, systemPropPassword);
+        } else if (StringUtils.isNotEmpty(systemPropPassword)) {
+            System.out.println(String.format("you could now use the following encrypted password: -D%s=%s", key,
+                SecuredProperties.encrypt(config, systemPropPassword)));
+            return systemPropPassword;
+        } else {
+            return null;
+        }
     }
 
     @Test
@@ -171,7 +182,7 @@ public class SecuredPropertiesTest {
         Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
         String newPasswordValue = props.getProperty("mySecretPassword");
         assertThat(newPasswordValue, is(not("test")));
-        assertThat(Encryption.isEncryptedPassword(newPasswordValue), is(true));
+        assertThat(SecuredProperties.isEncryptedPassword(newPasswordValue), is(true));
         assertThat(getTestSecretFile().exists(), is(true));
 
     }

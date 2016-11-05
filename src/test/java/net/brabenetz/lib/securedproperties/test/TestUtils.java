@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package net.brabenetz.lib.security.properties.test;
+package net.brabenetz.lib.securedproperties.test;
 
 public class TestUtils {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(TestUtils.class);

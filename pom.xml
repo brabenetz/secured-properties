@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>net.brabenetz.lib.security</groupId>
+  <groupId>net.brabenetz.lib</groupId>
   <artifactId>secured-properties</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -78,17 +78,16 @@
       <url>github:http://brabenetz.github.io/secured-properties/archiv/${project.version}</url>
     </site>
   </distributionManagement>
-  
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    
+
     <plugin-config-checkstyle-header-location>${basedir}/src/config/header.txt</plugin-config-checkstyle-header-location>
     <plugin-config-checkstyle-location>${basedir}/src/config/checkstyle.xml</plugin-config-checkstyle-location>
     <plugin-config-findbug-location>${basedir}/src/config/findbugs-exclude.xml</plugin-config-findbug-location>
     <plugin-config-pmd-location>${basedir}/src/config/pmd5-rulesets.xml</plugin-config-pmd-location>
-    
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
@@ -151,6 +150,18 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.settings4j</groupId>
+      <artifactId>settings4j</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <version>2.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
