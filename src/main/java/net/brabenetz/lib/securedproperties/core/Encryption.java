@@ -20,6 +20,8 @@
 package net.brabenetz.lib.securedproperties.core;
 
 import com.github.fge.lambdas.Throwing;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Cipher;
@@ -53,7 +55,7 @@ public final class Encryption {
      */
     public static boolean isAlgorithmSupported(final Algorithm algorithm) {
         try {
-            encrypt(algorithm, createKey(algorithm), "test");
+            encrypt(algorithm, createKey(algorithm), 0, "test");
             Cipher.getInstance(algorithm.getKey());
             return true;
         } catch (Exception e) {
@@ -134,9 +136,10 @@ public final class Encryption {
      *        The value which should be encrypted.
      * @return the encrypted value.
      */
-    public static String encrypt(final Algorithm algorithm, final SecretKey secretKey, final String plainTextValue) {
+    public static String encrypt(final Algorithm algorithm, final SecretKey secretKey, final int saltLength, final String plainTextValue) {
         byte[] valueBytes = plainTextValue.getBytes(StandardCharsets.UTF_8);
-        byte[] encryptedValue = Throwing.supplier(() -> encrypt(algorithm, secretKey, valueBytes)).get();
+        byte[] saltedValue = ArrayUtils.addAll(RandomUtils.nextBytes(saltLength), valueBytes);
+        byte[] encryptedValue = Throwing.supplier(() -> encrypt(algorithm, secretKey, saltedValue)).get();
         return "{" + Base64.getEncoder().encodeToString(encryptedValue) + "}";
     }
 
@@ -151,9 +154,10 @@ public final class Encryption {
      *        the encrypted value to decrypt.
      * @return the decrypted value.
      */
-    public static String decrypt(final Algorithm algorithm, final SecretKey secretKey, final String encryptedValue) {
+    public static String decrypt(final Algorithm algorithm, final SecretKey secretKey, final int saltLength, final String encryptedValue) {
         byte[] encryptedValueBytes = Base64.getDecoder().decode(StringUtils.strip(encryptedValue, "{}"));
-        byte[] valueBytes = Throwing.supplier(() -> decrypt(algorithm, secretKey, encryptedValueBytes)).get();
+        byte[] saltedValueBytes = Throwing.supplier(() -> decrypt(algorithm, secretKey, encryptedValueBytes)).get();
+        byte[] valueBytes = ArrayUtils.subarray(saltedValueBytes, saltLength, saltedValueBytes.length);
         return new String(valueBytes, StandardCharsets.UTF_8);
     }
 

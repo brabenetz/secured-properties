@@ -81,11 +81,11 @@ public final class SecuredProperties {
         String value = properties.getProperty(key);
         if (Encryption.isEncryptedValue(value)) {
             // read and decrypt value
-            return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
+            return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), value);
         } else if (StringUtils.isNotEmpty(value)) {
             // replace value with encrypted in property file.
             if (config.isAutoEncryptNonEncryptedValues()) {
-                String encryptedValue = Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
+                String encryptedValue = Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), value);
                 SecuredPropertiesUtils.replaceSecretValue(propertyFile, key, encryptedValue);
             } else {
                 LOG.warn("AutoEncryptNonEncryptedValues is off. Value in Property file will remain plain-text.");
@@ -127,7 +127,7 @@ public final class SecuredProperties {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
         
-        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), plainTextValue);
+        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), plainTextValue);
     }
     
     /**
@@ -150,7 +150,7 @@ public final class SecuredProperties {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
         
-        return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), encryptedPassword);
+        return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), encryptedPassword);
         
     }
 

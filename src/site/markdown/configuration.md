@@ -31,19 +31,25 @@ If no secret file path is configured in th eproperty file with key **secretFileP
 
 Without **defaultSecretFile** the default  "%user_home%/.secret/securedProperties.key" will be used as secret file.
         
-### [3] withAllowedAlgorithm()
+### [3] withSaltLength()
+
+The salt length defines the length of the randomly generated salt which will be added to the value before encryption.
+Default is 11, and a length of 0 will deactivate the salt.
+The salt makes sure that two properties with the same value doesn't have the same encrypted value.
+
+### [4] withAllowedAlgorithm()
 
 will replace the default **allowedAlgorithm** with the given algorithm.
  
-### [4] addAllowedAlgorithm()
+### [5] addAllowedAlgorithm()
 
 will add additional **allowedAlgorithm** to the given algorithm.
  
-### [5] disableAutoCreateSecretKey()
+### [6] disableAutoCreateSecretKey()
 
 will deactivate the auto creation of the secretKey file. If the secretKey file doesn't exist an Exception will be thrown.
  
-### [6] disableAutoEncryptNonEncryptedValues()
+### [7] disableAutoEncryptNonEncryptedValues()
 
 will deactivate the auto encryption of passwords in the property file. The property file will never be changed.<br/>
 A warning will be logged if the password is in plain-text.

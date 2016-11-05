@@ -34,9 +34,10 @@ public class ConfigurationSnippet {
     private SecuredPropertiesConfig config = new SecuredPropertiesConfig()
         .withSecretFilePropertyKey("secretKeyPath") // [1]
         .withDefaultSecretFile(new File("./mySecret.key")) // [2]
-        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [3]
-        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [4]
-        .disableAutoCreateSecretKey() // [5]
-        .disableAutoEncryptNonEncryptedValues(); // [6]
+        .withSaltLength(0) // [3]
+        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [4]
+        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [5]
+        .disableAutoCreateSecretKey() // [6]
+        .disableAutoEncryptNonEncryptedValues(); // [7]
     // END SNIPPET: configExample
 }
