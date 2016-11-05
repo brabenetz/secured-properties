@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -76,7 +77,7 @@ public class SecuredPropertiesTest {
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()).disableAutoEncryptNonEncryptedValues(),
             getTestPropertyFile(), "mySecretPassword");
 
         // validate result
@@ -105,6 +106,32 @@ public class SecuredPropertiesTest {
         String newPasswordValue = props.getProperty("mySecretPassword");
         assertThat(newPasswordValue, is(not("test")));
         assertThat(SecuredProperties.isEncryptedValue(newPasswordValue), is(true));
+
+    }
+
+    @Test
+    public void testGetSecretValue_multipleValues_shouldReplaceUnencryptedProperties() throws Exception {
+        // prepare property File
+        writeProperties(getTestPropertyFile(), "pwd1=test", "pwd2={buMkr+yZH9RclafjETtlSQ==}", "pwd3=test");
+
+        // run test
+        Map<String, String> secretValues = SecuredProperties.getSecretValues(
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
+            getTestPropertyFile(), "pwd1", "pwd2", "pwd3", "pwd99");
+        // validate result
+        assertThat(secretValues.get("pwd1"), is("test"));
+        assertThat(secretValues.get("pwd2"), is("test"));
+        assertThat(secretValues.get("pwd3"), is("test"));
+        assertThat(secretValues.get("pwd99"), is(nullValue()));
+
+        // validate that property file is unchanged
+        Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
+        assertThat(props.getProperty("pwd1"), is(not("test")));
+        assertThat(props.getProperty("pwd2"), is("{buMkr+yZH9RclafjETtlSQ==}"));
+        assertThat(props.getProperty("pwd3"), is(not("test")));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd1")), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd2")), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd3")), is(true));
 
     }
 
