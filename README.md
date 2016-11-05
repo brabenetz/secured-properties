@@ -58,6 +58,19 @@ mySecretPassword = {wVtvW8lQrwCf8MA9sadwww==}
 
 This encrypted password can now be read only in combination with the secret file "G:/mysecret.key" 
 
+## Get multiple values at ones
+
+It is also possible to encrypt multiple values at ones:
+
+```Java
+  Map secretValues = SecuredProperties.getSecretValues(
+      new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")), // custom configurations
+      new File("myConfiguration.properties"), // The Property File
+      "mySecretPassword", "anotherSecretPassword"); // the property-keys in "myConfiguration.properties" 
+```
+
+The returned Map contains the decrypted passwords for the two keys "mySecretPassword", "anotherSecretPassword".
+
 ## Manual Encryption/Decryption
 
 In some cases you don't want encrypt/decrypt values from Properties Files.

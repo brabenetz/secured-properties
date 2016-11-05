@@ -22,6 +22,7 @@ package net.brabenetz.lib.securedproperties.utils;
 import net.brabenetz.lib.securedproperties.test.TestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -98,7 +99,7 @@ public class SecuredPropertiesUtilsTest {
             validProperty.store(propertyOutputStream, "My Test Property");
         }
         // run test
-        SecuredPropertiesUtils.replaceSecretValue(propertyFile, "myPassword", "{abc-xyz}");
+        SecuredPropertiesUtils.replaceSecretValue(propertyFile, Pair.of("myPassword", "{abc-xyz}"));
 
         // validate Result
         Properties props = SecuredPropertiesUtils.readProperties(propertyFile);
@@ -109,16 +110,16 @@ public class SecuredPropertiesUtilsTest {
     public void testReplaceValue() throws Exception {
 
         // update Property
-        Assert.assertEquals("test=newTest", SecuredPropertiesUtils.replaceValue("test=test", "test", "newTest"));
+        Assert.assertEquals("test=newTest", SecuredPropertiesUtils.replaceValue("test=test", Pair.of("test", "newTest")));
         // unchanged Property
-        Assert.assertEquals("testForSomethingOther=test", SecuredPropertiesUtils.replaceValue("testForSomethingOther=test", "test", "newTest"));
-        Assert.assertEquals("otherKey=test", SecuredPropertiesUtils.replaceValue("otherKey=test", "test", "newTest"));
+        Assert.assertEquals("testForSomethingOther=test", SecuredPropertiesUtils.replaceValue("testForSomethingOther=test", Pair.of("test", "newTest")));
+        Assert.assertEquals("otherKey=test", SecuredPropertiesUtils.replaceValue("otherKey=test", Pair.of("test", "newTest")));
         // property with whitespaces should replace the value but leave the whitespaces unchanged.
-        Assert.assertEquals("test = newTest", SecuredPropertiesUtils.replaceValue("test = test", "test", "newTest"));
-        Assert.assertEquals("test  \t\t =\t newTest", SecuredPropertiesUtils.replaceValue("test  \t\t =\t test", "test", "newTest"));
+        Assert.assertEquals("test = newTest", SecuredPropertiesUtils.replaceValue("test = test", Pair.of("test", "newTest")));
+        Assert.assertEquals("test  \t\t =\t newTest", SecuredPropertiesUtils.replaceValue("test  \t\t =\t test", Pair.of("test", "newTest")));
         // property key with expression characters should be escaped
-        Assert.assertEquals("testX = test", SecuredPropertiesUtils.replaceValue("testX = test", "test.", "newTest"));
-        Assert.assertEquals("test.\\(){} = newTest", SecuredPropertiesUtils.replaceValue("test.\\(){} = test", "test.\\(){}", "newTest"));
+        Assert.assertEquals("testX = test", SecuredPropertiesUtils.replaceValue("testX = test", Pair.of("test.", "newTest")));
+        Assert.assertEquals("test.\\(){} = newTest", SecuredPropertiesUtils.replaceValue("test.\\(){} = test", Pair.of("test.\\(){}", "newTest")));
     }
 
     private File getValidPropertyFile() {

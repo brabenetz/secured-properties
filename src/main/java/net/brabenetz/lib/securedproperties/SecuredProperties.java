@@ -24,9 +24,13 @@ import net.brabenetz.lib.securedproperties.core.SecretContainer;
 import net.brabenetz.lib.securedproperties.core.SecretContainerStore;
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Encrypt and decrypt secret values in properties files with a secret key.
@@ -75,26 +79,65 @@ public final class SecuredProperties {
      * @return The decrypted plain-text value.
      */
     public static String getSecretValue(final SecuredPropertiesConfig config, final File propertyFile, final String key) {
+        return getSecretValues(config, propertyFile, key).get(key);
+    }
+
+    /**
+     * @see SecuredProperties
+     * @param config
+     *        the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile
+     *        The Properties file to with the encrypted value
+     * @param keys
+     *        The Property-Keys of the encrypted value.
+     * @return A Map with the decrypted plain-text values per key.
+     */
+    public static Map<String, String> getSecretValues(final SecuredPropertiesConfig config, final File propertyFile, final String... keys) {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
 
-        String value = properties.getProperty(key);
-        if (Encryption.isEncryptedValue(value)) {
-            // read and decrypt value
-            return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
-        } else if (StringUtils.isNotEmpty(value)) {
-            // replace value with encrypted in property file.
-            if (config.isAutoEncryptNonEncryptedValues()) {
-                String encryptedValue = Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
-                SecuredPropertiesUtils.replaceSecretValue(propertyFile, key, encryptedValue);
+        Map<String, String> result = new HashMap<>();
+        Map<String, String> unencryptedValues = new HashMap<>();
+
+        for (String key : keys) {
+
+            String value = properties.getProperty(key);
+            if (Encryption.isEncryptedValue(value)) {
+                // read and decrypt value
+                result.put(key, Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), value));
+            } else if (StringUtils.isNotEmpty(value)) {
+                // replace value with encrypted in property file.
+                unencryptedValues.put(key, value);
+                result.put(key, value);
             } else {
-                LOG.warn("AutoEncryptNonEncryptedValues is off. Value in Property file will remain plain-text.");
+                result.put(key, null);
             }
-            return value;
         }
 
-        return null;
+        if (config.isAutoEncryptNonEncryptedValues()) {
+            Map<String, String> encryptedValues = encryptValues(config, secretContainer, unencryptedValues);
+            Pair<String, String>[] newProperties = encryptedValues.entrySet().stream()
+                .map((e) -> Pair.of(e.getKey(), e.getValue()))
+                .collect(Collectors.toSet())
+                .toArray(new Pair[encryptedValues.size()]);
+            SecuredPropertiesUtils.replaceSecretValue(propertyFile, newProperties);
+        } else if (!unencryptedValues.isEmpty()) {
+            LOG.warn("AutoEncryptNonEncryptedValues is off. Secret values in Property file will remain plain-text.");
+        }
 
+        return result;
+
+    }
+
+    private static Map<String, String> encryptValues(final SecuredPropertiesConfig config, final SecretContainer secretContainer,
+        final Map<String, String> unencryptedValues) {
+
+        Map<String, String> encryptedValues = new HashMap<>();
+        for (String key : unencryptedValues.keySet()) {
+            String value = unencryptedValues.get(key);
+            encryptedValues.put(key, Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), value));
+        }
+        return encryptedValues;
     }
 
     /**
@@ -127,7 +170,7 @@ public final class SecuredProperties {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
         
-        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), plainTextValue);
+        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), plainTextValue);
     }
     
     /**
@@ -150,7 +193,7 @@ public final class SecuredProperties {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
         
-        return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), encryptedPassword);
+        return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), encryptedPassword);
         
     }
 

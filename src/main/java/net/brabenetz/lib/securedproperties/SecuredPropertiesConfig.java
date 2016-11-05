@@ -30,8 +30,11 @@ import java.io.File;
  */
 public class SecuredPropertiesConfig {
 
+    private static final int DEFAULT_SALT_LENGTH = 11;
+
     private File defaultSecretFile;
     private String secretFilePropertyKey;
+    private int saltLength = DEFAULT_SALT_LENGTH;
     private Algorithm[] allowedAlgorithm = new Algorithm[] {
             SupportedAlgorithm.AES_256,
             SupportedAlgorithm.AES_192,
@@ -50,6 +53,10 @@ public class SecuredPropertiesConfig {
 
     public String getSecretFilePropertyKey() {
         return this.secretFilePropertyKey;
+    }
+
+    public int getSaltLength() {
+        return saltLength;
     }
 
     public boolean isAutoCreateSecretKey() {
@@ -82,6 +89,11 @@ public class SecuredPropertiesConfig {
 
     public SecuredPropertiesConfig withSecretFilePropertyKey(final String newSecretFilePropertyKey) {
         this.secretFilePropertyKey = newSecretFilePropertyKey;
+        return this;
+    }
+
+    public SecuredPropertiesConfig withSaltLength(final int newSaltLength) {
+        this.saltLength = newSaltLength;
         return this;
     }
 

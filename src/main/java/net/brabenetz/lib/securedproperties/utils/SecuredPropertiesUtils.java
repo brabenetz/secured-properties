@@ -23,6 +23,7 @@ import com.github.fge.lambdas.Throwing;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -103,31 +104,35 @@ public final class SecuredPropertiesUtils {
     }
 
     /**
-     * Replaces the value for one key in the given Properties file and leaves all other lines
-     * unchanged.
+     * Replaces the value for one key in the given Properties file and leaves all other lines unchanged.
      * 
      * @param propertyFile
      *        The property File with the given Key
-     * @param key
-     *        The key where the value should be replaced.
-     * @param newValue
-     *        the new value
+     * @param newProperties
+     *        The new Property, where left is the key, and right is the new value.
      */
-    public static void replaceSecretValue(final File propertyFile, final String key, final String newValue) {
+    @SafeVarargs
+    public static void replaceSecretValue(final File propertyFile, final Pair<String, String>... newProperties) {
         List<String> lines = Throwing.supplier(() -> FileUtils.readLines(propertyFile, StandardCharsets.ISO_8859_1.name())).get();
-        List<String> newLines = lines.stream().map((line) -> replaceValue(line, key, newValue))
+        List<String> newLines = lines.stream()
+            .map((line) -> replaceValue(line, newProperties))
             .collect(Collectors.toList());
         Throwing.runnable(() -> FileUtils.writeLines(propertyFile, StandardCharsets.ISO_8859_1.name(), newLines)).run();
     }
 
     // SuppressWarnings "PMD.DefaultPackage": only used in UnitTest
+    @SafeVarargs
     @SuppressWarnings("PMD.DefaultPackage")
-    static String replaceValue(final String line, final String key, final String newValue) {
-        Pattern pattern = Pattern.compile("^" + Pattern.quote(key) + "(\\s*=\\s*).*$");
-        Matcher matcher = pattern.matcher(line);
-        if (matcher.matches()) {
-            String gr1 = matcher.group(1);
-            return key + gr1 + newValue;
+    static String replaceValue(final String line, final Pair<String, String>... newProperties) {
+        for (Pair<String, String> newProperty : newProperties) {
+            String key = newProperty.getLeft();
+            String newValue = newProperty.getRight();
+            Pattern pattern = Pattern.compile("^" + Pattern.quote(key) + "(\\s*=\\s*).*$");
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.matches()) {
+                String gr1 = matcher.group(1);
+                return key + gr1 + newValue;
+            }
         }
         return line;
     }

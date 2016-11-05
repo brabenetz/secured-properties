@@ -84,11 +84,12 @@ public class EncryptionTest {
     }
 
     private void testEncryptDecryptRoundup(final SupportedAlgorithm algorithm, final String password) {
+        final int saltLength = 11;
         Assert.assertFalse(Encryption.isEncryptedValue(password));
         String secretKeyStr = Encryption.toBase64String(Encryption.createKey(algorithm));
-        String encryptPw = Encryption.encrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), password);
+        String encryptPw = Encryption.encrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), saltLength, password);
         Assert.assertTrue(Encryption.isEncryptedValue(encryptPw));
-        String finalPassword = Encryption.decrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), encryptPw);
+        String finalPassword = Encryption.decrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), saltLength, encryptPw);
         assertThat(finalPassword, is(password));
     }
 

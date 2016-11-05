@@ -27,7 +27,7 @@
   </properties>
   <body>
     <release version="1.0-beta2" date="2016-11-??" description="Beta version 2 - Add Salt implementation">
-      <action dev="brabenetz" type="add" date="2016-11-??">
+      <action dev="brabenetz" type="add" date="2016-11-05">
         Add Salt implementation
       </action>
       <action dev="brabenetz" type="update" date="2016-11-05">
@@ -40,7 +40,7 @@
       </action>
     </release>
     <release version="1.0-beta1" date="2016-11-01" description="Beta version 1">
-      <action dev="brabenetz" type="add">
+      <action dev="brabenetz" type="add" date="2016-10-26">
        The beginning
       </action>
     </release>

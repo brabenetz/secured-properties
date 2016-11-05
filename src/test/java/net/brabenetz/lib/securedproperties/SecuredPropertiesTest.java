@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -72,11 +73,11 @@ public class SecuredPropertiesTest {
     @Test
     public void testGetSecretValue_fromEncryptedPropertyFile() throws Exception {
         // prepare property File
-        writeProperties(getTestPropertyFile(), "mySecretPassword={wNnuFmepE9cAN6GpaULDZw==}");
+        writeProperties(getTestPropertyFile(), "mySecretPassword={buMkr+yZH9RclafjETtlSQ==}");
 
         // run test
         String secretValue = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()).disableAutoEncryptNonEncryptedValues(),
             getTestPropertyFile(), "mySecretPassword");
 
         // validate result
@@ -84,7 +85,7 @@ public class SecuredPropertiesTest {
 
         // validate that property file is unchanged
         Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
-        assertThat(props.get("mySecretPassword"), is("{wNnuFmepE9cAN6GpaULDZw==}"));
+        assertThat(props.get("mySecretPassword"), is("{buMkr+yZH9RclafjETtlSQ==}"));
 
     }
 
@@ -109,6 +110,51 @@ public class SecuredPropertiesTest {
     }
 
     @Test
+    public void testGetSecretValue_multipleValues_shouldReplaceUnencryptedProperties() throws Exception {
+        // prepare property File
+        writeProperties(getTestPropertyFile(), "pwd1=test", "pwd2={buMkr+yZH9RclafjETtlSQ==}", "pwd3=test");
+
+        // run test
+        Map<String, String> secretValues = SecuredProperties.getSecretValues(
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()),
+            getTestPropertyFile(), "pwd1", "pwd2", "pwd3", "pwd99");
+        // validate result
+        assertThat(secretValues.get("pwd1"), is("test"));
+        assertThat(secretValues.get("pwd2"), is("test"));
+        assertThat(secretValues.get("pwd3"), is("test"));
+        assertThat(secretValues.get("pwd99"), is(nullValue()));
+
+        // validate that property file is unchanged
+        Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
+        assertThat(props.getProperty("pwd1"), is(not("test")));
+        assertThat(props.getProperty("pwd2"), is("{buMkr+yZH9RclafjETtlSQ==}"));
+        assertThat(props.getProperty("pwd3"), is(not("test")));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd1")), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd2")), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(props.getProperty("pwd3")), is(true));
+
+    }
+
+    @Test
+    public void testGetSecretValue_fromUnencryptedPropertyFileWithoutSalt_shouldReplacePropertyWithAlwaysSameValue() throws Exception {
+        // prepare property File
+        writeProperties(getTestPropertyFile(), "mySecretPassword=test");
+
+        // run test
+        String secretValue = SecuredProperties.getSecretValue(
+            new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample()).withSaltLength(0),
+            getTestPropertyFile(), "mySecretPassword");
+        // validate result
+        assertThat(secretValue, is("test"));
+
+        // validate that property file contains the encrypted value but without salt i5t result always with the same value.
+        Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
+        String newPasswordValue = props.getProperty("mySecretPassword");
+        assertThat(newPasswordValue, is("{wNnuFmepE9cAN6GpaULDZw==}"));
+
+    }
+
+    @Test
     public void testGetSecretValue_notDefinedProperty_shouldReturnNull() throws Exception {
         // prepare SystemProperty
         writeProperties(getTestPropertyFile(), "title=Some Test");
@@ -125,7 +171,7 @@ public class SecuredPropertiesTest {
     @Test
     public void testManualExampleEncryptAndDecrypt_fromEncryptedSystemProperty() throws Exception {
         // prepare SystemProperty
-        System.setProperty("mySecretPassword", "{wNnuFmepE9cAN6GpaULDZw==}");
+        System.setProperty("mySecretPassword", "{buMkr+yZH9RclafjETtlSQ==}");
 
         // run test
         SecuredPropertiesConfig config = new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample());
