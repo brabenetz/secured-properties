@@ -25,6 +25,9 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 
+/**
+ * Configuration Object to control the behavior of {@link SecuredProperties}.
+ */
 public class SecuredPropertiesConfig {
 
     private File defaultSecretFile;
@@ -61,6 +64,17 @@ public class SecuredPropertiesConfig {
         return this.allowedAlgorithm;
     }
 
+    /**
+     * Overwrite the default location "%user_home%/.secret/securedProperties.key" for the secret key
+     * to encrypt and decrypt values.
+     * <p>
+     * The default will only be used if no location where found in the properties file for the key
+     * {@link #withSecretFilePropertyKey(String)}
+     * 
+     * @param newSecretFile
+     *        the secret File
+     * @return this for fluent style.
+     */
     public SecuredPropertiesConfig withDefaultSecretFile(final File newSecretFile) {
         this.defaultSecretFile = newSecretFile;
         return this;

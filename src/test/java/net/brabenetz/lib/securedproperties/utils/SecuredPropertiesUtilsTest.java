@@ -19,25 +19,28 @@
  */
 package net.brabenetz.lib.securedproperties.utils;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import net.brabenetz.lib.securedproperties.test.TestUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.SystemUtils;
-import org.junit.Test;
-
-import net.brabenetz.lib.securedproperties.test.TestUtils;
-import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class SecuredPropertiesUtilsTest {
+
+    @Test
+    public void testUtilityPattern() {
+        // this test is more for test-coverage than logic :D
+        Assert.assertTrue(TestUtils.isDefaultConstructorHidden(SecuredPropertiesUtils.class));
+    }
 
     @Test
     public void testReadProperties_Success_HappyPath() throws Exception {
@@ -66,15 +69,15 @@ public class SecuredPropertiesUtilsTest {
 
     @Test
     public void testGetSecretFile_Success_returnsGivenSecretFile() throws Exception {
-        File secretFile = SecuredPropertiesUtils.getSecretFile(new File("test.key"), null, null);
+        File secretFile = SecuredPropertiesUtils.getSecretFile(null, new File("test.key"), null);
         assertThat(secretFile.getName(), is("test.key"));
     }
 
     @Test
     public void testGetSecretFile_Success_returnsFileFromProperty() throws Exception {
         Properties validProperty = SecuredPropertiesUtils.readProperties(getValidPropertyFile());
-        File secretFile = SecuredPropertiesUtils.getSecretFile(null, "mySecretFile", validProperty);
-        assertThat(secretFile.getName(), is("test.key"));
+        File secretFile = SecuredPropertiesUtils.getSecretFile("mySecretFile", null, validProperty);
+        assertThat(secretFile.getName(), is("secretFileExample.key"));
     }
 
     @Test
@@ -100,6 +103,22 @@ public class SecuredPropertiesUtilsTest {
         // validate Result
         Properties props = SecuredPropertiesUtils.readProperties(propertyFile);
         assertThat(props.get("myPassword"), is("{abc-xyz}"));
+    }
+
+    @Test
+    public void testReplaceValue() throws Exception {
+
+        // update Property
+        Assert.assertEquals("test=newTest", SecuredPropertiesUtils.replaceValue("test=test", "test", "newTest"));
+        // unchanged Property
+        Assert.assertEquals("testForSomethingOther=test", SecuredPropertiesUtils.replaceValue("testForSomethingOther=test", "test", "newTest"));
+        Assert.assertEquals("otherKey=test", SecuredPropertiesUtils.replaceValue("otherKey=test", "test", "newTest"));
+        // property with whitespaces should replace the value but leave the whitespaces unchanged.
+        Assert.assertEquals("test = newTest", SecuredPropertiesUtils.replaceValue("test = test", "test", "newTest"));
+        Assert.assertEquals("test  \t\t =\t newTest", SecuredPropertiesUtils.replaceValue("test  \t\t =\t test", "test", "newTest"));
+        // property key with expression characters should be escaped
+        Assert.assertEquals("testX = test", SecuredPropertiesUtils.replaceValue("testX = test", "test.", "newTest"));
+        Assert.assertEquals("test.\\(){} = newTest", SecuredPropertiesUtils.replaceValue("test.\\(){} = test", "test.\\(){}", "newTest"));
     }
 
     private File getValidPropertyFile() {

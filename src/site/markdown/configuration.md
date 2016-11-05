@@ -15,10 +15,6 @@
       After generating the secretKey file, the algorithm cannot be changed anymore. 
   * **autoEncryptNonEncryptedValues** If the value in the property file is not already encrypted. it will be replaced by the encrypted value.
 
-In addition, secret values can also be set over SystemProperties (command line e.g. -DmyPwdKey=myPwd).<br/>
-This works only if the properties file doesn't have a value for the given key.<br/>
-An info-message will be logged with the encrypted version of the SystemProperty value if the given value was not already encrypted.
-
 ## Custom Configuration
 
 The following customizations are available:

@@ -29,12 +29,29 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class SecuredPropertiesUtils {
+/**
+ * Some Utilities for {@link net.brabenetz.lib.securedproperties.SecuredProperties}.
+ */
+public final class SecuredPropertiesUtils {
 
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SecuredPropertiesUtils.class);
 
+    private SecuredPropertiesUtils() {
+        super();
+    }
+
+    /**
+     * Loads a {@link Properties} object from a given Property {@link File} and transform checked
+     * Exception into RuntimeExceptions.
+     * 
+     * @param propertyFile
+     *        the property File
+     * @return the {@link Properties} object loaded by the propertyFile
+     */
     public static Properties readProperties(final File propertyFile) {
         final Properties properties = new Properties();
         if (propertyFile == null) {
@@ -45,7 +62,30 @@ public class SecuredPropertiesUtils {
         return properties;
     }
 
-    public static File getSecretFile(final File defaultSecretFile, final String secretFilePropertyKey, final Properties properties) {
+    /**
+     * Determine the location of the secret Key file by the given parameters.
+     * <p>
+     * logic checks the following order:
+     * <ol>
+     * <li>try to read the location from the Properties-File by the given
+     * secretFilePropertyKey.</li>
+     * <li>if no value found. but a defaultSecretFile is given, then the defaultSecretFile will be
+     * returned.</li>
+     * <li>if custom defaultSecretFile is given, then the default location
+     * "%USER_HOME%/.secret/securedProperties.key" will be returned.</li>
+     * </ol>
+     * 
+     * @param secretFilePropertyKey
+     *        The Property Key to get the location of the secret File from the given properties
+     *        file.
+     * @param defaultSecretFile
+     *        The optional overwritten default location if no value for the secretFilePropertyKey is
+     *        placed.
+     * @param properties
+     *        the Properties to search for the value for secretFilePropertyKey.
+     * @return
+     */
+    public static File getSecretFile(final String secretFilePropertyKey, final File defaultSecretFile, final Properties properties) {
         String secretFilePath = null;
         if (StringUtils.isNotEmpty(secretFilePropertyKey)) {
             secretFilePath = properties.getProperty(secretFilePropertyKey);
@@ -62,11 +102,34 @@ public class SecuredPropertiesUtils {
         return new File(secretFilePath);
     }
 
-    public static void replaceSecretValue(final File propertyFile, final String key, final String encryptedPassword) {
+    /**
+     * Replaces the value for one key in the given Properties file and leaves all other lines
+     * unchanged.
+     * 
+     * @param propertyFile
+     *        The property File with the given Key
+     * @param key
+     *        The key where the value should be replaced.
+     * @param newValue
+     *        the new value
+     */
+    public static void replaceSecretValue(final File propertyFile, final String key, final String newValue) {
         List<String> lines = Throwing.supplier(() -> FileUtils.readLines(propertyFile, StandardCharsets.ISO_8859_1.name())).get();
-        List<String> newLines = lines.stream().map((line) -> ValueReplacementUtils.replaceValue(line, key, encryptedPassword))
+        List<String> newLines = lines.stream().map((line) -> replaceValue(line, key, newValue))
             .collect(Collectors.toList());
         Throwing.runnable(() -> FileUtils.writeLines(propertyFile, StandardCharsets.ISO_8859_1.name(), newLines)).run();
+    }
+
+    // SuppressWarnings "PMD.DefaultPackage": only used in UnitTest
+    @SuppressWarnings("PMD.DefaultPackage")
+    static String replaceValue(final String line, final String key, final String newValue) {
+        Pattern pattern = Pattern.compile("^" + Pattern.quote(key) + "(\\s*=\\s*).*$");
+        Matcher matcher = pattern.matcher(line);
+        if (matcher.matches()) {
+            String gr1 = matcher.group(1);
+            return key + gr1 + newValue;
+        }
+        return line;
     }
 
 }

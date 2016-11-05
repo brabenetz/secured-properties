@@ -24,10 +24,14 @@ import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
 import java.io.File;
 
+/**
+ * Snippet for src/site/markdown/configuration.md with compile validation.
+ */
 public class ConfigurationSnippet {
 
+    @SuppressWarnings("unused")
     // START SNIPPET: configExample
-    SecuredPropertiesConfig config = new SecuredPropertiesConfig()
+    private SecuredPropertiesConfig config = new SecuredPropertiesConfig()
         .withSecretFilePropertyKey("secretKeyPath") // [1]
         .withDefaultSecretFile(new File("./mySecret.key")) // [2]
         .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [3]

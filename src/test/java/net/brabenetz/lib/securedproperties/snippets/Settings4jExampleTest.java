@@ -19,20 +19,22 @@
  */
 package net.brabenetz.lib.securedproperties.snippets;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.settings4j.ConnectorPositions.afterLast;
-
-import java.io.File;
-
+import net.brabenetz.lib.securedproperties.SecuredProperties;
+import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
 import org.junit.Test;
 import org.settings4j.Settings4j;
 import org.settings4j.connector.PropertyFileConnector;
 import org.settings4j.connector.SystemPropertyConnector;
 
-import net.brabenetz.lib.securedproperties.SecuredProperties;
-import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
+import java.io.File;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.settings4j.ConnectorPositions.afterLast;
+
+/**
+ * Snippet for src/site/markdown/exampleSettings4j.md with compile validation.
+ */
 public class Settings4jExampleTest {
 
     @Test

@@ -19,10 +19,20 @@
  */
 package net.brabenetz.lib.securedproperties.core;
 
+/**
+ * The Algorithm interface for SecuredProperties.
+ */
 public interface Algorithm {
 
+    /**
+     * The Algorithm key, see {@link javax.crypto.Cipher#getInstance(String)}.
+     */
     String getKey();
 
+    /**
+     * The Algorithm keysize of the initial secret key, see
+     * {@link javax.crypto.KeyGenerator#init(int)}.
+     */
     int getSize();
 
 }

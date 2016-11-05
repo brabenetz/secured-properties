@@ -23,6 +23,7 @@ import net.brabenetz.lib.securedproperties.test.TestUtils;
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,6 +48,24 @@ public class SecuredPropertiesTest {
         if (getTestSecretFile().exists()) {
             FileUtils.forceDelete(getTestSecretFile());
         }
+
+    }
+
+    @Test
+    public void testUtilityPattern() {
+        // this test is more for test-coverage than logic :D
+        Assert.assertTrue(TestUtils.isDefaultConstructorHidden(SecuredProperties.class));
+    }
+
+    @Test
+    public void testGetSecretValue_withSecretFileFromProperty() throws Exception {
+        // run test
+        String secretValue = SecuredProperties.getSecretValue(
+            new SecuredPropertiesConfig().withSecretFilePropertyKey("mySecretFile"),
+            new File("./src/test/data/TestProperties-Valid.properties"), "mySecretPassword");
+
+        // validate result
+        assertThat(secretValue, is("test"));
 
     }
 
@@ -85,7 +104,7 @@ public class SecuredPropertiesTest {
         Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
         String newPasswordValue = props.getProperty("mySecretPassword");
         assertThat(newPasswordValue, is(not("test")));
-        assertThat(SecuredProperties.isEncryptedPassword(newPasswordValue), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(newPasswordValue), is(true));
 
     }
 
@@ -136,7 +155,7 @@ public class SecuredPropertiesTest {
     private String checkSystemProperties(final SecuredPropertiesConfig config, final String key) {
 
         String systemPropPassword = System.getProperty(key);
-        if (SecuredProperties.isEncryptedPassword(systemPropPassword)) {
+        if (SecuredProperties.isEncryptedValue(systemPropPassword)) {
             return SecuredProperties.decrypt(config, systemPropPassword);
         } else if (StringUtils.isNotEmpty(systemPropPassword)) {
             System.out.println(String.format("you could now use the following encrypted password: -D%s=%s", key,
@@ -182,7 +201,7 @@ public class SecuredPropertiesTest {
         Properties props = SecuredPropertiesUtils.readProperties(getTestPropertyFile());
         String newPasswordValue = props.getProperty("mySecretPassword");
         assertThat(newPasswordValue, is(not("test")));
-        assertThat(SecuredProperties.isEncryptedPassword(newPasswordValue), is(true));
+        assertThat(SecuredProperties.isEncryptedValue(newPasswordValue), is(true));
         assertThat(getTestSecretFile().exists(), is(true));
 
     }

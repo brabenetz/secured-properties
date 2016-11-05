@@ -79,14 +79,14 @@ public final class SecuredProperties {
         final SecretContainer secretContainer = getSecretContainer(config, properties);
 
         String value = properties.getProperty(key);
-        if (Encryption.isEncryptedPassword(value)) {
-            // read and decrypt
+        if (Encryption.isEncryptedValue(value)) {
+            // read and decrypt value
             return Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
         } else if (StringUtils.isNotEmpty(value)) {
-            // replace password with encrypted in property file.
+            // replace value with encrypted in property file.
             if (config.isAutoEncryptNonEncryptedValues()) {
-                String encryptedPassword = Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
-                SecuredPropertiesUtils.replaceSecretValue(propertyFile, key, encryptedPassword);
+                String encryptedValue = Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), value);
+                SecuredPropertiesUtils.replaceSecretValue(propertyFile, key, encryptedValue);
             } else {
                 LOG.warn("AutoEncryptNonEncryptedValues is off. Value in Property file will remain plain-text.");
             }
@@ -96,31 +96,38 @@ public final class SecuredProperties {
         return null;
 
     }
-    
-    public static boolean isEncryptedPassword(final String password) {
-        return Encryption.isEncryptedPassword(password);
+
+    /**
+     * Checks if the given String looks like an encrypted value.
+     */
+    public static boolean isEncryptedValue(final String maybeEncryptedValue) {
+        return Encryption.isEncryptedValue(maybeEncryptedValue);
     }
 
     /**
      * @see #encrypt(SecuredPropertiesConfig, File, String)
      */
-    public static String encrypt(final SecuredPropertiesConfig config, final String password) {
-        return encrypt(config, null, password);
+    public static String encrypt(final SecuredPropertiesConfig config, final String plainTextValue) {
+        return encrypt(config, null, plainTextValue);
     }
     
     /**
-     * Encrypt the given password (will create the secret key if not already exist).
+     * Encrypt the given value (will create the secret key if not already exist).
      * 
-     * @param config the {@link SecuredPropertiesConfig} to control custom behavior.
-     * @param propertyFile The optional PropertyFile is only used if {@link SecuredPropertiesConfig#withSecretFilePropertyKey(String)} is set.
-     * @param password The password to encrypt
+     * @param config
+     *        the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile
+     *        The optional PropertyFile is only used if
+     *        {@link SecuredPropertiesConfig#withSecretFilePropertyKey(String)} is set.
+     * @param plainTextValue
+     *        The value to encrypt
      * @return the encrypted value.
      */
-    public static String encrypt(final SecuredPropertiesConfig config, final File propertyFile, final String password) {
+    public static String encrypt(final SecuredPropertiesConfig config, final File propertyFile, final String plainTextValue) {
         final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
         final SecretContainer secretContainer = getSecretContainer(config, properties);
         
-        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), password);
+        return Encryption.encrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), plainTextValue);
     }
     
     /**
@@ -148,7 +155,7 @@ public final class SecuredProperties {
     }
 
     private static SecretContainer getSecretContainer(final SecuredPropertiesConfig config, final Properties properties) {
-        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getDefaultSecretFile(), config.getSecretFilePropertyKey(), properties);
+        File secretFile = SecuredPropertiesUtils.getSecretFile(config.getSecretFilePropertyKey(), config.getDefaultSecretFile(), properties);
 
         return SecretContainerStore.getSecretContainer(secretFile, config.isAutoCreateSecretKey(), config.getAllowedAlgorithm());
     }
