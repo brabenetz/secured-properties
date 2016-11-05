@@ -40,7 +40,7 @@
       </action>
     </release>
     <release version="1.0-beta1" date="2016-11-01" description="Beta version 1">
-      <action dev="brabenetz" type="add">
+      <action dev="brabenetz" type="add" date="2016-10-26">
        The beginning
       </action>
     </release>

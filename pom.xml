@@ -205,6 +205,7 @@
               <default>https://github.com/brabenetz/secured-properties/issues/%ISSUE%</default>
               <maven-site>./%ISSUE%.html</maven-site>
             </issueLinkTemplatePerSystem>
+            <addActionDate>true</addActionDate>
           </configuration>
         </plugin>
         <plugin>
