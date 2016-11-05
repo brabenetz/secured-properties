@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1_0" href="./SecretContainerStoreTest.html" title="net.brabenetz.lib.security.properties.core.SecretContainerStoreTest" alt="" coords="15,19,177,43"/>
-<area shape="rect" id="node1" href="./SecretContainerStoreTest.html" title="&lt;TABLE&gt;" alt="" coords="5,7,187,55"/>
-<area shape="rect" id="node2_1" href="./MockAlgorithm.html" title="net.brabenetz.lib.security.properties.core.MockAlgorithm" alt="" coords="213,116,312,140"/>
-<area shape="rect" id="node2" href="./MockAlgorithm.html" title="&lt;TABLE&gt;" alt="" coords="203,104,323,152"/>
-<area shape="rect" id="node3_2" href="./EncryptionTest.html" title="net.brabenetz.lib.security.properties.core.EncryptionTest" alt="" coords="349,19,449,43"/>
-<area shape="rect" id="node3" href="./EncryptionTest.html" title="&lt;TABLE&gt;" alt="" coords="338,7,459,55"/>
-<area shape="rect" id="node4" href="null" title="&lt;TABLE&gt;" alt="" coords="212,6,313,55"/>
-</map>

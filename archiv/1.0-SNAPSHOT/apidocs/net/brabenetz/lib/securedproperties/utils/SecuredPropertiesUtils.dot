@@ -10,10 +10,21 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils
-	c91 [label=<<table title="net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredPropertiesUtils.html">
+	c93 [label=<<table title="net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredPropertiesUtils.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesUtils </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecuredPropertiesUtils.html", fontname="arial", fontcolor="black", fontsize=9.0];
+	// net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils DEPEND org.apache.commons.lang3.tuple.Pair<L, R>
+	c93:p -> c98:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils DEPEND org.apache.commons.lang3.tuple.Pair<L, R>
+	c93:p -> c98:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.apache.commons.lang3.tuple.Pair<L, R>
+	c98 [label=<<table title="org.apache.commons.lang3.tuple.Pair" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="arial italic"> Pair&lt;L, R&gt; </font></td></tr>
+<tr><td align="center" balign="center"><font point-size="7.0"> org.apache.commons.lang3.tuple </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 }
 
