@@ -30,7 +30,7 @@
       <action dev="brabenetz" type="add" date="2016-11-??">
         Add Salt implementation
       </action>
-      <action dev="brabenetz" type="update" date="2016-11-??">
+      <action dev="brabenetz" type="update" date="2016-11-05">
         Change behavior: check first the secured key path from the properties file (custom key),
         then the custom secured key file (overwrites the default)
         and then the default path %USER_HOME%/.secret/securedProperties.key

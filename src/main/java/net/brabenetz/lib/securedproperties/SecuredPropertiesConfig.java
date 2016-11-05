@@ -19,16 +19,18 @@
  */
 package net.brabenetz.lib.securedproperties;
 
-import java.io.File;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.brabenetz.lib.securedproperties.core.Algorithm;
 import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
+import org.apache.commons.lang3.ArrayUtils;
 
+import java.io.File;
+
+/**
+ * Configuration Object to control the behavior of {@link SecuredProperties}.
+ */
 public class SecuredPropertiesConfig {
 
-    private File secretFile;
+    private File defaultSecretFile;
     private String secretFilePropertyKey;
     private Algorithm[] allowedAlgorithm = new Algorithm[] {
             SupportedAlgorithm.AES_256,
@@ -42,8 +44,8 @@ public class SecuredPropertiesConfig {
 
     private boolean autoEncryptNonEncryptedValues = true;
 
-    public File getSecretFile() {
-        return this.secretFile;
+    public File getDefaultSecretFile() {
+        return this.defaultSecretFile;
     }
 
     public String getSecretFilePropertyKey() {
@@ -62,8 +64,19 @@ public class SecuredPropertiesConfig {
         return this.allowedAlgorithm;
     }
 
-    public SecuredPropertiesConfig withSecretFile(final File newSecretFile) {
-        this.secretFile = newSecretFile;
+    /**
+     * Overwrite the default location "%user_home%/.secret/securedProperties.key" for the secret key
+     * to encrypt and decrypt values.
+     * <p>
+     * The default will only be used if no location where found in the properties file for the key
+     * {@link #withSecretFilePropertyKey(String)}
+     * 
+     * @param newSecretFile
+     *        the secret File
+     * @return this for fluent style.
+     */
+    public SecuredPropertiesConfig withDefaultSecretFile(final File newSecretFile) {
+        this.defaultSecretFile = newSecretFile;
         return this;
     }
 

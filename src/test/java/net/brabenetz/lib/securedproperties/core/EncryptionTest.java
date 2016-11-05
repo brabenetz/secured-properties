@@ -19,16 +19,13 @@
  */
 package net.brabenetz.lib.securedproperties.core;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
+import net.brabenetz.lib.securedproperties.test.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.brabenetz.lib.securedproperties.core.Encryption;
-import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
-import net.brabenetz.lib.securedproperties.test.TestUtils;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class EncryptionTest {
 
@@ -41,6 +38,12 @@ public class EncryptionTest {
         Assert.assertFalse(Encryption.isAlgorithmSupported(new MockAlgorithm("AES", 1000)));
         // By default, Java only supports AES 128 (travis-ci supports AES_256), but you can import it into your jvm
         // Assert.assertFalse(Encryption.isAlgorithmSupported(SupportedAlgorithm.AES_256));
+    }
+
+    @Test
+    public void testUtilityPattern() {
+        // this test is more for test-coverage than logic :D
+        Assert.assertTrue(TestUtils.isDefaultConstructorHidden(Encryption.class));
     }
 
     @Test
@@ -61,7 +64,6 @@ public class EncryptionTest {
     public void testCreateKey_Failed() throws Exception {
         Exception exc = TestUtils.expectException(() -> Encryption.createKey(new MockAlgorithm("AES", 1000)));
         // exception message: "Wrong keysize: must be equal to 128, 192 or 256"
-        // System.out.println(exc.getMessage());
         assertThat(exc.getMessage(), containsString("128"));
         assertThat(exc.getMessage(), containsString("192"));
         assertThat(exc.getMessage(), containsString("256"));
@@ -74,7 +76,6 @@ public class EncryptionTest {
 
         SupportedAlgorithm[] values = SupportedAlgorithm.values();
         for (SupportedAlgorithm algorithm : values) {
-            System.out.println("Algorithm: " + algorithm.name());
             if (Encryption.isAlgorithmSupported(algorithm)) {
                 testEncryptDecryptRoundup(algorithm, password);
             }
@@ -83,16 +84,16 @@ public class EncryptionTest {
     }
 
     private void testEncryptDecryptRoundup(final SupportedAlgorithm algorithm, final String password) {
-        Assert.assertFalse(Encryption.isEncryptedPassword(password));
-        String secretKeyStr = Encryption.toString(Encryption.createKey(algorithm));
+        Assert.assertFalse(Encryption.isEncryptedValue(password));
+        String secretKeyStr = Encryption.toBase64String(Encryption.createKey(algorithm));
         String encryptPw = Encryption.encrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), password);
-        Assert.assertTrue(Encryption.isEncryptedPassword(encryptPw));
+        Assert.assertTrue(Encryption.isEncryptedValue(encryptPw));
         String finalPassword = Encryption.decrypt(algorithm, Encryption.readSecretKey(algorithm, secretKeyStr), encryptPw);
         assertThat(finalPassword, is(password));
     }
 
     @Test
-    public void testIsEncryptedPassword() throws Exception {
-        Assert.assertFalse(Encryption.isEncryptedPassword(null));
-    }
+        public void testIsEncryptedValue() throws Exception {
+            Assert.assertFalse(Encryption.isEncryptedValue(null));
+        }
 }

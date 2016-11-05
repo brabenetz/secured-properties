@@ -29,6 +29,6 @@ The java code example:
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/Settings4jExampleTest.java} -->
 
-
+The complete code is in [Settings4jExampleTest.java](./xref-test/net/brabenetz/lib/securedproperties/snippets/Settings4jExampleTest.html)
 
 

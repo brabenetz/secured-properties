@@ -19,8 +19,18 @@
  */
 package net.brabenetz.lib.securedproperties.test;
 
-public class TestUtils {
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
+/**
+ * Some utilities to simplify testing.
+ */
+public final class TestUtils {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(TestUtils.class);
+
+    private TestUtils() {
+        super();
+    }
 
     /**
      * @see #expectException(MethodToCall, Class) expectException(MethodToCall, Exception.class).
@@ -66,8 +76,42 @@ public class TestUtils {
         }
     }
 
+    /**
+     * Functional Interface for {@link TestUtils#expectException(MethodToCall, Class)}.
+     */
     @FunctionalInterface
     public interface MethodToCall {
-        public abstract void run() throws Exception;
+        void run() throws Exception;
+    }
+
+    /**
+     * <p>
+     * check if the Default constructor is hidden, and call it one time for Testcoverage Report :D .
+     * <p>
+     * Usage: <code>Assert.assertTrue(ClassUtils.isDefaultConstructorHidden(XyzUtils.class));</code>
+     * 
+     * @param clazz
+     *        The Class to Test.
+     * @return true if the constructor is hidden.
+     */
+    public static boolean isDefaultConstructorHidden(final Class<?> clazz) {
+        final Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+        if (constructors.length > 1) {
+            return false;
+        }
+
+        final Constructor<?> constructor = constructors[0];
+        if (Modifier.isPrivate(constructor.getModifiers())) {
+            // call the constructor once for TestCoverage Report.
+            constructor.setAccessible(true);
+            try {
+                constructor.newInstance((Object[]) null);
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage(), e);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

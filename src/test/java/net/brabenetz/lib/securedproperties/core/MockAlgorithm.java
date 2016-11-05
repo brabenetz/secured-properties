@@ -19,12 +19,14 @@
  */
 package net.brabenetz.lib.securedproperties.core;
 
-import net.brabenetz.lib.securedproperties.core.Algorithm;
-
+/**
+ * Mock implementation of {@link Algorithm} for testing exception handling for invalid Algorithms.
+ */
 public class MockAlgorithm implements Algorithm {
     private final String key;
     private final int size;
 
+    /** @see MockAlgorithm */
     public MockAlgorithm(final String key, final int size) {
         super();
         this.key = key;

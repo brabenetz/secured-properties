@@ -19,10 +19,14 @@
  */
 package net.brabenetz.lib.securedproperties;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.empty;
+import jdepend.framework.JDepend;
+import jdepend.framework.JavaPackage;
+import jdepend.framework.PackageFilter;
+import net.brabenetz.lib.securedproperties.core.Encryption;
+import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,16 +35,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-import org.junit.Test;
-
-import jdepend.framework.JDepend;
-import jdepend.framework.JavaPackage;
-import jdepend.framework.PackageFilter;
-import net.brabenetz.lib.securedproperties.SecuredProperties;
-import net.brabenetz.lib.securedproperties.core.Encryption;
-import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
 
 public class JDependTest {
 
@@ -127,7 +125,6 @@ public class JDependTest {
             }
             JavaPackage javaSubPackage = rootPkgs.get(subPackage);
 
-            // System.out.println(String.format("%s: ", subPackage));
             javaPackage.getEfferents()
             .stream()
             .map((pkg) -> getSubPackageName(pkgRoot, pkg))

@@ -19,17 +19,25 @@
  */
 package net.brabenetz.lib.securedproperties.core;
 
+/**
+ * Some default implementations of {@link Algorithm}.
+ */
 public enum SupportedAlgorithm implements Algorithm {
-    AES_256("AES", 256), // By default, Java only supports AES 128
-    AES_192("AES", 192), // By default, Java only supports AES 128
+    /** AES 256 bit encoding. By default, Java only supports 128 bit of AES. */
+    AES_256("AES", 256),
+    /** AES 192 bit encoding. By default, Java only supports 128 bit of AES. */
+    AES_192("AES", 192),
+    /** AES 128 bit encoding. */
     AES_128("AES", 128),
+    /** DESede 168 bit encoding. Also known as TripleDES. */
     DESede_168("DESede", 168),
+    /** DESede 112 bit encoding. Also known as TripleDES. */
     DESede_112("DESede", 112);
 
     private final String key;
     private final int size;
 
-    private SupportedAlgorithm(final String key, final int size) {
+    SupportedAlgorithm(final String key, final int size) {
         this.key = key;
         this.size = size;
     }

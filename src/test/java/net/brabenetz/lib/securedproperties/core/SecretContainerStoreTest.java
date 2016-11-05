@@ -19,10 +19,11 @@
  */
 package net.brabenetz.lib.securedproperties.core;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
+import net.brabenetz.lib.securedproperties.test.TestUtils;
+import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,14 +32,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-import org.junit.Test;
-
-import net.brabenetz.lib.securedproperties.core.SecretContainer;
-import net.brabenetz.lib.securedproperties.core.SecretContainerStore;
-import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
-import net.brabenetz.lib.securedproperties.test.TestUtils;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 
 public class SecretContainerStoreTest {
 
@@ -50,6 +47,12 @@ public class SecretContainerStoreTest {
         if (this.testFolder.exists()) {
             FileUtils.forceDelete(this.testFolder);
         }
+    }
+
+    @Test
+    public void testUtilityPattern() {
+        // this test is more for test-coverage than logic :D
+        Assert.assertTrue(TestUtils.isDefaultConstructorHidden(SecretContainerStore.class));
     }
 
     @Test

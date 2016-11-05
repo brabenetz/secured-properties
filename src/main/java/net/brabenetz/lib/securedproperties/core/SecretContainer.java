@@ -21,11 +21,20 @@ package net.brabenetz.lib.securedproperties.core;
 
 import javax.crypto.SecretKey;
 
+/**
+ * A container class to store the values from the secret key file.
+ */
 public class SecretContainer {
 
     private final Algorithm algorithm;
     private final SecretKey secretKey;
 
+    /**
+     * @param algorithm
+     *        the {@link Algorithm} which was used to generate the secretKey.
+     * @param secretKey
+     *        the {@link SecretKey}
+     */
     public SecretContainer(final Algorithm algorithm, final SecretKey secretKey) {
         super();
         this.algorithm = algorithm;

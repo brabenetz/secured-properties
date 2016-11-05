@@ -19,11 +19,8 @@
  */
 package net.brabenetz.lib.securedproperties.snippets;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
-import java.io.File;
-
+import net.brabenetz.lib.securedproperties.SecuredProperties;
+import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
 import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.SystemConfiguration;
@@ -31,9 +28,14 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.junit.Test;
 
-import net.brabenetz.lib.securedproperties.SecuredProperties;
-import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
+import java.io.File;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+/**
+ * Snippet for src/site/markdown/exampleCommonsConfiguration.md with compile validation.
+ */
 public class CommonsConfigurationExampleTest {
 
     @Test
@@ -46,7 +48,7 @@ public class CommonsConfigurationExampleTest {
 
         // initialization - get decrypted value
         String myPassword = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(secretKey),
+            new SecuredPropertiesConfig().withDefaultSecretFile(secretKey),
             propertiesFile,
             "mySecretPassword");
         System.setProperty("mySecretPassword", myPassword);

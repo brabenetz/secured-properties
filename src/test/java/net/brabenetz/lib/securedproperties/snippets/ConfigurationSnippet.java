@@ -19,20 +19,24 @@
  */
 package net.brabenetz.lib.securedproperties.snippets;
 
-import java.io.File;
-
 import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
 import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
+import java.io.File;
+
+/**
+ * Snippet for src/site/markdown/configuration.md with compile validation.
+ */
 public class ConfigurationSnippet {
 
+    @SuppressWarnings("unused")
     // START SNIPPET: configExample
-    SecuredPropertiesConfig config = new SecuredPropertiesConfig()
-        .withSecretFile(new File("./mySecret.key")) // [1a]
-        .withSecretFilePropertyKey("secretKeyPath") // [1b]
-        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [2]
-        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [3]
-        .disableAutoCreateSecretKey() // [4]
-        .disableAutoEncryptNonEncryptedValues(); // [5]
+    private SecuredPropertiesConfig config = new SecuredPropertiesConfig()
+        .withSecretFilePropertyKey("secretKeyPath") // [1]
+        .withDefaultSecretFile(new File("./mySecret.key")) // [2]
+        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [3]
+        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [4]
+        .disableAutoCreateSecretKey() // [5]
+        .disableAutoEncryptNonEncryptedValues(); // [6]
     // END SNIPPET: configExample
 }
