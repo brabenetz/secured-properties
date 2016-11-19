@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20161119" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Secured Properties library &#x2013; Download</title>
+    <title>Secured Properties library &#x2013; Frequently Asked Questions</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.5.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -77,10 +77,12 @@
         Overview</a>
             </li>
                 
-      <li class="active">
+      <li>
   
-            <a href="#"><span class="none"></span>Download</a>
-          </li>
+                          <a href="download.html" title="Download">
+          <span class="none"></span>
+        Download</a>
+            </li>
                 
       <li>
   
@@ -103,12 +105,10 @@
         Archiv</a>
             </li>
                 
-      <li>
+      <li class="active">
   
-                          <a href="faq.html" title="FAQ">
-          <span class="none"></span>
-        FAQ</a>
-            </li>
+            <a href="#"><span class="none"></span>FAQ</a>
+          </li>
                               <li class="nav-header">Examples</li>
                               
       <li>
@@ -165,26 +165,54 @@
                 
         <div id="bodyColumn"  class="span10" >
                                   
-            <h1>Download</h1>
-
-<ul>
-<li><a href="#Manual">Manual</a></li>
-<li><a href="#Automatically_with_Maven">Automatically with Maven</a></li></ul>
-<div class="section">
-<h2><a name="Manual"></a>Manual</h2>
-<p>You can download source and binary distributions from the <a class="externalLink" href="https://repo1.maven.org/maven2/net/brabenetz/lib/secured-properties/">Maven Central Repo</a>.</p></div>
-<div class="section">
-<h2><a name="Automatically_with_Maven"></a>Automatically with Maven</h2>
-<p>Add the Secured Properties &#xab;Dependency&#xbb; to your pom.xml:</p>
-
-<div class="source">
-<div class="source"><pre class="prettyprint linenums">&lt;dependency&gt;
-  &lt;groupId&gt;net.brabenetz.lib&lt;/groupId&gt;
-  &lt;artifactId&gt;secured-properties&lt;/artifactId&gt;
-  &lt;version&gt;1.0&lt;/version&gt;
-&lt;/dependency&gt;
-</pre></div></div>
-<p>See also <a class="externalLink" href="https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties">https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties</a></p></div>
+            <div class="section">
+<h2><a name="Frequently_Asked_Questions"></a><a name="top">Frequently Asked Questions</a></h2>
+<ol style="list-style-type: decimal">
+<li><a href="#why-auto-encrypt">
+                Why is the default for autoEncryptNonEncryptedValues set to &quot;true&quot;? I would expect only a readonly operation for getSecretValues(...)!
+            </a></li>
+<li><a href="#why-not-InputStream">
+                Why do you use java.io.File as input for properties? An InputStream seems more flexible!
+            </a></li></ol></div>
+<dl>
+<dt><a name="why-auto-encrypt">
+                Why is the default for autoEncryptNonEncryptedValues set to &quot;true&quot;? I would expect only a readonly operation for getSecretValues(...)!
+            </a></dt>
+<dd>
+                
+<p>
+                    With deactivated
+                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
+                    the usage is much more complex.
+               </p>
+                
+<p>
+                    Your application must then somehow call SecuredProperties.encrypt(...) to get the encrypted value.
+                    This encrypted value must then be used
+                    (manual or automatically) to replace the plain-text value.
+               </p>
+                
+<p>
+                    Because of that, autoEncryptNonEncryptedValues=true will be the most used scenario, which should be the default.
+               </p>
+            <hr /></dd>
+<dt><a name="why-not-InputStream">
+                Why do you use java.io.File as input for properties? An InputStream seems more flexible!
+            </a></dt>
+<dd>
+                
+<p>
+                    Because of the
+                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
+                    , SecuredProperties must also be able to write the properties.
+               </p>
+                
+<p>
+                    For other inputs (like SystemProperties, DB, JNDI-Context, Preferences, Environments and so on..)
+                    you can always use the manual approach described in
+                    <a href="./index.html#Manual_EncryptionDecryption">Secured Properties Overview</a>
+               </p>
+            </dd></dl>
                   </div>
             </div>
           </div>
