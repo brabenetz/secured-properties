@@ -75,7 +75,7 @@ The returned Map contains the decrypted passwords for the two keys "mySecretPass
 
 In some cases you don't want encrypt/decrypt values from Properties Files.
 
-This example shows how values from System Properties are encrypted/encrypted:
+This example shows how values from System Properties are encrypted/decrypted:
 
 ```Java
     String systemPropPassword = System.getProperty(key);
