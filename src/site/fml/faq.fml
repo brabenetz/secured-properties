@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+    title="Frequently Asked Questions" toplink="false">
+
+    <part id="general">
+        <faq id="why-auto-encrypt">
+            <question>
+                Why is the default for autoEncryptNonEncryptedValues set to "true"? I would expect only a readonly operation for getSecretValues(...)!
+            </question>
+            <answer>
+                <p>
+                    With deactivated
+                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
+                    the usage is much more complex.
+                </p>
+                <p>
+                    Your application must then somehow call SecuredProperties.encrypt(...) to get the encrypted value.
+                    This encrypted value must then be used
+                    (manual or automatically) to replace the plain-text value.
+                </p>
+                <p>
+                    Because of that, autoEncryptNonEncryptedValues=true will be the most used scenario, which should be the default.
+                </p>
+            </answer>
+        </faq>
+        <faq id="why-not-InputStream">
+            <question>
+                Why do you use java.io.File as input for properties? An InputStream seems more flexible!
+            </question>
+            <answer>
+                <p>
+                    Because of the
+                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
+                    , SecuredProperties must also be able to write the properties.
+                </p>
+                <p>
+                    For other inputs (like SystemProperties, DB, JNDI-Context, Preferences, Environments and so on..)
+                    you can always use the manual approach described in
+                    <a href="./index.html#Manual_EncryptionDecryption">Secured Properties Overview</a>
+                </p>
+            </answer>
+        </faq>
+    </part>
+
+</faqs>
