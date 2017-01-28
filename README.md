@@ -3,6 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/brabenetz/secured-properties.png?branch=master)](http://travis-ci.org/brabenetz/secured-properties)
 [![Coverage Status](https://coveralls.io/repos/brabenetz/secured-properties/badge.svg?branch=code-quality)](https://coveralls.io/github/brabenetz/secured-properties?branch=code-quality)
 [![Coverity](https://scan.coverity.com/projects/10666/badge.svg)](https://scan.coverity.com/projects/brabenetz-secured-properties)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8f5c89c8143444b6ae39dddb1f329b8f)](https://www.codacy.com/app/brabenetz/secured-properties?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brabenetz/secured-properties&amp;utm_campaign=Badge_Grade)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://secured-properties.brabenetz.net/archiv/latest/)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-brightgreen.svg)](https://github.com/brabenetz/secured-properties/blob/master/LICENSE.txt)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.brabenetz.lib/secured-properties)
