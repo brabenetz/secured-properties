@@ -47,14 +47,10 @@ public class ExtractPomVersions {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(pomFile);
 
-            // optional, but recommended
-            // read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
             Map<String, String> extractedProperties = new HashMap<>();
 
             extractedProperties.putAll(extractProperties(doc.getElementsByTagName("plugin"), "plugin-"));
-            // extractedProperties.putAll(extractProperties(doc.getElementsByTagName("dependency"), "dependency-"));
+            extractedProperties.putAll(extractProperties(doc.getElementsByTagName("dependency"), "dependency-"));
             List<String> properties = new ArrayList<>(extractedProperties.keySet());
             Collections.sort(properties);
             for (String property : properties) {
