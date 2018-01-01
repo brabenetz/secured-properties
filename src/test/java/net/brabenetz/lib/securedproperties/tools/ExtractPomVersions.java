@@ -25,50 +25,65 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import java.io.File;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * Helper class to extract versions from plugins and dependencies into the properties-section of a pom.xml.
+ */
 public class ExtractPomVersions {
 
-    public static void main(final String[] args) {
-
-        File pomFile = new File("pom.xml");
-
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(pomFile);
-
-            Map<String, String> extractedProperties = new HashMap<>();
-
-            extractedProperties.putAll(extractProperties(doc.getElementsByTagName("plugin"), "plugin-"));
-            extractedProperties.putAll(extractProperties(doc.getElementsByTagName("dependency"), "dependency-"));
-            List<String> properties = new ArrayList<>(extractedProperties.keySet());
-            Collections.sort(properties);
-            for (String property : properties) {
-                List<Node> propertiesNode = getChildElementsByTagName(doc.getDocumentElement(), "properties");
-                Element propertyElement = doc.createElement(property);
-                propertyElement.setTextContent(extractedProperties.get(property));
-                propertiesNode.get(0).appendChild(propertyElement);
-            }
-
-            writeDocument(doc, pomFile);
-            System.out.println("Success updated pom.xml");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+    /**
+     * Just run this class as application.
+     */
+    public static void main(final String[] args) throws Exception {
+        new ExtractPomVersions().extractVersionsIntoProperties();
     }
 
-    private static void writeDocument(final Document doc, final File file) throws Exception {
+    private void extractVersionsIntoProperties() throws ParserConfigurationException, SAXException, IOException, Exception {
+        File pomFile = new File("pom.xml");
+
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(pomFile);
+
+        Map<String, String> extractedProperties = new HashMap<>();
+
+        extractedProperties.putAll(extractProperties(doc.getElementsByTagName("plugin"), "plugin-"));
+        extractedProperties.putAll(extractProperties(doc.getElementsByTagName("dependency"), "dependency-"));
+        addProperties(doc, extractedProperties);
+
+        writeDocument(doc, pomFile);
+        System.out.println("Success updated pom.xml");
+    }
+
+    private void addProperties(final Document doc, final Map<String, String> extractedProperties) {
+        List<String> properties = new ArrayList<>(extractedProperties.keySet());
+        Collections.sort(properties);
+        for (String property : properties) {
+            List<Node> propertiesNode = getChildElementsByTagName(doc.getDocumentElement(), "properties");
+            Element propertyElement = doc.createElement(property);
+            propertyElement.setTextContent(extractedProperties.get(property));
+            propertiesNode.get(0).appendChild(propertyElement);
+        }
+    }
+
+    private void writeDocument(final Document doc, final File file) throws Exception {
         // Use a Transformer for output
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
@@ -77,7 +92,7 @@ public class ExtractPomVersions {
         transformer.transform(source, result);
     }
 
-    private static Map<String, String> extractProperties(final NodeList pluginList, final String propertyPrefix) {
+    private Map<String, String> extractProperties(final NodeList pluginList, final String propertyPrefix) {
         Map<String, String> extractedProperties = new HashMap<>();
 
         for (int i = 0; i < pluginList.getLength(); i++) {
@@ -104,7 +119,7 @@ public class ExtractPomVersions {
         return extractedProperties;
     }
 
-    private static String getTextContent(final Element element, final String tagName) {
+    private String getTextContent(final Element element, final String tagName) {
         List<Node> elements = getChildElementsByTagName(element, tagName);
         if (elements.size() > 1) {
             throw new IllegalArgumentException(
@@ -116,12 +131,13 @@ public class ExtractPomVersions {
         return null;
     }
 
-    private static void setTextContent(final Element element, final String tagName, final String newValue) {
+    private void setTextContent(final Element element, final String tagName, final String newValue) {
         List<Node> elements = getChildElementsByTagName(element, tagName);
         Validate.isTrue(elements.size() == 1, "Expected one element for '%s' but got %s", tagName, elements.size());
         elements.get(0).setTextContent(newValue);
     }
-    private static List<Node> getChildElementsByTagName(final Element element, final String tagName) {
+
+    private List<Node> getChildElementsByTagName(final Element element, final String tagName) {
         List<Node> childNodesByTagName = new ArrayList<>();
         NodeList childNodes = element.getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
