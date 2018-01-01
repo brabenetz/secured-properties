@@ -84,10 +84,42 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <maven.version.rules>file:./src/config/dependency-version-rules.xml</maven.version.rules>
+    <plugin-animal-sniffer-maven-plugin.version>1.15</plugin-animal-sniffer-maven-plugin.version>
+    <plugin-cobertura-maven-plugin.version>2.7</plugin-cobertura-maven-plugin.version>
     <plugin-config-checkstyle-header-location>${basedir}/src/config/header.txt</plugin-config-checkstyle-header-location>
     <plugin-config-checkstyle-location>${basedir}/src/config/checkstyle.xml</plugin-config-checkstyle-location>
     <plugin-config-findbug-location>${basedir}/src/config/findbugs-exclude.xml</plugin-config-findbug-location>
     <plugin-config-pmd-location>${basedir}/src/config/pmd5-rulesets.xml</plugin-config-pmd-location>
+    <plugin-coveralls-maven-plugin.version>4.3.0</plugin-coveralls-maven-plugin.version>
+    <plugin-findbugs-maven-plugin.version>3.0.4</plugin-findbugs-maven-plugin.version>
+    <plugin-javancss-maven-plugin.version>2.1</plugin-javancss-maven-plugin.version>
+    <plugin-jdepend-maven-plugin.version>2.0</plugin-jdepend-maven-plugin.version>
+    <plugin-license-maven-plugin.version>1.13</plugin-license-maven-plugin.version>
+    <plugin-lifecycle-mapping.version>1.0.0</plugin-lifecycle-mapping.version>
+    <plugin-maven-changes-plugin.version>2.12.1</plugin-maven-changes-plugin.version>
+    <plugin-maven-checkstyle-plugin.version>2.17</plugin-maven-checkstyle-plugin.version>
+    <plugin-maven-clean-plugin.version>3.0.0</plugin-maven-clean-plugin.version>
+    <plugin-maven-compiler-plugin.version>3.6.0</plugin-maven-compiler-plugin.version>
+    <plugin-maven-dependency-plugin.version>3.0.1</plugin-maven-dependency-plugin.version>
+    <plugin-maven-deploy-plugin.version>2.8.2</plugin-maven-deploy-plugin.version>
+    <plugin-maven-eclipse-plugin.version>2.10</plugin-maven-eclipse-plugin.version>
+    <plugin-maven-enforcer-plugin.version>1.4.1</plugin-maven-enforcer-plugin.version>
+    <plugin-maven-gpg-plugin.version>1.6</plugin-maven-gpg-plugin.version>
+    <plugin-maven-install-plugin.version>2.5.2</plugin-maven-install-plugin.version>
+    <plugin-maven-jar-plugin.version>3.0.2</plugin-maven-jar-plugin.version>
+    <plugin-maven-javadoc-plugin.version>2.10.4</plugin-maven-javadoc-plugin.version>
+    <plugin-maven-jxr-plugin.version>2.5</plugin-maven-jxr-plugin.version>
+    <plugin-maven-pmd-plugin.version>3.8</plugin-maven-pmd-plugin.version>
+    <plugin-maven-project-info-reports-plugin.version>2.9</plugin-maven-project-info-reports-plugin.version>
+    <plugin-maven-release-plugin.version>2.5.3</plugin-maven-release-plugin.version>
+    <plugin-maven-resources-plugin.version>3.0.2</plugin-maven-resources-plugin.version>
+    <plugin-maven-site-plugin.version>3.6</plugin-maven-site-plugin.version>
+    <plugin-maven-source-plugin.version>3.0.1</plugin-maven-source-plugin.version>
+    <plugin-maven-surefire-plugin.version>2.20</plugin-maven-surefire-plugin.version>
+    <plugin-maven-surefire-report-plugin.version>2.20</plugin-maven-surefire-report-plugin.version>
+    <plugin-sortpom-maven-plugin.version>2.8.0</plugin-sortpom-maven-plugin.version>
+    <plugin-taglist-maven-plugin.version>2.4</plugin-taglist-maven-plugin.version>
+    <plugin-versions-maven-plugin.version>2.4</plugin-versions-maven-plugin.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -173,7 +205,7 @@
         <plugin>
           <groupId>com.github.ekryd.sortpom</groupId>
           <artifactId>sortpom-maven-plugin</artifactId>
-          <version>2.8.0</version>
+          <version>${plugin-sortpom-maven-plugin.version}</version>
           <configuration>
             <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
             <sortDependencies>scope,optional,groupId,artifactId</sortDependencies>
@@ -198,7 +230,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-changes-plugin</artifactId>
-          <version>2.12.1</version>
+          <version>${plugin-maven-changes-plugin.version}</version>
           <configuration>
             <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
             <issueLinkTemplatePerSystem>
@@ -211,7 +243,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.17</version>
+          <version>${plugin-maven-checkstyle-plugin.version}</version>
           <configuration>
             <configLocation>${plugin-config-checkstyle-location}</configLocation>
             <headerLocation>${plugin-config-checkstyle-header-location}</headerLocation>
@@ -222,12 +254,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>${plugin-maven-clean-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>${plugin-maven-compiler-plugin.version}</version>
           <configuration>
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
@@ -237,17 +269,17 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>${plugin-maven-dependency-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
+          <version>${plugin-maven-deploy-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-eclipse-plugin</artifactId>
-          <version>2.10</version>
+          <version>${plugin-maven-eclipse-plugin.version}</version>
           <configuration>
             <!-- See: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
             <downloadSources>true</downloadSources>
@@ -344,7 +376,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.4.1</version>
+          <version>${plugin-maven-enforcer-plugin.version}</version>
           <executions>
             <execution>
               <id>enforce-maven</id>
@@ -365,12 +397,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
+          <version>${plugin-maven-install-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>${plugin-maven-jar-plugin.version}</version>
           <configuration>
             <archive>
               <manifest>
@@ -388,7 +420,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.4</version>
+          <version>${plugin-maven-javadoc-plugin.version}</version>
           <configuration>
             <show>package</show>
             <source>${maven.compile.source}</source>
@@ -416,12 +448,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jxr-plugin</artifactId>
-          <version>2.5</version>
+          <version>${plugin-maven-jxr-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.8</version>
+          <version>${plugin-maven-pmd-plugin.version}</version>
           <configuration>
             <linkXref>true</linkXref>
             <targetJdk>${maven.compiler.target}</targetJdk>
@@ -437,12 +469,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>2.9</version>
+          <version>${plugin-maven-project-info-reports-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.3</version>
+          <version>${plugin-maven-release-plugin.version}</version>
           <configuration>
             <preparationGoals>sortpom:sort clean verify</preparationGoals>
             <goals>deploy</goals>
@@ -453,12 +485,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>${plugin-maven-resources-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.6</version>
+          <version>${plugin-maven-site-plugin.version}</version>
           <configuration>
             <port>8090</port>
             <relativizeDecorationLinks>false</relativizeDecorationLinks>
@@ -494,7 +526,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>${plugin-maven-source-plugin.version}</version>
           <inherited>true</inherited>
           <executions>
             <execution>
@@ -509,17 +541,17 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20</version>
+          <version>${plugin-maven-surefire-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.20</version>
+          <version>${plugin-maven-surefire-report-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>animal-sniffer-maven-plugin</artifactId>
-          <version>1.15</version>
+          <version>${plugin-animal-sniffer-maven-plugin.version}</version>
           <configuration>
             <signature>
               <groupId>org.codehaus.mojo.signature</groupId>
@@ -540,7 +572,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>cobertura-maven-plugin</artifactId>
-          <version>2.7</version>
+          <version>${plugin-cobertura-maven-plugin.version}</version>
           <configuration>
             <format>xml</format>
             <maxmem>256m</maxmem>
@@ -549,7 +581,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>findbugs-maven-plugin</artifactId>
-          <version>3.0.4</version>
+          <version>${plugin-findbugs-maven-plugin.version}</version>
           <configuration>
             <excludeFilterFile>${plugin-config-findbug-location}</excludeFilterFile>
             <!-- Effort of the bug finders. Valid values are: 'MIN', 'DEFAULT', 'MAX' -->
@@ -563,17 +595,17 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>javancss-maven-plugin</artifactId>
-          <version>2.1</version>
+          <version>${plugin-javancss-maven-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>jdepend-maven-plugin</artifactId>
-          <version>2.0</version>
+          <version>${plugin-jdepend-maven-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>license-maven-plugin</artifactId>
-          <version>1.13</version>
+          <version>${plugin-license-maven-plugin.version}</version>
           <configuration>
             <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
             <sectionDelimiter>===============================================================</sectionDelimiter>
@@ -595,7 +627,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>taglist-maven-plugin</artifactId>
-          <version>2.4</version>
+          <version>${plugin-taglist-maven-plugin.version}</version>
           <configuration>
             <tagListOptions>
               <tagClasses>
@@ -633,7 +665,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.4</version>
+          <version>${plugin-versions-maven-plugin.version}</version>
           <configuration>
             <generateBackupPoms>false</generateBackupPoms>
           </configuration>
@@ -641,7 +673,7 @@
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
+          <version>${plugin-lifecycle-mapping.version}</version>
           <configuration>
             <lifecycleMappingMetadata>
               <pluginExecutions>
@@ -667,7 +699,7 @@
         <plugin>
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
-          <version>4.3.0</version>
+          <version>${plugin-coveralls-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -803,7 +835,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>${plugin-maven-gpg-plugin.version}</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -817,7 +849,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.4</version>
+            <version>${plugin-maven-javadoc-plugin.version}</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -830,7 +862,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>3.0.1</version>
+            <version>${plugin-maven-source-plugin.version}</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
