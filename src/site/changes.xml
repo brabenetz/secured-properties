@@ -26,7 +26,12 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="1.0-beta2" date="2016-11-06" description="Beta 2 - Add Salt implementation (Release Candidate)">
+    <release version="1.0-beta3" date="2019-09-09" description="Beta 3 - Add SpringBoot-Example">
+      <action dev="brabenetz" type="add" date="2019-09-09">
+        Small improvements, and update documentation how to use it with Spring-Boot.
+      </action>
+    </release>
+    <release version="1.0-beta2" date="2016-11-06" description="Beta 2 - Add Salt implementation">
       <action dev="brabenetz" type="add" date="2016-11-05">
         Add Salt implementation
       </action>
