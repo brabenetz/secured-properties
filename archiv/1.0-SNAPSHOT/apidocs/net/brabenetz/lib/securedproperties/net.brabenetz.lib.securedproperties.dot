@@ -14,12 +14,12 @@ digraph G {
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesConfig </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SecuredPropertiesConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./SecuredPropertiesConfig.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.SecuredProperties
 	c14 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredProperties" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecuredProperties.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredProperties </td></tr>
 		</table></td></tr>
-		</table>>, URL="./SecuredProperties.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./SecuredProperties.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

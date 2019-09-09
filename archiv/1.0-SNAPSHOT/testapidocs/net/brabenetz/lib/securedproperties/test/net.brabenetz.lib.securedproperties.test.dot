@@ -10,17 +10,17 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.test.TestUtils
-	c46 [label=<<table title="net.brabenetz.lib.securedproperties.test.TestUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestUtils.html">
+	c65 [label=<<table title="net.brabenetz.lib.securedproperties.test.TestUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestUtils.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestUtils </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestUtils.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./TestUtils.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.test.TestUtils.MethodToCall
-	c47 [label=<<table title="net.brabenetz.lib.securedproperties.test.TestUtils.MethodToCall" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestUtils.MethodToCall.html">
+	c66 [label=<<table title="net.brabenetz.lib.securedproperties.test.TestUtils.MethodToCall" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestUtils.MethodToCall.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> MethodToCall </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestUtils.MethodToCall.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./TestUtils.MethodToCall.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 
