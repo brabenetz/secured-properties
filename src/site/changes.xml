@@ -26,7 +26,12 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="1.0-beta2" date="2016-11-??" description="Beta version 2 - Add Salt implementation">
+    <release version="1.0-beta3" date="2019-09-09" description="Beta 3 - Add SpringBoot-Example">
+      <action dev="brabenetz" type="add" date="2019-09-09">
+        Small improvements, and update documentation how to use it with Spring-Boot.
+      </action>
+    </release>
+    <release version="1.0-beta2" date="2016-11-06" description="Beta 2 - Add Salt implementation">
       <action dev="brabenetz" type="add" date="2016-11-05">
         Add Salt implementation
       </action>
@@ -39,7 +44,7 @@
         remove behavior: remove getting password from System Properties (can and should be done outside of secured-properties)
       </action>
     </release>
-    <release version="1.0-beta1" date="2016-11-01" description="Beta version 1">
+    <release version="1.0-beta1" date="2016-11-01" description="Beta 1">
       <action dev="brabenetz" type="add" date="2016-10-26">
        The beginning
       </action>

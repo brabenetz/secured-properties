@@ -36,10 +36,12 @@
       <item name="Configuration" href="configuration.html" />
       <item name="Changes" href="changes-report.html" />
       <item name="Archiv" href="http://secured-properties.brabenetz.net/archiv/" />
+      <item name="FAQ" href="faq.html" />
     </menu>
     <menu name="Examples">
-      <item name="Settings4j" href="exampleSettings4j.html" />
+      <item name="SpringBoot" href="exampleSpringBoot.html" />
       <item name="CommonsConfiguration" href="exampleCommonsConfiguration.html" />
+      <item name="Settings4j" href="exampleSettings4j.html" />
     </menu>
     <menu ref="reports" />
   </body>
