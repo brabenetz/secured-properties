@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,6 +56,23 @@ public class SecuredPropertiesTest {
     public void testUtilityPattern() {
         // this test is more for test-coverage than logic :D
         Assert.assertTrue(TestUtils.isDefaultConstructorHidden(SecuredProperties.class));
+    }
+
+    @Test
+    public void testGetSecretValue_withMultipleFilesShouldIgnoreNotExistingOnes() throws Exception {
+        // run test
+        String secretValue = SecuredProperties.getSecretValue(
+                new SecuredPropertiesConfig().withSecretFilePropertyKey("mySecretFile"),
+                new File[] {
+                        new File("./conf-abc/application.properties"),
+                        new File("./src/test/data/TestProperties-Valid.properties"),
+                        new File("./conf-xyz/application.properties"),
+                },
+                "mySecretPassword");
+
+        // validate result
+        assertThat(secretValue, is("test"));
+
     }
 
     @Test
@@ -191,7 +208,7 @@ public class SecuredPropertiesTest {
         // run test
         SecuredPropertiesConfig config = new SecuredPropertiesConfig().withDefaultSecretFile(getSecretFileExample());
         String encryptedValue = checkSystemProperties(config, "mySecretPassword");
-        
+
         // validate result
         assertThat(encryptedValue, is("test"));
 
