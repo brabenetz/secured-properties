@@ -21,7 +21,6 @@ package net.brabenetz.lib.securedproperties.utils;
 
 import net.brabenetz.lib.securedproperties.test.TestUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -66,27 +65,6 @@ public class SecuredPropertiesUtilsTest {
         assertThat(exc, is(instanceOf(RuntimeException.class)));
         assertThat(exc.getCause(), is(instanceOf(FileNotFoundException.class)));
         assertThat(exc.getMessage(), containsString("TestProperties-Doesnt-Exist.properties"));
-    }
-
-    @Test
-    public void testGetSecretFile_Success_returnsGivenSecretFile() throws Exception {
-        File secretFile = SecuredPropertiesUtils.getSecretFile(null, new File("test.key"), null);
-        assertThat(secretFile.getName(), is("test.key"));
-    }
-
-    @Test
-    public void testGetSecretFile_Success_returnsFileFromProperty() throws Exception {
-        Properties validProperty = SecuredPropertiesUtils.readProperties(getValidPropertyFile());
-        File secretFile = SecuredPropertiesUtils.getSecretFile("mySecretFile", null, validProperty);
-        assertThat(secretFile.getName(), is("secretFileExample.key"));
-    }
-
-    @Test
-    public void testGetSecretFile_Success_returnsDefaultSecretFileInUserHome() throws Exception {
-        File secretFile = SecuredPropertiesUtils.getSecretFile(null, null, null);
-        assertThat(secretFile.getName(), is("securedProperties.key"));
-        assertThat(secretFile.getParentFile().getName(), is(".secret"));
-        assertThat(secretFile.getParentFile().getParentFile(), is(SystemUtils.getUserHome()));
     }
 
     @Test

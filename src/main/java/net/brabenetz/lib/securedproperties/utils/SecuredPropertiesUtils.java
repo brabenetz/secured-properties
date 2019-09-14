@@ -21,8 +21,6 @@ package net.brabenetz.lib.securedproperties.utils;
 
 import com.github.fge.lambdas.Throwing;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.ByteArrayInputStream;
@@ -38,8 +36,6 @@ import java.util.stream.Collectors;
  * Some Utilities for {@link net.brabenetz.lib.securedproperties.SecuredProperties}.
  */
 public final class SecuredPropertiesUtils {
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SecuredPropertiesUtils.class);
 
     private SecuredPropertiesUtils() {
         super();
@@ -61,46 +57,6 @@ public final class SecuredPropertiesUtils {
         byte[] propertyFileContent = Throwing.supplier(() -> FileUtils.readFileToByteArray(propertyFile)).get();
         Throwing.runnable(() -> properties.load(new ByteArrayInputStream(propertyFileContent))).run();
         return properties;
-    }
-
-    /**
-     * Determine the location of the secret Key file by the given parameters.
-     * <p>
-     * logic checks the following order:
-     * <ol>
-     * <li>try to read the location from the Properties-File by the given
-     * secretFilePropertyKey.</li>
-     * <li>if no value found. but a defaultSecretFile is given, then the defaultSecretFile will be
-     * returned.</li>
-     * <li>if custom defaultSecretFile is given, then the default location
-     * "%USER_HOME%/.secret/securedProperties.key" will be returned.</li>
-     * </ol>
-     * 
-     * @param secretFilePropertyKey
-     *        The Property Key to get the location of the secret File from the given properties
-     *        file.
-     * @param defaultSecretFile
-     *        The optional overwritten default location if no value for the secretFilePropertyKey is
-     *        placed.
-     * @param properties
-     *        the Properties to search for the value for secretFilePropertyKey.
-     * @return
-     */
-    public static File getSecretFile(final String secretFilePropertyKey, final File defaultSecretFile, final Properties properties) {
-        String secretFilePath = null;
-        if (StringUtils.isNotEmpty(secretFilePropertyKey)) {
-            secretFilePath = properties.getProperty(secretFilePropertyKey);
-        }
-
-        if (StringUtils.isEmpty(secretFilePath)) {
-            if (defaultSecretFile != null) {
-                return defaultSecretFile;
-            }
-            secretFilePath = SystemUtils.USER_HOME + "/.secret/securedProperties.key";
-            LOG.debug("No secretFilePath configured. Use default location: {}", secretFilePath);
-        }
-
-        return new File(secretFilePath);
     }
 
     /**

@@ -552,6 +552,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${plugin-maven-surefire-plugin.version}</version>
+          <configuration>
+            <environmentVariables>
+                <TEST_SECURED_PROPERTIES_SECRET_FILE>Test-value-for-UnitTest</TEST_SECURED_PROPERTIES_SECRET_FILE>
+            </environmentVariables>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
