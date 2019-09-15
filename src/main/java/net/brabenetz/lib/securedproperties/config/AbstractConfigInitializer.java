@@ -94,7 +94,7 @@ public abstract class AbstractConfigInitializer implements ConfigInitializer {
     }
 
     protected static void initAllowedAlgorithm(final Config config, final String value) {
-        config.withAllowedAlgorithm(Arrays.stream(value.split(",")).map(SupportedAlgorithm::valueOf).toArray(Algorithm[]::new));
+        config.withAllowedAlgorithm(Arrays.stream(value.split("[, ]+")).map(SupportedAlgorithm::valueOf).toArray(Algorithm[]::new));
     }
 
     protected static void initAutoCreateSecretKey(final Config config, final String value) {
