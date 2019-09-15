@@ -36,7 +36,7 @@
     </developer>
   </developers>
 
-  <contributors></contributors>
+  <contributors />
 
   <prerequisites>
     <maven>3.3.0</maven>
@@ -57,7 +57,7 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/brabenetz/secured-properties</url>
-    <notifiers></notifiers>
+    <notifiers />
   </ciManagement>
 
   <distributionManagement>
@@ -552,6 +552,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${plugin-maven-surefire-plugin.version}</version>
+          <configuration>
+            <environmentVariables>
+                <TEST_SECURED_PROPERTIES_SECRET_FILE>Test-value-for-UnitTest</TEST_SECURED_PROPERTIES_SECRET_FILE>
+            </environmentVariables>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -699,7 +704,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore></ignore>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>

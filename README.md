@@ -43,10 +43,18 @@ mySecretPassword = test
 The Java code:
 
 ```Java
-  String secretValue = SecuredProperties.getSecretValue(
-      new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")), // custom configurations
-      new File("myConfiguration.properties"), // The Property File
-      "mySecretPassword"); // the property-key from "myConfiguration.properties" 
+ // prepare custom config
+ final SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key"));
+
+ // auto-encrypt values in the property-file:
+ SecuredProperties.encryptNonEncryptedValues(config,
+         new File("myConfiguration.properties"), // The Property File
+         "mySecretPassword"); // the property-key from "myConfiguration.properties"
+
+ // read encrypted values from the property-file
+ String secretValue = SecuredProperties.getSecretValue(config,
+         new File("myConfiguration.properties"), // The Property File
+         "mySecretPassword"); // the property-key from "myConfiguration.properties"
 ```
 
 will return "test" as secretValue and automatically encrypt the value in the property file.
@@ -98,7 +106,6 @@ This example shows how values from System Properties are encrypted/decrypted:
   * **secretFile** default location: "%user_home%/.secret/securedProperties.key"
   * **autoCreateSecretKey** If the secret key doesn't exists, it will be created automatically
   * **allowedAlgorithm** AES-256,  AES-192,  AES-128, DESede-168, DESede-128: The first algorithm supported by the java-VM will be used to create the initial secret key.
-  * **autoEncryptNonEncryptedValues** If the value in the property file is not already encrypted. it will be replaced by the encrypted value.
 
 All this configurations can be customized by the *SecuredPropertiesConfig.java*.
 
@@ -109,7 +116,8 @@ See: http://secured-properties.brabenetz.net/archiv/latest/configuration.html
   * Maven Site: http://secured-properties.brabenetz.net/archiv/latest/index.html
   * Dependency-Information: http://secured-properties.brabenetz.net/archiv/latest/download.html
   * Custom Configuration: http://secured-properties.brabenetz.net/archiv/latest/configuration.html
-  * Example with Settings4j: http://secured-properties.brabenetz.net/archiv/latest/exampleSettings4j.html
+  * Example with Spring Boot: http://secured-properties.brabenetz.net/archiv/latest/exampleSpringBoot.html
   * Example with CommonsConfiguration: http://secured-properties.brabenetz.net/archiv/latest/exampleCommonsConfiguration.html
+  * Example with Settings4j: http://secured-properties.brabenetz.net/archiv/latest/exampleSettings4j.html
 
 

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,8 @@
 package net.brabenetz.lib.securedproperties.snippets;
 
 import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
+import net.brabenetz.lib.securedproperties.config.Config;
+import net.brabenetz.lib.securedproperties.config.ConfigInitializers;
 import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
 import java.io.File;
@@ -31,13 +33,13 @@ public class ConfigurationSnippet {
 
     @SuppressWarnings("unused")
     // START SNIPPET: configExample
-    private SecuredPropertiesConfig config = new SecuredPropertiesConfig()
-        .withSecretFilePropertyKey("secretKeyPath") // [1]
-        .withDefaultSecretFile(new File("./mySecret.key")) // [2]
-        .withSaltLength(0) // [3]
-        .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [4]
-        .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [5]
-        .disableAutoCreateSecretKey() // [6]
-        .disableAutoEncryptNonEncryptedValues(); // [7]
+    private Config config = new SecuredPropertiesConfig()
+            .initDefault() // [1]
+            .init(ConfigInitializers.systemProperties()) // [2]
+            .withSecretFile(new File("./mySecret.key")) // [3]
+            .withSaltLength(0) // [4]
+            .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [5]
+            .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [6]
+            .withAutoCreateSecretKey(false); // [7]
     // END SNIPPET: configExample
 }

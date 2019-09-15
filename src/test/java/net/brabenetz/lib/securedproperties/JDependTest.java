@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,17 +22,14 @@ package net.brabenetz.lib.securedproperties;
 import jdepend.framework.JDepend;
 import jdepend.framework.JavaPackage;
 import jdepend.framework.PackageFilter;
+import net.brabenetz.lib.securedproperties.config.ConfigInitializer;
 import net.brabenetz.lib.securedproperties.core.Encryption;
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -52,17 +49,20 @@ public class JDependTest {
         Assert.assertFalse(jdepend.containsCycles());
 
         JavaPackage pkgRoot = jdepend.getPackage(SecuredProperties.class.getPackage().getName());
+        JavaPackage pkgConfig = jdepend.getPackage(ConfigInitializer.class.getPackage().getName());
         JavaPackage pkgCore = jdepend.getPackage(Encryption.class.getPackage().getName());
         JavaPackage pkgUtil = jdepend.getPackage(SecuredPropertiesUtils.class.getPackage().getName());
 
         // pkg uses other Pkg
-        assertThat(pkgRoot.getEfferents(), containsInAnyOrder(pkgUtil, pkgCore));
+        assertThat(pkgRoot.getEfferents(), containsInAnyOrder(pkgConfig, pkgUtil, pkgCore));
+        assertThat(pkgConfig.getEfferents(), containsInAnyOrder(pkgUtil, pkgCore));
         assertThat(pkgUtil.getEfferents(), is(empty()));
         assertThat(pkgCore.getEfferents(), is(empty()));
         // pkg is used in other Pkg
         assertThat(pkgRoot.getAfferents(), is(empty()));
-        assertThat(pkgUtil.getAfferents(), containsInAnyOrder(pkgRoot));
-        assertThat(pkgCore.getAfferents(), containsInAnyOrder(pkgRoot));
+        assertThat(pkgConfig.getAfferents(), containsInAnyOrder(pkgRoot));
+        assertThat(pkgUtil.getAfferents(), containsInAnyOrder(pkgRoot, pkgConfig));
+        assertThat(pkgCore.getAfferents(), containsInAnyOrder(pkgRoot, pkgConfig));
     }
 
     @Test
@@ -72,7 +72,8 @@ public class JDependTest {
         Map<String, JavaPackage> rootPkgs = analyseDirectChildes(pkgBase);
         assertNoCycleBetweenSiblings(rootPkgs);
 
-        assertThat(rootPkgs.keySet(), containsInAnyOrder("core", "utils"));
+        assertThat(rootPkgs.keySet(), containsInAnyOrder("config", "core", "utils"));
+        assertThat(rootPkgs.get("config").getEfferents(), containsInAnyOrder(rootPkgs.get("core"), rootPkgs.get("utils")));
         assertThat(rootPkgs.get("core").getEfferents(), is(empty()));
         assertThat(rootPkgs.get("utils").getEfferents(), is(empty()));
 

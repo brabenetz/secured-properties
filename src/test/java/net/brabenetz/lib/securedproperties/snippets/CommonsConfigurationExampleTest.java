@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,10 +47,14 @@ public class CommonsConfigurationExampleTest {
         File propertiesFile = new File("src/test/data/TestProperties-Valid.properties");
 
         // initialization - get decrypted value
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(secretKey);
+        // initialization - auto encrypt values in the property files:
+        SecuredProperties.encryptNonEncryptedValues(
+                config, propertiesFile, "mySecretPassword");
+        // initialization - get decrypted value
         String myPassword = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withDefaultSecretFile(secretKey),
-            propertiesFile,
-            "mySecretPassword");
+                config, propertiesFile, "mySecretPassword");
+        // initialization - store plane-text-PW into System-Properties
         System.setProperty("mySecretPassword", myPassword);
 
         // initialization - create CompositeConfiguration which first reads SystemProperties and then the PropertiesFile.

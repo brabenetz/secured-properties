@@ -24,11 +24,15 @@ Like the following Example:
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/SpringBootTestProperties.java} -->
 
+The complete code is in [SpringBootTestProperties.java](./xref-test/net/brabenetz/lib/securedproperties/snippets/SpringBootTestProperties.html)
+
 ### Secured Properties Helper
 
 The Helper contains your secured-properties configuration and can be used to initial encrypt unencrypted values in the propoerty files and decrypt the values on demand where you need it.
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/SpringBootSecuredPropertiesHelper.java} -->
+
+The complete code is in [SpringBootSecuredPropertiesHelper.java](./xref-test/net/brabenetz/lib/securedproperties/snippets/SpringBootSecuredPropertiesHelper.html)
 
 ### The Spring-Boot Starter Application
 
@@ -36,8 +40,12 @@ A spring-Boot application has a starter-class where you can directly decrypt val
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/SpringBootStarterApplication.java} -->
 
+The complete code is in [SpringBootStarterApplication.java](./xref-test/net/brabenetz/lib/securedproperties/snippets/SpringBootStarterApplication.html)
+
 ### Some Service-Class
 
 Now you can decrypt the values of your Properties class whereever you need it.
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/SpringBootTestService.java} -->
+
+The complete code is in [SpringBootTestService.java](./xref-test/net/brabenetz/lib/securedproperties/snippets/SpringBootTestService.html)
