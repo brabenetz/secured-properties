@@ -46,10 +46,14 @@ public class Settings4jExampleTest {
         File propertiesFile = new File("src/test/data/TestProperties-Valid.properties");
 
         // initialization - get decrypted value
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(secretKey);
+        // initialization - auto encrypt values in the property files:
+        SecuredProperties.encryptNonEncryptedValues(
+                config, propertiesFile, "mySecretPassword");
+        // initialization - get decrypted value
         String myPassword = SecuredProperties.getSecretValue(
-            new SecuredPropertiesConfig().withSecretFile(secretKey),
-            propertiesFile,
-            "mySecretPassword");
+                config, propertiesFile, "mySecretPassword");
+        // initialization - store plane-text-PW into System-Properties
         System.setProperty("mySecretPassword", myPassword);
 
         // initialization - add custom Settings4j PropertyFileConnector after existing SystemPropertyConnector

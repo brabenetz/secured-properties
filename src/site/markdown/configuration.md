@@ -22,11 +22,27 @@ The following customizations are available:
 
 ### [1] initDefault():
 
-If **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
+Similar to Spring-Boot, Externalize your configuration so that you can work with the same application code in different environments.
+
+1. Application property Files './application.properties'. If the File doesn't exist, it will be ignored.
+2. Application property Files './config/application.properties'. If the File doesn't exist, it will be ignored.
+3. OS environment variables.
+4. Java System properties (System.getProperties()).
+
+The last one has the highest priority and will overwrite properties before.<br/>
+The Properties which can be configured can be found in  [ConfigKey.java](./xref/net/brabenetz/lib/securedproperties/config/ConfigKey.html).<br/>
+The default prefix is "SECURED_PROPERTIES" and the keys must be configured formatted as:
+
+* **UPPER_CASE:** Like "SECURED_PROPERTIES_SECRET_FILE" is used for **OS environment variables**.
+* **kebab-case:** Like "secured-properties.secret-file" is used for **System-Properties** and **Property-Files**
 
 ### [2] init(ConfigInitializer...):
 
-If **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
+The generic variant of initDefault().<br/>
+Just put in the [ConfigInitializers.java](./xref/net/brabenetz/lib/securedproperties/config/ConfigInitializers.html) you want
+into it in the order you want.<br/>
+Or implement yout own [ConfigInitializer.java](./xref/net/brabenetz/lib/securedproperties/config/ConfigInitializer.html).<br/>
+The last ConfigInitializer has the highest priority and will overwrite properties before.
 
 ### [3] withSecretFile(File):
 
@@ -50,4 +66,5 @@ will add additional **allowedAlgorithm** to the given algorithm.
  
 ### [7] withAutoCreateSecretKey(boolean)
 
-will deactivate the auto creation of the secretKey file. If the secretKey file doesn't exist an Exception will be thrown.
+With "false" it will deactivate the auto creation of the secretKey file. If the secretKey file doesn't exist an Exception will be thrown.<br/>
+Default is "true".

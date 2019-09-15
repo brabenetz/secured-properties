@@ -152,20 +152,6 @@ public class SecuredPropertiesTest {
         // TODO brabenetz 28.10.2016 : validate Log Message
     }
 
-    private String checkSystemProperties(final SecuredPropertiesConfig config, final String key) {
-
-        final String systemPropPassword = System.getProperty(key);
-        if (SecuredProperties.isEncryptedValue(systemPropPassword)) {
-            return SecuredProperties.decrypt(config, systemPropPassword);
-        } else if (StringUtils.isNotEmpty(systemPropPassword)) {
-            System.out.println(String.format("you could now use the following encrypted password: -D%s=%s", key,
-                    SecuredProperties.encrypt(config, systemPropPassword)));
-            return systemPropPassword;
-        } else {
-            return null;
-        }
-    }
-
     @Test
     public void testGetSecretValue_fromUnencryptedPropertyFile_shouldNotReplaceProperty() throws Exception {
         // prepare property File
@@ -321,6 +307,20 @@ public class SecuredPropertiesTest {
         // validate that property file is unchanged
         assertThat(getTestSecretFile().exists(), is(false));
 
+    }
+
+    private String checkSystemProperties(final SecuredPropertiesConfig config, final String key) {
+
+        final String systemPropPassword = System.getProperty(key);
+        if (SecuredProperties.isEncryptedValue(systemPropPassword)) {
+            return SecuredProperties.decrypt(config, systemPropPassword);
+        } else if (StringUtils.isNotEmpty(systemPropPassword)) {
+            System.out.println(String.format("you could now use the following encrypted password: -D%s=%s", key,
+                    SecuredProperties.encrypt(config, systemPropPassword)));
+            return systemPropPassword;
+        } else {
+            return null;
+        }
     }
 
     private File getTestSecretFile() {
