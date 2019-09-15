@@ -10,20 +10,20 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.core.SupportedAlgorithm
-	c26 [label=<<table title="net.brabenetz.lib.securedproperties.core.SupportedAlgorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SupportedAlgorithm.html">
+	c104 [label=<<table title="net.brabenetz.lib.securedproperties.core.SupportedAlgorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SupportedAlgorithm.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;enumeration&#187; </td></tr>
 <tr><td align="center" balign="center"> SupportedAlgorithm </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SupportedAlgorithm.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.core.Algorithm
-	c33 [label=<<table title="net.brabenetz.lib.securedproperties.core.Algorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Algorithm.html">
+	c108 [label=<<table title="net.brabenetz.lib.securedproperties.core.Algorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Algorithm.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Algorithm </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Algorithm.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//net.brabenetz.lib.securedproperties.core.SupportedAlgorithm implements net.brabenetz.lib.securedproperties.core.Algorithm
-	c33:p -> c26:p [dir=back,arrowtail=empty,style=dashed];
+	c108:p -> c104:p [dir=back,arrowtail=empty,style=dashed];
 }
 

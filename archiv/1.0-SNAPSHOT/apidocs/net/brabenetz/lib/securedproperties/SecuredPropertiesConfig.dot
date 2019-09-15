@@ -9,11 +9,20 @@ digraph G {
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
+	// net.brabenetz.lib.securedproperties.config.Config
+	c294 [label=<<table title="net.brabenetz.lib.securedproperties.config.Config" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./config/Config.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> Config </td></tr>
+		</table></td></tr>
+		</table>>, URL="./config/Config.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.SecuredPropertiesConfig
-	c77 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredPropertiesConfig.html">
+	c301 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SecuredPropertiesConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesConfig </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecuredPropertiesConfig.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	//net.brabenetz.lib.securedproperties.SecuredPropertiesConfig implements net.brabenetz.lib.securedproperties.config.Config
+	c294:p -> c301:p [dir=back,arrowtail=empty,style=dashed];
 }
 

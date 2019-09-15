@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.SecuredPropertiesTest
-	c21 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecuredPropertiesTest.html">
+	c53 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecuredPropertiesTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecuredPropertiesTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.SecuredPropertiesConfigTest
-	c22 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecuredPropertiesConfigTest.html">
+	c54 [label=<<table title="net.brabenetz.lib.securedproperties.SecuredPropertiesConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecuredPropertiesConfigTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecuredPropertiesConfigTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecuredPropertiesConfigTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.JDependTest
-	c23 [label=<<table title="net.brabenetz.lib.securedproperties.JDependTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JDependTest.html">
+	c55 [label=<<table title="net.brabenetz.lib.securedproperties.JDependTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JDependTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JDependTest </td></tr>
 		</table></td></tr>

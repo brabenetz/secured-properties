@@ -10,27 +10,27 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// net.brabenetz.lib.securedproperties.core.SecretContainerStoreTest
-	c0 [label=<<table title="net.brabenetz.lib.securedproperties.core.SecretContainerStoreTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecretContainerStoreTest.html">
+	c27 [label=<<table title="net.brabenetz.lib.securedproperties.core.SecretContainerStoreTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SecretContainerStoreTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SecretContainerStoreTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SecretContainerStoreTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.core.MockAlgorithm
-	c1 [label=<<table title="net.brabenetz.lib.securedproperties.core.MockAlgorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockAlgorithm.html">
+	c28 [label=<<table title="net.brabenetz.lib.securedproperties.core.MockAlgorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MockAlgorithm.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MockAlgorithm </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MockAlgorithm.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	// net.brabenetz.lib.securedproperties.core.EncryptionTest
-	c2 [label=<<table title="net.brabenetz.lib.securedproperties.core.EncryptionTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EncryptionTest.html">
+	c29 [label=<<table title="net.brabenetz.lib.securedproperties.core.EncryptionTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./EncryptionTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EncryptionTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EncryptionTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 	//net.brabenetz.lib.securedproperties.core.MockAlgorithm implements net.brabenetz.lib.securedproperties.core.Algorithm
-	c17:p -> c1:p [dir=back,arrowtail=empty,style=dashed];
+	c44:p -> c28:p [dir=back,arrowtail=empty,style=dashed];
 	// net.brabenetz.lib.securedproperties.core.Algorithm
-	c17 [label=<<table title="net.brabenetz.lib.securedproperties.core.Algorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c44 [label=<<table title="net.brabenetz.lib.securedproperties.core.Algorithm" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Algorithm </td></tr>
