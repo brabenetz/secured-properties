@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
  *
  * <pre>
  * // prepare custom config
- * final SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key"));
+ * final SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")).initDefault();
  *
  * // auto-encrypt values in the property-file:
  * SecuredProperties.encryptNonEncryptedValues(config,

@@ -3,26 +3,6 @@
     title="Frequently Asked Questions" toplink="false">
 
     <part id="general">
-        <faq id="why-auto-encrypt">
-            <question>
-                Why is the default for autoEncryptNonEncryptedValues set to "true"? I would expect only a readonly operation for getSecretValues(...)!
-            </question>
-            <answer>
-                <p>
-                    With deactivated
-                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
-                    the usage is much more complex.
-                </p>
-                <p>
-                    Your application must then somehow call SecuredProperties.encrypt(...) to get the encrypted value.
-                    This encrypted value must then be used
-                    (manual or automatically) to replace the plain-text value.
-                </p>
-                <p>
-                    Because of that, autoEncryptNonEncryptedValues=true will be the most used scenario, which should be the default.
-                </p>
-            </answer>
-        </faq>
         <faq id="why-not-InputStream">
             <question>
                 Why do you use java.io.File as input for properties? An InputStream seems more flexible!
@@ -30,7 +10,7 @@
             <answer>
                 <p>
                     Because of the
-                    <a href="./configuration.html">autoEncryptNonEncryptedValues</a>
+                    <a href="./index.html">SecuredProperties.encryptNonEncryptedValues</a>
                     , SecuredProperties must also be able to write the properties.
                 </p>
                 <p>

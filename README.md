@@ -44,7 +44,9 @@ The Java code:
 
 ```Java
  // prepare custom config
- final SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key"));
+ final SecuredPropertiesConfig config = new SecuredPropertiesConfig()
+        .withSecretFile(new File("G:/mysecret.key"))
+        .initDefault();
 
  // auto-encrypt values in the property-file:
  SecuredProperties.encryptNonEncryptedValues(config,
@@ -72,8 +74,12 @@ This encrypted password can now be read only in combination with the secret file
 It is also possible to encrypt multiple values at ones:
 
 ```Java
-  Map secretValues = SecuredProperties.getSecretValues(
-      new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")), // custom configurations
+  // custom configurations
+  final SecuredPropertiesConfig config = new SecuredPropertiesConfig()
+        .withSecretFile(new File("G:/mysecret.key"))
+        .initDefault();
+
+  Map secretValues = SecuredProperties.getSecretValues(config
       new File("myConfiguration.properties"), // The Property File
       "mySecretPassword", "anotherSecretPassword"); // the property-keys in "myConfiguration.properties" 
 ```
