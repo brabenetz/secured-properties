@@ -26,6 +26,11 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
+    <release version="1.0-beta4" date="2019-09-??" description="Beta 4 - Add External Configuration similar to Spring-Boot">
+      <action dev="brabenetz" type="add" date="2019-09-15">
+        Implement new way to configure SecuredPropertiesConfig via Environment-Properties, System-Properties, and Property-Files.
+      </action>
+    </release>
     <release version="1.0-beta3" date="2019-09-09" description="Beta 3 - Add SpringBoot-Example">
       <action dev="brabenetz" type="add" date="2019-09-09">
         Small improvements, and update documentation how to use it with Spring-Boot.

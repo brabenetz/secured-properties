@@ -23,6 +23,9 @@ import net.brabenetz.lib.securedproperties.core.Algorithm;
 
 import java.io.File;
 
+/**
+ * Needed available methods to use the {@link ConfigInitializer}.
+ */
 public interface Config {
 
     /**

@@ -21,6 +21,9 @@ package net.brabenetz.lib.securedproperties.config;
 
 import java.io.File;
 
+/**
+ * A Collection of known {@link ConfigInitializer} factory-methods.
+ */
 public final class ConfigInitializers {
 
     private static final ConfigInitializer BY_SYSTEM_PROPERTIES_DEFAULT = new ConfigBySystemProperties();
@@ -38,7 +41,7 @@ public final class ConfigInitializers {
         return BY_ENV_PROPERTIES_DEFAULT;
     }
 
-    public static ConfigInitializer propertyFile(File propertyFile) {
+    public static ConfigInitializer propertyFile(final File propertyFile) {
         return new ConfigByPropertyFile(propertyFile);
     }
 }

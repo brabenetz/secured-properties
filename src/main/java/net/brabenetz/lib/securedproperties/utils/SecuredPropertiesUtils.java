@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,6 +21,7 @@ package net.brabenetz.lib.securedproperties.utils;
 
 import com.github.fge.lambdas.Throwing;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.ByteArrayInputStream;
@@ -44,16 +45,14 @@ public final class SecuredPropertiesUtils {
     /**
      * Loads a {@link Properties} object from a given Property {@link File} and transform checked
      * Exception into RuntimeExceptions.
-     * 
+     *
      * @param propertyFile
      *        the property File
      * @return the {@link Properties} object loaded by the propertyFile
      */
     public static Properties readProperties(final File propertyFile) {
         final Properties properties = new Properties();
-        if (propertyFile == null) {
-            return properties;
-        }
+        Validate.notNull(propertyFile, "The Propety-File is required");
         byte[] propertyFileContent = Throwing.supplier(() -> FileUtils.readFileToByteArray(propertyFile)).get();
         Throwing.runnable(() -> properties.load(new ByteArrayInputStream(propertyFileContent))).run();
         return properties;
@@ -61,7 +60,7 @@ public final class SecuredPropertiesUtils {
 
     /**
      * Replaces the value for one key in the given Properties file and leaves all other lines unchanged.
-     * 
+     *
      * @param propertyFile
      *        The property File with the given Key
      * @param newProperties

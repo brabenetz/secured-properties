@@ -20,10 +20,17 @@
 package net.brabenetz.lib.securedproperties.config;
 
 import net.brabenetz.lib.securedproperties.utils.SecuredPropertiesUtils;
+import org.apache.commons.lang3.Validate;
 
 import java.io.File;
 import java.util.Properties;
 
+/**
+ * {@link ConfigInitializer} implementation to read from {@link Properties} Files.
+ * <p>
+ * The property-Prefix is "secured-properties".<br>
+ * The Keys must be kebab-case like 'secured-properties.secret-file'.
+ */
 public class ConfigByPropertyFile extends AbstractConfigInitializer {
 
     private final Properties properties;
@@ -32,8 +39,14 @@ public class ConfigByPropertyFile extends AbstractConfigInitializer {
         this(ConfigKey.DEFAULT_PREFIX_KEBAB_CASE, propertyFile);
     }
 
+    /**
+     * @param configKeyPrefix an optional key prefix (default is 'secured-properties').
+     * @param propertyFile    required, but the {@link Properties} File itself is the optional.<br>
+     *                        If the File doesn't exist an empty Properties Object will be used to prevent errors.
+     */
     public ConfigByPropertyFile(final String configKeyPrefix, final File propertyFile) {
         super(configKeyPrefix, ConfigKey::getKebabCase, (final ConfigKey key) -> configKeyPrefix + "." + key.getKebabCase());
+        Validate.notNull(propertyFile, "The Propety-File is required");
         if (propertyFile.exists()) {
             properties = SecuredPropertiesUtils.readProperties(propertyFile);
         } else {

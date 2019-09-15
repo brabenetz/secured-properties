@@ -30,6 +30,9 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+/**
+ * Parent helper class to easier implement a custom ConfigInitializer. Only {@link #getValue(ConfigKey)} must be implemented.
+ */
 public abstract class AbstractConfigInitializer implements ConfigInitializer {
 
     private static final Map<ConfigKey, BiConsumer<Config, String>> CONFIG_KEY_TO_INIT_FUNCTION_MAPPING = initConfigMappings();
@@ -44,6 +47,9 @@ public abstract class AbstractConfigInitializer implements ConfigInitializer {
         this.keyFactory = keyFactory;
     }
 
+    /**
+     * Small convenience Constructor for concrete implementation which can have an optional config key-prefix.
+     */
     protected AbstractConfigInitializer(final String configKeyPrefix,
             final Function<ConfigKey, String> keyFactoryWithoutPrefix,
             final Function<ConfigKey, String> keyFactoryWithPrefix) {
@@ -99,5 +105,9 @@ public abstract class AbstractConfigInitializer implements ConfigInitializer {
         config.withAutoEncryptNonEncryptedValues(Boolean.valueOf(value));
     }
 
+    /**
+     * @param key The {@link ConfigKey} to search the value for.
+     * @return the Value as simple string.
+     */
     protected abstract String getValue(ConfigKey key);
 }

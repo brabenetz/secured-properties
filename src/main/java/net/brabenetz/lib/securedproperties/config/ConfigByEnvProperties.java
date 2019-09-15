@@ -19,6 +19,12 @@
  */
 package net.brabenetz.lib.securedproperties.config;
 
+/**
+ * {@link ConfigInitializer} implementation for OS environment variables ({@link System#getenv(String)}).
+ * <p>
+ * The property-Prefix is "SECURED_PROPERTIES".<br>
+ * The Keys must be UpperCase like 'SECURED_PROPERTIES_SECRET_FILE'.
+ */
 public class ConfigByEnvProperties extends AbstractConfigInitializer {
 
     public ConfigByEnvProperties() {

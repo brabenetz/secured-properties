@@ -19,6 +19,12 @@
  */
 package net.brabenetz.lib.securedproperties.config;
 
+/**
+ * {@link ConfigInitializer} implementation to read from System Properties ({@link System#getProperty(String)}).
+ * <p>
+ * The property-Prefix is "secured-properties".<br>
+ * The Keys must be kebab-case like 'secured-properties.secret-file'.
+ */
 public class ConfigBySystemProperties extends AbstractConfigInitializer {
 
     public ConfigBySystemProperties() {

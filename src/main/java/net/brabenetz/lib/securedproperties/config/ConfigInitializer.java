@@ -19,6 +19,9 @@
  */
 package net.brabenetz.lib.securedproperties.config;
 
+/**
+ * Interface class to auto-configure a {@link Config} instance.
+ */
 public interface ConfigInitializer {
 
     void init(Config config);

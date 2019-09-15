@@ -30,8 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Configuration Object to control the behavior of {@link SecuredProperties}.
@@ -56,6 +55,11 @@ public class SecuredPropertiesConfig implements Config {
 
     private boolean autoEncryptNonEncryptedValues = true;
 
+    /**
+     * Return the SecretFile location which is needed to decrypt and encrypt your property-values.
+     * <p>
+     * Default is $HOME/.secret/securedProperties.key
+     */
     public File getSecretFile() {
         if (secretFile == null) {
             final String secretFilePath = SystemUtils.USER_HOME + "/.secret/securedProperties.key";
@@ -82,31 +86,43 @@ public class SecuredPropertiesConfig implements Config {
     }
 
     /**
-     * Externalize your configuration so that you can work with the same application code in different environments.
+     * Similar to Spring-Boot, Externalize your configuration so that you can work with the same application code in different environments.
      * <p>
      * <ol>
-     * <li>Application property Files given as arguments. If they doesn't exist, they will be ignored.</li>
+     * <li>Application property Files './application.properties'. If the File doesn't exist, it will be ignored.</li>
+     * <li>Application property Files './config/application.properties'. If the File doesn't exist, it will be ignored.</li>
      * <li>OS environment variables.</li>
      * <li>Java System properties (System.getProperties()).</li>
      * </ol>
-     * The last one has the highest priority. and will overwrite properties before if they are set.
+     * The last one has the highest priority and will overwrite properties before.
      * <p>
-     * The Properties which can be confguered can be found in {@link net.brabenetz.lib.securedproperties.config.ConfigKey}.<br>
+     * The Properties which can be configured can be found in {@link net.brabenetz.lib.securedproperties.config.ConfigKey}.<br>
      * The default prefix is "SECURED_PROPERTIES" and the keys must be configured formatted as:
      * <ul>
      * <li><b>UPPER_CASE:</b> Like "SECURED_PROPERTIES_SECRET_FILE" is used for <b>OS environment variables</b>.</li>
      * <li><b>kebab-case:</b> Like "secured-properties.secret-file" is used for <b>System-Properties</b> and <b>Property-Files</b></li>
      * </ul>
+     *
+     * @see "https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html"
+     * @return this for fluent style.
      */
-    public SecuredPropertiesConfig init(final File... files) {
-        final List<ConfigInitializer> configInitializers = new ArrayList<>();
-        for (final File file : files) {
-            configInitializers.add(ConfigInitializers.propertyFile(file));
-        }
-        configInitializers.add(ConfigInitializers.envProperties());
-        configInitializers.add(ConfigInitializers.systemProperties());
+    public SecuredPropertiesConfig initDefault() {
+        return init(ConfigInitializers.propertyFile(new File("./application.properties")),
+                ConfigInitializers.propertyFile(new File("./config/application.properties")),
+                ConfigInitializers.envProperties(),
+                ConfigInitializers.systemProperties());
+    }
 
-        configInitializers.forEach(configInit -> configInit.init(this));
+    /**
+     * The generic variant of {@link #initDefault()}. Just put your {@link ConfigInitializer}s into it in the order you want.
+     * <p>
+     * The last one has the highest priority and will overwrite properties before.
+     *
+     * @param configInitializers your {@link ConfigInitializer}s. See {@link ConfigInitializers}.
+     * @return this for fluent style.
+     */
+    public SecuredPropertiesConfig init(final ConfigInitializer... configInitializers) {
+        Arrays.asList(configInitializers).forEach(configInit -> configInit.init(this));
         return this;
     }
 
