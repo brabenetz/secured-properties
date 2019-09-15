@@ -48,8 +48,6 @@ public class AbstractConfigInitializerTest {
                         return "AES_128,DESede_168";
                     case AUTO_CREATE_SECRET_KEY:
                         return "false";
-                    case AUTO_ENCRYPT_NON_ENCRYPTED_VALUES:
-                        return "false";
                     default:
                         throw new RuntimeException("Invalid Key: " + key);
                 }
@@ -62,12 +60,11 @@ public class AbstractConfigInitializerTest {
         Mockito.verify(config).withSaltLength(15);
         Mockito.verify(config).withAllowedAlgorithm(SupportedAlgorithm.AES_128, SupportedAlgorithm.DESede_168);
         Mockito.verify(config).withAutoCreateSecretKey(false);
-        Mockito.verify(config).withAutoEncryptNonEncryptedValues(false);
 
         assertThat(configInitializer.getKeyFactory().apply(ConfigKey.SECRET_FILE),
                 is(equalTo("secured-properties.secret-file")));
-        assertThat(configInitializer.getKeyFactory().apply(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES),
-                is(equalTo("secured-properties.auto-encrypt-non-encrypted-values")));
+        assertThat(configInitializer.getKeyFactory().apply(ConfigKey.AUTO_CREATE_SECRET_KEY),
+                is(equalTo("secured-properties.auto-create-secret-key")));
     }
 
     @Test
@@ -86,11 +83,10 @@ public class AbstractConfigInitializerTest {
         Mockito.verify(config, Mockito.never()).withSaltLength(ArgumentMatchers.anyInt());
         Mockito.verify(config, Mockito.never()).withAllowedAlgorithm(ArgumentMatchers.any(SupportedAlgorithm[].class));
         Mockito.verify(config, Mockito.never()).withAutoCreateSecretKey(ArgumentMatchers.anyBoolean());
-        Mockito.verify(config, Mockito.never()).withAutoEncryptNonEncryptedValues(ArgumentMatchers.anyBoolean());
 
         assertThat(configInitializer.getKeyFactory().apply(ConfigKey.SECRET_FILE),
                 is(equalTo("SECRET_FILE")));
-        assertThat(configInitializer.getKeyFactory().apply(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES),
-                is(equalTo("AUTO_ENCRYPT_NON_ENCRYPTED_VALUES")));
+        assertThat(configInitializer.getKeyFactory().apply(ConfigKey.AUTO_CREATE_SECRET_KEY),
+                is(equalTo("AUTO_CREATE_SECRET_KEY")));
     }
 }

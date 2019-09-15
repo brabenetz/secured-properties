@@ -13,7 +13,6 @@
       The first algorithm supported by the java-VM will be used to create the initial secret key.<br/>
       **Attention:** the default JDK doesn't support AES-256 and AES-192 without extension.<br/>
       After generating the secretKey file, the algorithm cannot be changed anymore. 
-  * **autoEncryptNonEncryptedValues** If the value in the property file is not already encrypted. it will be replaced by the encrypted value.
 
 ## Custom Configuration
 
@@ -21,35 +20,34 @@ The following customizations are available:
 
 <!-- MACRO{snippet|id=configExample|file=src/test/java/net/brabenetz/lib/securedproperties/snippets/ConfigurationSnippet.java} -->
 
-### [1] withSecretFilePropertyKey():
+### [1] initDefault():
 
 If **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
 
-### [2] withDefaultSecretFile():
+### [2] init(ConfigInitializer...):
+
+If **secretFilePropertyKey** is set, the path to the secret file will be read from the given property of the properties file.
+
+### [3] withSecretFile(File):
 
 If no secret file path is configured in th eproperty file with key **secretFilePropertyKey**, then the **defaultSecretFile** will be used.
 
 Without **defaultSecretFile** the default  "%user_home%/.secret/securedProperties.key" will be used as secret file.
         
-### [3] withSaltLength()
+### [4] withSaltLength(int)
 
 The salt length defines the length of the randomly generated salt which will be added to the value before encryption.
 Default is 11, and a length of 0 will deactivate the salt.
 The salt makes sure that two properties with the same value doesn't have the same encrypted value.
 
-### [4] withAllowedAlgorithm()
+### [5] withAllowedAlgorithm(Algorithm...)
 
 will replace the default **allowedAlgorithm** with the given algorithm.
  
-### [5] addAllowedAlgorithm()
+### [6] addAllowedAlgorithm(Algorithm...)
 
 will add additional **allowedAlgorithm** to the given algorithm.
  
-### [6] disableAutoCreateSecretKey()
+### [7] withAutoCreateSecretKey(boolean)
 
 will deactivate the auto creation of the secretKey file. If the secretKey file doesn't exist an Exception will be thrown.
- 
-### [7] disableAutoEncryptNonEncryptedValues()
-
-will deactivate the auto encryption of passwords in the property file. The property file will never be changed.<br/>
-A warning will be logged if the password is in plain-text.

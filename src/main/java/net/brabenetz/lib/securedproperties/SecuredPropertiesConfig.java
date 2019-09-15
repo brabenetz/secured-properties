@@ -53,8 +53,6 @@ public class SecuredPropertiesConfig implements Config {
 
     private boolean autoCreateSecretKey = true;
 
-    private boolean autoEncryptNonEncryptedValues = true;
-
     /**
      * Return the SecretFile location which is needed to decrypt and encrypt your property-values.
      * <p>
@@ -75,10 +73,6 @@ public class SecuredPropertiesConfig implements Config {
 
     public boolean isAutoCreateSecretKey() {
         return autoCreateSecretKey;
-    }
-
-    public boolean isAutoEncryptNonEncryptedValues() {
-        return autoEncryptNonEncryptedValues;
     }
 
     public Algorithm[] getAllowedAlgorithm() {
@@ -158,12 +152,6 @@ public class SecuredPropertiesConfig implements Config {
     @Override
     public SecuredPropertiesConfig withAutoCreateSecretKey(final boolean autoCreate) {
         autoCreateSecretKey = autoCreate;
-        return this;
-    }
-
-    @Override
-    public SecuredPropertiesConfig withAutoEncryptNonEncryptedValues(final boolean autoEncrypt) {
-        autoEncryptNonEncryptedValues = autoEncrypt;
         return this;
     }
 

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class ConfigByPropertyFileTest {
@@ -50,7 +52,7 @@ public class ConfigByPropertyFileTest {
         ConfigByPropertyFile configInitializer = new ConfigByPropertyFile(getTestPropertyFile());
 
         assertThat(configInitializer.getValue(ConfigKey.SECRET_FILE), is(equalTo("Test-value-for-Property-File-UnitTest")));
-        assertThat(configInitializer.getValue(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES), is(nullValue()));
+        assertThat(configInitializer.getValue(ConfigKey.AUTO_CREATE_SECRET_KEY), is(nullValue()));
     }
 
     @Test
@@ -62,7 +64,7 @@ public class ConfigByPropertyFileTest {
         ConfigByPropertyFile configInitializer = new ConfigByPropertyFile(new File("./doesnt-exist.properties"));
 
         assertThat(configInitializer.getValue(ConfigKey.SECRET_FILE), is(nullValue()));
-        assertThat(configInitializer.getValue(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES), is(nullValue()));
+        assertThat(configInitializer.getValue(ConfigKey.AUTO_CREATE_SECRET_KEY), is(nullValue()));
     }
 
     private void writeProperties(final File testPropertyFile, final String... line) throws IOException {

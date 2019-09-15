@@ -21,6 +21,7 @@ package net.brabenetz.lib.securedproperties.snippets;
 
 import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
 import net.brabenetz.lib.securedproperties.config.Config;
+import net.brabenetz.lib.securedproperties.config.ConfigInitializers;
 import net.brabenetz.lib.securedproperties.core.SupportedAlgorithm;
 
 import java.io.File;
@@ -33,12 +34,12 @@ public class ConfigurationSnippet {
     @SuppressWarnings("unused")
     // START SNIPPET: configExample
     private Config config = new SecuredPropertiesConfig()
-            .init() // [1]
-            .withSecretFile(new File("./mySecret.key")) // [2]
-            .withSaltLength(0) // [3]
-            .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [4]
-            .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [5]
-            .withAutoCreateSecretKey(false) // [6]
-            .withAutoEncryptNonEncryptedValues(false); // [7]
+            .initDefault() // [1]
+            .init(ConfigInitializers.systemProperties()) // [2]
+            .withSecretFile(new File("./mySecret.key")) // [3]
+            .withSaltLength(0) // [4]
+            .withAllowedAlgorithm(SupportedAlgorithm.AES_256) // [5]
+            .addAllowedAlgorithm(SupportedAlgorithm.DESede_168) // [6]
+            .withAutoCreateSecretKey(false); // [7]
     // END SNIPPET: configExample
 }

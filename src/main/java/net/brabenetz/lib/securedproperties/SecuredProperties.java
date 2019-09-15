@@ -46,26 +46,30 @@ import java.util.stream.Collectors;
  * The Java code:
  *
  * <pre>
- * String secretValue = SecuredProperties.getSecretValue(
- *     new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key")), // custom config
- *     new File("myConfiguration.properties"), // The Property File
- *     "mySecretPassword"); // the property-key from "myConfiguration.properties"
+ * // prepare custom config
+ * final SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(new File("G:/mysecret.key"));
+ *
+ * // auto-encrypt values in the property-file:
+ * SecuredProperties.encryptNonEncryptedValues(config,
+ *         new File("myConfiguration.properties"), // The Property File
+ *         "mySecretPassword"); // the property-key from "myConfiguration.properties"
+ *
+ * // read encrypted values from the property-file
+ * String secretValue = SecuredProperties.getSecretValue(config,
+ *         new File("myConfiguration.properties"), // The Property File
+ *         "mySecretPassword"); // the property-key from "myConfiguration.properties"
  * </pre>
  *
- * will return "test" as secretValue and automatically encrypt the value in the property file. After
- * the first run the Property file will looks similar to the following:
+ * will return "test" as secretValue and automatically encrypt the value in the property file. After the first run the Property file will looks similar to the
+ * following:
  *
  * <pre>
  *  mySecretPassword = {wVtvW8lQrwCf8MA9sadwww==}
  * </pre>
  *
- * This encrypted password can now be read only in combination with the secret file
- * "G:/mysecret.key"
+ * This encrypted password can now be read only in combination with the secret file "G:/mysecret.key"
  */
 public final class SecuredProperties {
-
-    /** General Logger for this Class. */
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SecuredProperties.class);
 
     private SecuredProperties() {
         super();
@@ -117,43 +121,75 @@ public final class SecuredProperties {
             final SecuredPropertiesConfig config, final File[] propertyFiles, final String... keys) {
 
         Map<String, String> result = new HashMap<>();
+        final SecretContainer secretContainer = getSecretContainer(config);
 
         for (File propertyFile : propertyFiles) {
             if (!propertyFile.exists()) {
                 continue;
             }
-            Map<String, String> unencryptedValues = new HashMap<>();
             final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
-            final SecretContainer secretContainer = getSecretContainer(config);
             for (String key : keys) {
 
                 String value = properties.getProperty(key);
                 if (Encryption.isEncryptedValue(value)) {
                     // read and decrypt value
                     result.put(key, Encryption.decrypt(secretContainer.getAlgorithm(), secretContainer.getSecretKey(), config.getSaltLength(), value));
-                } else if (StringUtils.isNotEmpty(value)) {
-                    // replace value with encrypted in property file.
-                    unencryptedValues.put(key, value);
-                    result.put(key, value);
                 } else {
-                    result.put(key, null);
+                    result.put(key, value);
                 }
             }
 
-            if (config.isAutoEncryptNonEncryptedValues()) {
+        }
+
+        return result;
+
+    }
+
+    /**
+     * @see SecuredProperties
+     * @param config       the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFile The Properties file to with the encrypted value
+     * @param keys         The Property-Keys of the encrypted value.
+     */
+    public static void encryptNonEncryptedValues(
+            final SecuredPropertiesConfig config, final File propertyFile, final String... keys) {
+        encryptNonEncryptedValues(config, new File[] {propertyFile}, keys);
+    }
+
+    /**
+     * @see SecuredProperties
+     * @param config        the {@link SecuredPropertiesConfig} to control custom behavior.
+     * @param propertyFiles A list of Property file to with the encrypted value
+     * @param keys          The Property-Keys of the encrypted value.
+     */
+    public static void encryptNonEncryptedValues(
+            final SecuredPropertiesConfig config, final File[] propertyFiles, final String... keys) {
+
+        final SecretContainer secretContainer = getSecretContainer(config);
+        for (File propertyFile : propertyFiles) {
+            if (!propertyFile.exists()) {
+                continue;
+            }
+            Map<String, String> unencryptedValues = new HashMap<>();
+            final Properties properties = SecuredPropertiesUtils.readProperties(propertyFile);
+            for (String key : keys) {
+
+                String value = properties.getProperty(key);
+                if (!Encryption.isEncryptedValue(value) && StringUtils.isNotEmpty(value)) {
+                    // replace value with encrypted in property file.
+                    unencryptedValues.put(key, value);
+                }
+            }
+
+            if (!unencryptedValues.isEmpty()) {
                 Map<String, String> encryptedValues = encryptValues(config, secretContainer, unencryptedValues);
                 Pair<String, String>[] newProperties = encryptedValues.entrySet().stream()
                         .map(e -> Pair.of(e.getKey(), e.getValue()))
                         .collect(Collectors.toSet())
                         .toArray(new Pair[encryptedValues.size()]);
                 SecuredPropertiesUtils.replaceSecretValue(propertyFile, newProperties);
-            } else if (!unencryptedValues.isEmpty()) {
-                LOG.warn("AutoEncryptNonEncryptedValues is off. Secret values in Property file '{}' will remain plain-text.", propertyFile);
             }
         }
-
-        return result;
-
     }
 
     private static Map<String, String> encryptValues(final SecuredPropertiesConfig config, final SecretContainer secretContainer,

@@ -21,7 +21,9 @@ package net.brabenetz.lib.securedproperties.config;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class ConfigByEnvPropertiesTest {
@@ -39,7 +41,7 @@ public class ConfigByEnvPropertiesTest {
         // value cannot be set on development-computer where tests should run.
         ConfigByEnvProperties configInitializer = new ConfigByEnvProperties();
 
-        assertThat(configInitializer.getValue(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES), is(nullValue()));
+        assertThat(configInitializer.getValue(ConfigKey.AUTO_CREATE_SECRET_KEY), is(nullValue()));
     }
 
 }

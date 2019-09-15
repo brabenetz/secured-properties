@@ -80,7 +80,6 @@ public abstract class AbstractConfigInitializer implements ConfigInitializer {
         mapping.put(ConfigKey.SALT_LENGTH, AbstractConfigInitializer::initSaltLength);
         mapping.put(ConfigKey.ALLOWED_ALGORITHM, AbstractConfigInitializer::initAllowedAlgorithm);
         mapping.put(ConfigKey.AUTO_CREATE_SECRET_KEY, AbstractConfigInitializer::initAutoCreateSecretKey);
-        mapping.put(ConfigKey.AUTO_ENCRYPT_NON_ENCRYPTED_VALUES, AbstractConfigInitializer::initAutoEncryptNonEncryptedValues);
         return mapping;
 
     }
@@ -99,10 +98,6 @@ public abstract class AbstractConfigInitializer implements ConfigInitializer {
 
     protected static void initAutoCreateSecretKey(final Config config, final String value) {
         config.withAutoCreateSecretKey(Boolean.valueOf(value));
-    }
-
-    protected static void initAutoEncryptNonEncryptedValues(final Config config, final String value) {
-        config.withAutoEncryptNonEncryptedValues(Boolean.valueOf(value));
     }
 
     /**

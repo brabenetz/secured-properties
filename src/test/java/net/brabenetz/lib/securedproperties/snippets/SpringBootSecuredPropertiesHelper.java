@@ -22,23 +22,22 @@ package net.brabenetz.lib.securedproperties.snippets;
 // START SNIPPET: configExample
 import net.brabenetz.lib.securedproperties.SecuredProperties;
 import net.brabenetz.lib.securedproperties.SecuredPropertiesConfig;
-import net.brabenetz.lib.securedproperties.core.Encryption;
 
 import java.io.File;
 
 public class SpringBootSecuredPropertiesHelper {
     // Here you should look if you maybe need a custom config:
-    private static final SecuredPropertiesConfig config = new SecuredPropertiesConfig();
+    private static final SecuredPropertiesConfig config = new SecuredPropertiesConfig().initDefault();
 
     // the same property files which are supported by spring-boot:
     private static File[] propertyFiles = new File[] {new File("./config/application.properties"), new File("./application.properties")};
 
     public static void encryptProperties(String... keys) {
-        SecuredProperties.getSecretValues(config, propertyFiles, keys);
+        SecuredProperties.encryptNonEncryptedValues(config, propertyFiles, keys);
     }
 
     public static String decrypt(String value) {
-        if (Encryption.isEncryptedValue(value)) {
+        if (SecuredProperties.isEncryptedValue(value)) {
             return SecuredProperties.decrypt(config, value);
         }
         return value;

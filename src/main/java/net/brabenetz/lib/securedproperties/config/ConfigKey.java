@@ -34,9 +34,7 @@ public enum ConfigKey {
     /** for setting the value {@link Config#withAllowedAlgorithm(net.brabenetz.lib.securedproperties.core.Algorithm...)}. */
     ALLOWED_ALGORITHM,
     /** for setting the value {@link Config#withAutoCreateSecretKey(boolean)}. */
-    AUTO_CREATE_SECRET_KEY,
-    /** for setting the value {@link Config#withAutoEncryptNonEncryptedValues(boolean)}. */
-    AUTO_ENCRYPT_NON_ENCRYPTED_VALUES;
+    AUTO_CREATE_SECRET_KEY;
 
     /** default prefix for UPPER_CASE keys. */
     public static final String DEFAULT_PREFIX_UPPER_CASE = "SECURED_PROPERTIES";

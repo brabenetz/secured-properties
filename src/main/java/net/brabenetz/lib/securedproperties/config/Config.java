@@ -42,6 +42,4 @@ public interface Config {
 
     Config withAutoCreateSecretKey(boolean autoCreate);
 
-    Config withAutoEncryptNonEncryptedValues(boolean autoCreate);
-
 }
