@@ -41,8 +41,11 @@ public class SecuredPropertiesConfig implements Config {
 
     private static final int DEFAULT_SALT_LENGTH = 11;
 
+    /** The place of your secret file. default is '$HOME/.secret/securedProperties.key'. */
     private File secretFile;
+    /** The salt length to make sure that properties with the same value result in different encrypted strings. */
     private int saltLength = DEFAULT_SALT_LENGTH;
+    /** The allowed encryption algorithms for auto-create the secret-key like 'AES_256' or 'DESede_168'. */
     private Algorithm[] allowedAlgorithm = new Algorithm[] {
             SupportedAlgorithm.AES_256,
             SupportedAlgorithm.AES_192,
@@ -51,6 +54,7 @@ public class SecuredPropertiesConfig implements Config {
             SupportedAlgorithm.DESede_112
     };
 
+    /** If the secret Key should be created automatically if missing, or an Exception should be shown instead. */
     private boolean autoCreateSecretKey = true;
 
     /**

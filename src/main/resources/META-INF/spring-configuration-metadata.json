@@ -1,0 +1,38 @@
+{
+  "groups": [
+    {
+      "name": "secured-properties",
+      "type": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig",
+      "sourceType": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "secured-properties.allowed-algorithm",
+      "type": "net.brabenetz.lib.securedproperties.core.Algorithm[]",
+      "description": "The allowed encryption algorithms for auto-create the secret-key like 'AES_256' or 'DESede_168'.",
+      "sourceType": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig"
+    },
+    {
+      "name": "secured-properties.auto-create-secret-key",
+      "type": "java.lang.Boolean",
+      "description": "If the secret Key should be created automatically if missing, or an Exception should be shown instead.",
+      "sourceType": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig",
+      "defaultValue": true
+    },
+    {
+      "name": "secured-properties.salt-length",
+      "type": "java.lang.Integer",
+      "description": "The salt length to make sure that properties with the same value result in different encrypted strings.",
+      "sourceType": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig",
+      "defaultValue": 11
+    },
+    {
+      "name": "secured-properties.secret-file",
+      "type": "java.io.File",
+      "description": "The place of your secret file. default is '$HOME\/.secret\/securedProperties.key'.",
+      "sourceType": "net.brabenetz.lib.securedproperties.SecuredPropertiesConfig"
+    }
+  ],
+  "hints": []
+}
