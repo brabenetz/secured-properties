@@ -93,6 +93,7 @@
     <dependency-mockito-core.version>2.13.0</dependency-mockito-core.version>
     <dependency-settings4j.version>2.1</dependency-settings4j.version>
     <dependency-slf4j-api.version>1.7.25</dependency-slf4j-api.version>
+    <dependency-spring-boot.version>2.1.8.RELEASE</dependency-spring-boot.version>
     <dependency-throwing-lambdas.version>0.5.0</dependency-throwing-lambdas.version>
     <dependency-wagon-git.version>2.0.3</dependency-wagon-git.version>
     <dependency-wagon-ssh.version>3.0.0</dependency-wagon-ssh.version>
@@ -203,8 +204,15 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <version>2.1.8.RELEASE</version>
+      <version>${dependency-spring-boot.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <version>${dependency-spring-boot.version}</version>
+      <scope>test</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -554,7 +562,7 @@
           <version>${plugin-maven-surefire-plugin.version}</version>
           <configuration>
             <environmentVariables>
-                <TEST_SECURED_PROPERTIES_SECRET_FILE>Test-value-for-UnitTest</TEST_SECURED_PROPERTIES_SECRET_FILE>
+              <TEST_SECURED_PROPERTIES_SECRET_FILE>Test-value-for-UnitTest</TEST_SECURED_PROPERTIES_SECRET_FILE>
             </environmentVariables>
           </configuration>
         </plugin>
@@ -631,6 +639,9 @@
               <licenseMerge>Apache License, Version 2.0|
                 The Apache Software License, Version 2.0</licenseMerge>
             </licenseMerges>
+            <excludes>
+              <exclude>**/*.json</exclude>
+            </excludes>
             <excludedScopes>test,provided</excludedScopes>
             <roots>
               <root>src/main/java</root>

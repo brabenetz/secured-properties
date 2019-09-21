@@ -46,7 +46,7 @@ public class Settings4jExampleTest {
         File propertiesFile = new File("src/test/data/TestProperties-Valid.properties");
 
         // initialization - get decrypted value
-        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(secretKey);
+        SecuredPropertiesConfig config = new SecuredPropertiesConfig().withSecretFile(secretKey).initDefault();
         // initialization - auto encrypt values in the property files:
         SecuredProperties.encryptNonEncryptedValues(
                 config, propertiesFile, "mySecretPassword");
