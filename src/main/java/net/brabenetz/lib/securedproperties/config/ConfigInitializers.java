@@ -30,7 +30,7 @@ public final class ConfigInitializers {
     private static final ConfigInitializer BY_ENV_PROPERTIES_DEFAULT = new ConfigByEnvProperties();
 
     private ConfigInitializers() {
-        // hide constructor.
+        // hide constructor (utility-pattern).
     }
 
     public static ConfigInitializer systemProperties() {
