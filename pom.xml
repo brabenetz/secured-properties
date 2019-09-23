@@ -38,10 +38,6 @@
 
   <contributors />
 
-  <prerequisites>
-    <maven>3.3.0</maven>
-  </prerequisites>
-
   <scm>
     <connection>scm:git:git@github.com:brabenetz/secured-properties.git</connection>
     <developerConnection>scm:git:git@github.com:brabenetz/secured-properties.git</developerConnection>
@@ -80,28 +76,28 @@
   </distributionManagement>
 
   <properties>
-    <dependency-commons-configuration2.version>2.2</dependency-commons-configuration2.version>
+    <dependency-commons-configuration2.version>2.6</dependency-commons-configuration2.version>
     <dependency-commons-io.version>2.6</dependency-commons-io.version>
-    <dependency-commons-lang3.version>3.7</dependency-commons-lang3.version>
-    <dependency-doxia-core.version>1.8</dependency-doxia-core.version>
-    <dependency-doxia-sink-api.version>1.8</dependency-doxia-sink-api.version>
+    <dependency-commons-lang3.version>3.9</dependency-commons-lang3.version>
+    <dependency-doxia-core.version>1.9</dependency-doxia-core.version>
+    <dependency-doxia-sink-api.version>1.9</dependency-doxia-sink-api.version>
     <dependency-hamcrest-library.version>1.3</dependency-hamcrest-library.version>
     <dependency-jdepend.version>2.9.5</dependency-jdepend.version>
     <dependency-junit.version>4.12</dependency-junit.version>
     <dependency-log4j-core.version>2.10.0</dependency-log4j-core.version>
     <dependency-log4j-slf4j-impl.version>2.10.0</dependency-log4j-slf4j-impl.version>
-    <dependency-mockito-core.version>2.13.0</dependency-mockito-core.version>
+    <dependency-mockito-core.version>3.0.0</dependency-mockito-core.version>
     <dependency-settings4j.version>2.1</dependency-settings4j.version>
-    <dependency-slf4j-api.version>1.7.25</dependency-slf4j-api.version>
+    <dependency-slf4j-api.version>1.7.28</dependency-slf4j-api.version>
     <dependency-spring-boot.version>2.1.8.RELEASE</dependency-spring-boot.version>
     <dependency-throwing-lambdas.version>0.5.0</dependency-throwing-lambdas.version>
     <dependency-wagon-git.version>2.0.3</dependency-wagon-git.version>
-    <dependency-wagon-ssh.version>3.0.0</dependency-wagon-ssh.version>
+    <dependency-wagon-ssh.version>3.3.3</dependency-wagon-ssh.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <maven.version.rules>file:./src/config/dependency-version-rules.xml</maven.version.rules>
-    <plugin-animal-sniffer-maven-plugin.version>1.16</plugin-animal-sniffer-maven-plugin.version>
+    <plugin-animal-sniffer-maven-plugin.version>1.18</plugin-animal-sniffer-maven-plugin.version>
     <plugin-cobertura-maven-plugin.version>2.7</plugin-cobertura-maven-plugin.version>
     <plugin-config-checkstyle-header-location>${basedir}/src/config/header.txt</plugin-config-checkstyle-header-location>
     <plugin-config-checkstyle-location>${basedir}/src/config/checkstyle.xml</plugin-config-checkstyle-location>
@@ -111,32 +107,32 @@
     <plugin-findbugs-maven-plugin.version>3.0.5</plugin-findbugs-maven-plugin.version>
     <plugin-javancss-maven-plugin.version>2.1</plugin-javancss-maven-plugin.version>
     <plugin-jdepend-maven-plugin.version>2.0</plugin-jdepend-maven-plugin.version>
-    <plugin-license-maven-plugin.version>1.14</plugin-license-maven-plugin.version>
+    <plugin-license-maven-plugin.version>2.0.0</plugin-license-maven-plugin.version>
     <plugin-lifecycle-mapping.version>1.0.0</plugin-lifecycle-mapping.version>
     <plugin-maven-changes-plugin.version>2.12.1</plugin-maven-changes-plugin.version>
     <plugin-maven-checkstyle-plugin.version>2.17</plugin-maven-checkstyle-plugin.version>
-    <plugin-maven-clean-plugin.version>3.0.0</plugin-maven-clean-plugin.version>
-    <plugin-maven-compiler-plugin.version>3.7.0</plugin-maven-compiler-plugin.version>
-    <plugin-maven-dependency-plugin.version>3.0.2</plugin-maven-dependency-plugin.version>
-    <plugin-maven-deploy-plugin.version>2.8.2</plugin-maven-deploy-plugin.version>
+    <plugin-maven-clean-plugin.version>3.1.0</plugin-maven-clean-plugin.version>
+    <plugin-maven-compiler-plugin.version>3.8.1</plugin-maven-compiler-plugin.version>
+    <plugin-maven-dependency-plugin.version>3.1.1</plugin-maven-dependency-plugin.version>
+    <plugin-maven-deploy-plugin.version>3.0.0-M1</plugin-maven-deploy-plugin.version>
     <plugin-maven-eclipse-plugin.version>2.10</plugin-maven-eclipse-plugin.version>
-    <plugin-maven-enforcer-plugin.version>3.0.0-M1</plugin-maven-enforcer-plugin.version>
+    <plugin-maven-enforcer-plugin.version>3.0.0-M2</plugin-maven-enforcer-plugin.version>
     <plugin-maven-gpg-plugin.version>1.6</plugin-maven-gpg-plugin.version>
-    <plugin-maven-install-plugin.version>2.5.2</plugin-maven-install-plugin.version>
-    <plugin-maven-jar-plugin.version>3.0.2</plugin-maven-jar-plugin.version>
-    <plugin-maven-javadoc-plugin.version>3.0.0</plugin-maven-javadoc-plugin.version>
-    <plugin-maven-jxr-plugin.version>2.5</plugin-maven-jxr-plugin.version>
-    <plugin-maven-pmd-plugin.version>3.8</plugin-maven-pmd-plugin.version>
-    <plugin-maven-project-info-reports-plugin.version>2.9</plugin-maven-project-info-reports-plugin.version>
+    <plugin-maven-install-plugin.version>3.0.0-M1</plugin-maven-install-plugin.version>
+    <plugin-maven-jar-plugin.version>3.1.2</plugin-maven-jar-plugin.version>
+    <plugin-maven-javadoc-plugin.version>3.1.1</plugin-maven-javadoc-plugin.version>
+    <plugin-maven-jxr-plugin.version>3.0.0</plugin-maven-jxr-plugin.version>
+    <plugin-maven-pmd-plugin.version>3.12.0</plugin-maven-pmd-plugin.version>
+    <plugin-maven-project-info-reports-plugin.version>3.0.0</plugin-maven-project-info-reports-plugin.version>
     <plugin-maven-release-plugin.version>2.5.3</plugin-maven-release-plugin.version>
-    <plugin-maven-resources-plugin.version>3.0.2</plugin-maven-resources-plugin.version>
-    <plugin-maven-site-plugin.version>3.7</plugin-maven-site-plugin.version>
-    <plugin-maven-source-plugin.version>3.0.1</plugin-maven-source-plugin.version>
-    <plugin-maven-surefire-plugin.version>2.20.1</plugin-maven-surefire-plugin.version>
-    <plugin-maven-surefire-report-plugin.version>2.20.1</plugin-maven-surefire-report-plugin.version>
-    <plugin-sortpom-maven-plugin.version>2.8.0</plugin-sortpom-maven-plugin.version>
+    <plugin-maven-resources-plugin.version>3.1.0</plugin-maven-resources-plugin.version>
+    <plugin-maven-site-plugin.version>3.8.2</plugin-maven-site-plugin.version>
+    <plugin-maven-source-plugin.version>3.1.0</plugin-maven-source-plugin.version>
+    <plugin-maven-surefire-plugin.version>3.0.0-M3</plugin-maven-surefire-plugin.version>
+    <plugin-maven-surefire-report-plugin.version>3.0.0-M3</plugin-maven-surefire-report-plugin.version>
+    <plugin-sortpom-maven-plugin.version>2.10.0</plugin-sortpom-maven-plugin.version>
     <plugin-taglist-maven-plugin.version>2.4</plugin-taglist-maven-plugin.version>
-    <plugin-versions-maven-plugin.version>2.5</plugin-versions-maven-plugin.version>
+    <plugin-versions-maven-plugin.version>2.7</plugin-versions-maven-plugin.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
