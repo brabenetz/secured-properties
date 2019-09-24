@@ -107,7 +107,7 @@
     <plugin-findbugs-maven-plugin.version>3.0.5</plugin-findbugs-maven-plugin.version>
     <plugin-javancss-maven-plugin.version>2.1</plugin-javancss-maven-plugin.version>
     <plugin-jdepend-maven-plugin.version>2.0</plugin-jdepend-maven-plugin.version>
-    <plugin-license-maven-plugin.version>2.0.0</plugin-license-maven-plugin.version>
+    <plugin-license-maven-plugin.version>1.20</plugin-license-maven-plugin.version>
     <plugin-lifecycle-mapping.version>1.0.0</plugin-lifecycle-mapping.version>
     <plugin-maven-changes-plugin.version>2.12.1</plugin-maven-changes-plugin.version>
     <plugin-maven-checkstyle-plugin.version>2.17</plugin-maven-checkstyle-plugin.version>
