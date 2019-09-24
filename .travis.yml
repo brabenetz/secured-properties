@@ -12,6 +12,7 @@ group: edge
 jdk:
   - oraclejdk8
   - oraclejdk9
+  - openjdk11
 
 #addons:
 #  coverity_scan:
