@@ -508,7 +508,7 @@
           <configuration>
             <port>8090</port>
             <relativizeDecorationLinks>false</relativizeDecorationLinks>
-            <inputEncoding>${plicense-maven-pluginroject.reporting.sourceEncoding}</inputEncoding>
+            <inputEncoding>${project.reporting.sourceEncoding}</inputEncoding>
             <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
           </configuration>
           <dependencies>
