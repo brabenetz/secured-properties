@@ -19,23 +19,35 @@
  */
 package net.brabenetz.lib.securedproperties.snippets;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 //START SNIPPET: configExample
 @SpringBootApplication
 public class SpringBootStarterApplication {
 
     public static void main(String[] args) {
-        securePasswords();
-        SpringApplication.run(SpringBootStarterApplication.class, args);
+        new SpringApplicationBuilder(SpringBootStarterApplication.class)
+                .bannerMode(Mode.OFF) // banner already shown by the inner context -> no need to show it again.
+                .parent(new SpringApplicationBuilder(AppPrepare.class) // the inner-Context runs first
+                        // .banner(new YourAppBanner()) // replace SpringBoot Ascii-Art with your own (but don't tell Josh Long).
+                        .run(args))
+                .run(args);
     }
 
-    private static void securePasswords() {
-        // this will encrypt the given properties if there are not already encrypted:
-        SpringBootSecuredPropertiesHelper.encryptProperties(
-                "your.app.props.my-secret-password",
-                "your.app.props.another-secret-password");
+    /**
+     * Run the initialize in its own Spring-Boot-Context is needed to use the Spring-Boot backlog Logging config.
+     */
+    public static class AppPrepare implements InitializingBean {
+        @Override
+        public void afterPropertiesSet() {
+            // this will encrypt the given properties if there are not already encrypted:
+            SpringBootSecuredPropertiesHelper.encryptProperties(
+                    "your.app.props.my-secret-password",
+                    "your.app.props.another-secret-password");
+        }
     }
 }
 //END SNIPPET: configExample

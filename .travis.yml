@@ -1,6 +1,5 @@
 language: java
 dist: trusty
-group: edge
 
 # Coverity and coveralls should only run in "code-quality" branch (not on each submit)
 env:
@@ -12,6 +11,7 @@ env:
 jdk:
   - oraclejdk8
   - oraclejdk9
+  - openjdk11
 
 addons:
   coverity_scan:
