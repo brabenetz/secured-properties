@@ -4,8 +4,8 @@ dist: trusty
 # Coverity and coveralls should only run in "code-quality" branch (not on each submit)
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
+   # secure key is copied from coverity project page on "Submitted first build" the tab travis-ci:
+   # See https://scan.coverity.com/projects/brabenetz-secured-properties/builds/new?tab=travis_ci 
    - secure: "GRuU9Pw8Xzh7SWLATEjdji5bxpuO2iMVrSc5zjFO6x330NY4o/kwhxxGeWQkbU1qDQHoS5kI7H0CNbOFXTDVoUB2Umxw470IHvEjT4zjP4yquId7VISkgQXMr/IFqyfr1Nx0vG5xUPO8ELJvzsSxiSewXI21wjeT+jl4h1qk61bMEpLSpQ3jRU7psO3A9zrBL3g3tZv7Wi46upwD+5KO3EUrZKnBy0+dSEtSiJ9Tm2AlQO/obE8GYcQ3AHcd7tEMtnHuJjbOLrnllWC9D3XY7Jw6FJgYsWCGapAhZq6BE8UPGrn1xsAOGu90GqLXIT5I4RvLsxUCaplXGTmrV9mNMejtqBdNr4LgdfVvsqdDY6PMYA3uciP5QDQNdyGcJZ1difpLpXPSjqHurHyIUbmkwqM6Lmpcb3PlS1IuHJS+AAZjvSzePNTh16ea1vlmjNFaqFUh8nmQB+fBKYEDVLoYfwY8uHVIbmYR8BlpxnroEwtdx8dhjzWwZaaRkcmFP+P7j2nJxB4AynQ3pQxzx58C7C4q0Sv3RnW2zptnrvn14HhGmmzmni1sFiOYgcCEcTVDuoouew4hbjoN8FA/48UUf3xHudDDk/jHEJjKIAFX4vbUl1oBt3AE0Uj3T8oUX5mkUPpm0RERuxlh2zKXHGQH0Ox3EDWUA6mfbLYhqWEHD4s="
 
 jdk:
@@ -24,4 +24,4 @@ addons:
     branch_pattern: code-quality
     
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean test jacoco:report coveralls:report
