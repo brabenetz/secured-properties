@@ -77,7 +77,7 @@
 
   <properties>
     <dependency-commons-configuration2.version>2.7</dependency-commons-configuration2.version>
-    <dependency-commons-io.version>2.6</dependency-commons-io.version>
+    <dependency-commons-io.version>2.7</dependency-commons-io.version>
     <dependency-commons-lang3.version>3.9</dependency-commons-lang3.version>
     <dependency-doxia-core.version>1.9</dependency-doxia-core.version>
     <dependency-doxia-sink-api.version>1.9</dependency-doxia-sink-api.version>
