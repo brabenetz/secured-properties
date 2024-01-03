@@ -83,7 +83,7 @@
     <dependency-doxia-sink-api.version>1.9</dependency-doxia-sink-api.version>
     <dependency-hamcrest-library.version>1.3</dependency-hamcrest-library.version>
     <dependency-jdepend.version>2.9.5</dependency-jdepend.version>
-    <dependency-junit.version>4.12</dependency-junit.version>
+    <dependency-junit.version>4.13.1</dependency-junit.version>
     <dependency-log4j-core.version>2.10.0</dependency-log4j-core.version>
     <dependency-log4j-slf4j-impl.version>2.10.0</dependency-log4j-slf4j-impl.version>
     <dependency-mockito-core.version>3.0.0</dependency-mockito-core.version>
